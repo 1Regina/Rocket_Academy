@@ -1,3 +1,3 @@
 1. Q3: removing returns will result in "undefined" because what to display is not defined. Returns tell what to display after clicking submit ![undefined](remove_return.png "Undefined")
-2. Q4: Remove the `distanceInKm `parameter from the function definition results in "uncaught referenceError in console ![reference_error](remove_distanceinKm.png "reference error") because the function `convertKmToMiles` doesnt not know what input it is working with  
+2. Q4: Remove the `distanceInKm `parameter from the function definition results in "uncaught referenceError in console ![reference_error](remove_distanceInKm.png "reference error") because the function `convertKmToMiles` doesnt not know what input it is working with  
 3. Q5: Changing the name distanceInKm to something consistently everywhere still works. Bcos it is consistently recognised as the new input.
