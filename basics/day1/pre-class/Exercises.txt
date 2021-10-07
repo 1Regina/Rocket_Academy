@@ -1,0 +1,15 @@
+
+1. How many pieces of software can you think of that you use on a daily basis that you don't access through a personal digital device such as a phone, tablet, or laptop? Come up with 3 specific examples.
+    1. Lift
+    2. Escalator
+    3. Television
+    4. Intercom
+    5. Microwave
+2. How do you give input to this software, how does it give you output?
+    1. Lift - buttons (i/p); specified floor (o/p)
+    2. Escalator - Up or down
+    3. Television - Remote control
+    4. Intercom - Button to answer caller and activate gate release
+    5. Microwave - Button for heat level and timer.
+Examples: An ATM, your rice cooker, an escalator you take every day
+3. Define what that input is, what the output is and what the software in this computer is responsible for
