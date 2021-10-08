@@ -122,6 +122,6 @@ let angle = function (minsPast1) {
   if (minsPast1 < 5) {
     return `Angle between hour and minute hands is ${angleBetweenHands.toFixed(0)} degrees` ;
   } else {
-    return `Angle between hour and minute hands is ${(angleBetweenHands - 360).toFixed(0)} degrees`
+    return `Angle between hour hand at 1pm and minute hands is ${(angleBetweenHands - 360).toFixed(0)} degrees`
   };
 };
