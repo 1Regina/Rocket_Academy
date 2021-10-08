@@ -1,27 +1,45 @@
-// Even Easier Dice Game
+// Random Dice Gues
 let main = function (input) {
   // Generate a random dice number
   let randomDiceNumber = rollDice();
+
   // Default output value is 'you lose'.
   console.log("dice roll-lose case!");
   console.log(randomDiceNumber);
   var myOutputValue = 'you lose! you input ' +input+ ' and rolled ' + randomDiceNumber;
-  let diceNum = "even" || "odd"; 
+
+  // Lesson
+  // the user wins
+  // If:
+  // The guess equals the dice roll,
+  // if (randomDiceNumber == input) {
+  //   myOutputValue = 'you win bcos you input ' +input+ " and rolled " + randomDiceNumber;
+  // }
+  // // OR
+  // // The guess plus one equals the dice roll,
+  // if (randomDiceNumber + 1 == input) {
+  //   myOutputValue = 'you win bcos you input ' +input+ " and rolled " + randomDiceNumber;
+  // }
+  // // OR
+  //  // The guess minus one equals the dice roll,
+  //  if (randomDiceNumber - 1 == input) {
+  //   myOutputValue = 'you win bcos you input ' +input+ " and rolled " + randomDiceNumber;
+  // }
+  
   if (
-      randomDiceNumber == 1 ||
-      randomDiceNumber == 3 ||
-      randomDiceNumber == 5 
-      ){
-        diceNum = "odd" 
-      }
-    else {diceNum = "even"}
-  if (
-      diceNum == "odd" && input == "odd" ||
-      diceNum == "even" && input == "even"
-      ){
-      console.log("correct! roll number is " + diceNum+ " input is " + input)
-      myOutputValue = "correct! roll number is " + diceNum+ " input is " + input
-      }
+      // Lesson
+      input == randomDiceNumber     ||
+      input == randomDiceNumber + 1 || 
+      input == randomDiceNumber - 1 ||
+      // Easier Dice Game: If the user guess is within 2 of the dice roll, they still win.
+      input == randomDiceNumber + 2 ||
+      input == randomDiceNumber - 2
+
+    ) {
+    console.log("dice roll!- win case")
+    console.log(randomDiceNumber);
+    myOutputValue = 'you win! you input ' +input+ ' and rolled ' + randomDiceNumber;
+  }
 
   // Return output.
   return myOutputValue;
