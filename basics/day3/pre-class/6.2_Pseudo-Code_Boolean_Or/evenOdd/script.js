@@ -2,10 +2,8 @@
 let main = function (input) {
   // Generate a random dice number
   let randomDiceNumber = rollDice();
-  // Default output value is 'you lose'.
-  console.log("dice roll-lose case!");
-  console.log(randomDiceNumber);
-  var myOutputValue = 'you lose! you input ' +input+ ' and rolled ' + randomDiceNumber;
+  
+  var myOutputValue = 'you lose! roll number is  ' + randomDiceNumber + " input is " + input;
   let diceNum = "even" || "odd"; 
   if (
       randomDiceNumber == 1 ||
@@ -14,15 +12,27 @@ let main = function (input) {
       ){
         diceNum = "odd" 
       }
-    else {diceNum = "even"}
+    else //if (
+            //   randomDiceNumber == 2 ||
+            //   randomDiceNumber == 4 ||
+            //   randomDiceNumber == 6 
+            // )
+            {
+                diceNum = "even" 
+              }
+    
   if (
       diceNum == "odd" && input == "odd" ||
       diceNum == "even" && input == "even"
       ){
-      console.log("correct! roll number is " + diceNum+ " input is " + input)
-      myOutputValue = "correct! roll number is " + diceNum+ " input is " + input
+      console.log("correct! roll number is " + randomDiceNumber+ " input is " + input)
+      myOutputValue = "correct! roll number is " + randomDiceNumber+ " input is " + input
       }
-
+      else {
+            // Default output value is 'you lose'.
+            console.log("dice roll-lose case!");
+            console.log(randomDiceNumber);
+           }
   // Return output.
   return myOutputValue;
 };
