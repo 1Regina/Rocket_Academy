@@ -3,11 +3,11 @@ let main = function (input) {                    // alternatively var main = fun
   // var myOutputValue = input; 
   // var myOutputValue = "wow hello"
   // var myOutputValue = doubleNumber (input)
-  // var myOutputValue = guestToOrange(input);     // Juice Wedding
-  // var myOutputValue = hugEveryone (input);      // SG Hugs
-  // var myOutputValue = costToPaintHouse(input);  // House Paint
+  // var myOutputValue = guestToOrange(input);        // Juice Wedding
+  // var myOutputValue = hugEveryone (input);         // SG Hugs
+  // var myOutputValue = costToPaintHouse(input);     // House Paint
   // var myOutputValue = catchUpSpeed(input) ;        // Train Speed  
-  let myOutputValue = angle(input) ; 
+  let myOutputValue = angle(input) ;                  // Clock
   return myOutputValue;
 };
 
