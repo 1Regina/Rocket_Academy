@@ -23,6 +23,7 @@ var main = function (input) {
   // original simple dice guess  
   // if (input == randomDiceNumber) {
   
+  // homework (twice the guess)
   if (input*2 == randomDiceNumber) {
     console.log("dice roll!- win case")
     console.log(randomDiceNumber);
