@@ -15,7 +15,6 @@ let main = function (input) {
   // let myOutputValue = calGBRate(input)
   // Mortgage Calculator
   let myOutputValue = calCustomerPayments( input);
-  // let myOutputValue =  mortgageCalculator(input);
   return myOutputValue;
 };
 
@@ -92,7 +91,7 @@ let calGBRate = function (useGB) {
   console.log(useGB + "usage means "+ numPlan + "50GB plams")
   let payment = numPlan * cost50GB
   let costPerGB = payment / useGB
-  let costPerGBDisplay = "The cost per GB used is $" + costPerGB.toFixed(2);
+  let costPerGBDisplay = `Using ${useGB}GB of data a month means one is buying ${numPlan} 50GB plans and the cost per GB he used is $${costPerGB.toFixed(2)}`;
   return costPerGBDisplay
 };
 
@@ -124,5 +123,3 @@ let calCustomerPayments = function (loan) {
   The customer would pay $${monthlyRepayment.toFixed(2)} monthly over the loan duration.`;
   
 };
-
-
