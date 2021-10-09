@@ -3,9 +3,6 @@ let main = function (input) {
   // Generate a random dice number
   let randomDiceNumber = rollDice();
 
-  // Default output value is 'you lose'.
-  console.log("dice roll-lose case!");
-  console.log(randomDiceNumber);
   var myOutputValue = 'you lose! you input ' +input+ ' and rolled ' + randomDiceNumber;
 
   // Lesson
@@ -41,6 +38,9 @@ let main = function (input) {
     myOutputValue = 'you win! you input ' +input+ ' and rolled ' + randomDiceNumber;
   }
 
+    // Default output value is 'you lose'.
+    console.log("dice roll-lose case!");
+    console.log(randomDiceNumber);
   // Return output.
   return myOutputValue;
 };
