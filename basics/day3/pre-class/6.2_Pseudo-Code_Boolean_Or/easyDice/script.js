@@ -24,7 +24,7 @@ let main = function (input) {
   // }
   
   if (
-      // Lesson
+      // From Lesson
       input == randomDiceNumber     ||
       input == randomDiceNumber + 1 || 
       input == randomDiceNumber - 1 ||

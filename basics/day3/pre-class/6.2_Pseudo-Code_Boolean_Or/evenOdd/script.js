@@ -2,8 +2,9 @@
 let main = function (input) {
   // Generate a random dice number
   let randomDiceNumber = rollDice();
-  
+  // default message
   var myOutputValue = 'you lose! roll number is  ' + randomDiceNumber + " input is " + input;
+  // classify dice throw as even or odd
   let diceNum = "even" || "odd"; 
   if (
       randomDiceNumber == 1 ||
@@ -20,11 +21,13 @@ let main = function (input) {
             {
                 diceNum = "even" 
               }
-    
+  
+  // match dice throw classification and input guess             
   if (
       diceNum == "odd" && input == "odd" ||
       diceNum == "even" && input == "even"
       ){
+      // messages to display for matching guess  
       console.log("correct! roll number is " + randomDiceNumber+ " input is " + input)
       myOutputValue = "correct! roll number is " + randomDiceNumber+ " input is " + input
       }
