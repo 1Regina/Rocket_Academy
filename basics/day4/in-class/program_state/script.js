@@ -62,7 +62,7 @@ var generateSecretWordNoRepeats = function () {
   // "While" Creates a loop that repeats itself as long as a given condition is true (the condition being assessed is that which is in the parenthesis). We'll learn more about "while loops" in Day 6. You can also read more about "while loops" here: https://www.w3schools.com/jsref/jsref_while.asp
   while (secretWord == prevSecretWord) {
     // Use generateSecretWord function from previous exercise
-    secretWord = generateSecretWord();
+    secretWord = generateWord();
   }
   // Keep track of the current secret word as prevSecretWord in the next guess.
   prevSecretWord = secretWord;
@@ -79,6 +79,7 @@ var playSecretWordTwiceInARow = function (guessedWord) {
                          Secret word: ${secretWord}.`;
   if (secretWord != guessedWord
     ) {
+      numCorrectGuessesSoFar = 0
       return `${standardMessage}. Try again`
     }
   else if (secretWord == guessedWord && ((numCorrectGuessesSoFar+1) < numCorrectGuessesNeededToWin)
@@ -90,19 +91,20 @@ var playSecretWordTwiceInARow = function (guessedWord) {
         You need 1 more correct guess to win.`
   }
   else {
-        numCorrectGuessesSoFar = numCorrectGuessesSoFar + 1;
-        console.log(`With 1 correct guess so far earlier, now your total numCorrectGuessesSoFar : ${numCorrectGuessesSoFar}.` )
+        // numCorrectGuessesSoFar = numCorrectGuessesSoFar + 1;
+        // console.log(`With 1 correct guess so far earlier, now your accumulated numCorrectGuessesSoFar : ${numCorrectGuessesSoFar}.` )
+        numCorrectGuessesSoFar = 0 // to reset
         return `${standardMessage} <br> 
-        You guessed correctly twice in a row. <br> 
-        You win! Please play again.`
+        You guessed correctly at least twice in a row. <br> 
+        You win! Let's reset. Please play again.`
        }
   };
 
 
 //Secret Word X in a Row 
 // generate req guess
-var main = function() {
-randomReqGuess = (Math.floor(Math.random() * 3)) + 2
-console.log(randomReqGuess)
-return randomReqGuess
-};
+// var main = function() {
+// randomReqGuess = (Math.floor(Math.random() * 3)) + 2
+// console.log(randomReqGuess)
+// return randomReqGuess
+// };
