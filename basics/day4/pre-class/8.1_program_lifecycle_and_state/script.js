@@ -1,3 +1,13 @@
+var main = function(input){
+  // Last Roll
+  // let myOutputValue = getPrevDice(input)
+  // Win or Loss
+  let myOutputValue = countWins(input)
+  return myOutputValue;
+};
+
+// LAST ROLL
+// initiate to beginning before any dice roll 
 let prevDiceRoll = 0;
 
 var rollDice = function () {  
@@ -23,21 +33,21 @@ var rollDice = function () {
 // } ; 
 
 var getPrevDice = function (input) {  
-
-  var randomDiceNumber = 3// rollDice(); 
+  // 1. roll a new dice number, assign to a variable
+  var randomDiceNumber = rollDice(); 
+  // 2. record output value with previous and current values as string
   var myOutputValue = `your last roll was ${prevDiceRoll}. You just roll a ${randomDiceNumber}. You guess ${input}. You lost.`;  
 
   if (randomDiceNumber == input) {    
     myOutputValue = `your last roll was ${prevDiceRoll}. You just roll a ${randomDiceNumber}. You guess ${input}. You win.`;  
   }  
+  // 3. assign prev dice roll variable TO new dice number (AMENDED)
   prevDiceRoll = randomDiceNumber; 
+  // 4. return string from step 2 
   return myOutputValue;
 };
 
-let main = function(input){
-  let myOutputValue = getPrevDice(input)
-  return myOutputValue;
-};
+
 
 // var main = function (input) { 
 //     // 1. roll a new dice number, assign to a variable
@@ -57,14 +67,41 @@ let main = function(input){
 // };
 
 
-// // Track the previous dice roll value
-// var prevDiceRoll = 0;
-// // Track the user's running score
-// var score = 0;
-// // Track number of games won
-// var numGamesPlayed = 0;
-// // Track number of losses
-// var numGamesWon = 0;
+// WIN / LOSS
+// Track the user's running score
+let score = 0;
+// Track number of games won
+let numGamesPlayed = 0;
+// Track number of losses
+let numGamesWon = 0;
+// let winLossMessage = 
+// let percentWinOld = ((numGamesWon/numGamesPlayed)*100).toFixed(1)
+
+let countWins = function (input){
+  // 1. roll a new dice number, assign to a variable
+  let randomDiceNumber = 3// rollDice();
+  // 2. increase games played by 1
+  numGamesPlayed = numGamesPlayed +1
+  // if didnt guess correctly
+  numGamesWon = numGamesWon
+  let percentWinOld = ((numGamesWon/numGamesPlayed)*100).toFixed(1)
+  console.log(`wrong guess`)
+  console.log(`numGames Play = ${numGamesPlayed}.` )
+  console.log(`GamesOld% Won = ${percentWinOld}.` )
+  let myOutputMessage = `You win ${percentWinOld}% of the time.You guess ${input}. You rolled ${randomDiceNumber}. You lose!`
+  // if guess correctly
+  if (input === randomDiceNumber
+    ){
+      numGamesWonNew = numGamesWon +1 
+      let percentWinNew = ((numGamesWonNew/numGamesPlayed)*100).toFixed(1)
+      myOutputMessage = `You win ${percentWinNew}% of the time.You guess ${input}. You rolled ${randomDiceNumber}. You win!`
+      console.log(`correct guess`)
+      console.log(`numGames Play = ${numGamesPlayed}.` )
+      console.log(`GamesNew% Play = ${percentWinNew}.` )
+    }
+  return myOutputMessage
+};
+
 
 // // Track the frequency of dice rolls for each dice value
 // var diceVal1Freq = 0;
