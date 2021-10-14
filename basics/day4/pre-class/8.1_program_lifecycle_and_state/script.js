@@ -1,5 +1,4 @@
 let prevDiceRoll = 0;
-const diceRecord = [];
 
 var rollDice = function () {  
   // produces a decimal between 0 and 6  
@@ -15,22 +14,17 @@ var rollDice = function () {
 
 };
 
-let getPrevDiceRoll = function () {
-  // previous Dice Roll 
-  prevDiceRoll = rollDice;
-
+let getPrevDiceRollInfo = function () {
   // case of first roll
   if (prevDiceRoll == 0){
     return `This was your first dice roll.` ;
   }
-
-  
-  return  `Your previous dice roll was ${prevDiceRoll}.`
+   return  `Your previous dice roll was ${prevDiceRoll}.`
 } ; 
 
 var main = function (input) {  
+  prevDiceRoll = rollDice(); 
   var randomDiceNumber = rollDice(); 
-
   var myOutputValue = `your last roll was ${prevDiceRoll}. You just roll a ${randomDiceNumber}. You guess ${input}. You lost.`;  
   if (randomDiceNumber == input) {    
     myOutputValue = `your last roll was ${prevDiceRoll}. You just roll a ${randomDiceNumber}. You guess ${input}. You win.`;  
