@@ -14,24 +14,48 @@ var rollDice = function () {
 
 };
 
-let getPrevDiceRollInfo = function () {
-  // case of first roll
-  if (prevDiceRoll == 0){
-    return `This was your first dice roll.` ;
-  }
-   return  `Your previous dice roll was ${prevDiceRoll}.`
-} ; 
+// let getPrevDiceRollInfo = function () {
+//   // case of first roll
+//   if (prevDiceRoll == 0){
+//     return `This was your first dice roll.` ;
+//   }
+//    return  `Your previous dice roll was ${prevDiceRoll}.`
+// } ; 
 
-var main = function (input) {  
-  prevDiceRoll = rollDice(); 
-  var randomDiceNumber = rollDice(); 
+var getPrevDice = function (input) {  
+
+  var randomDiceNumber = 3// rollDice(); 
   var myOutputValue = `your last roll was ${prevDiceRoll}. You just roll a ${randomDiceNumber}. You guess ${input}. You lost.`;  
+
   if (randomDiceNumber == input) {    
     myOutputValue = `your last roll was ${prevDiceRoll}. You just roll a ${randomDiceNumber}. You guess ${input}. You win.`;  
   }  
-    
+  prevDiceRoll = randomDiceNumber; 
   return myOutputValue;
 };
+
+let main = function(input){
+  let myOutputValue = getPrevDice(input)
+  return myOutputValue;
+};
+
+// var main = function (input) { 
+//     // 1. roll a new dice number, assign to a variable
+//     var getNewDice = 3// rollDice();
+    
+//     // 2. record output value with previous and current values as string
+//     var myOutputValue = `You lose. your last roll was  ${prevDiceRoll}. You just roll a ${getNewDice} and you guess ${input}. `
+//     // 3b. if condition where guess = current roll
+//     if (input == getNewDice) {
+//       myOutputValue =  `You win. your last roll was  ${prevDiceRoll}. You just roll a ${getNewDice} and you guess ${input}. `
+//       }
+//     // 3. assign prev dice roll variable TO new dice number (AMENDED)
+//     //    (new dice num is then the prevDiceRoll for the next time you press submit)
+//     prevDiceRoll = getNewDice
+// // 4. return string from step 2 
+//   return myOutputValue;
+// };
+
 
 // // Track the previous dice roll value
 // var prevDiceRoll = 0;
