@@ -78,27 +78,29 @@ let numGamesWon = 0;
 // let percentWinOld = ((numGamesWon/numGamesPlayed)*100).toFixed(1)
 
 let countWins = function (input){
-  // 1. roll a new dice number, assign to a variable
-  let randomDiceNumber = 3// rollDice();
+   // 1. roll a new dice number, assign to a variable
+  let randomDiceNumber = rollDice();
   // 2. increase games played by 1
   numGamesPlayed = numGamesPlayed +1
-  // if didnt guess correctly
-  numGamesWon = numGamesWon
+
+  
   let percentWinOld = ((numGamesWon/numGamesPlayed)*100).toFixed(1)
   console.log(`wrong guess`)
   console.log(`numGames Play = ${numGamesPlayed}.` )
   console.log(`GamesOld% Won = ${percentWinOld}.` )
   let myOutputMessage = `You win ${percentWinOld}% of the time.You guess ${input}. You rolled ${randomDiceNumber}. You lose!`
   // if guess correctly
-  if (input === randomDiceNumber
+  if (input == randomDiceNumber
     ){
       numGamesWonNew = numGamesWon +1 
+      // numGamesPlayed = numGamesPlayed +1
       let percentWinNew = ((numGamesWonNew/numGamesPlayed)*100).toFixed(1)
       myOutputMessage = `You win ${percentWinNew}% of the time.You guess ${input}. You rolled ${randomDiceNumber}. You win!`
       console.log(`correct guess`)
       console.log(`numGames Play = ${numGamesPlayed}.` )
       console.log(`GamesNew% Play = ${percentWinNew}.` )
     }
+  numGamesWonNew = numGamesWon +1   
   return myOutputMessage
 };
 
