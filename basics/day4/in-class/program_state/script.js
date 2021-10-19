@@ -104,30 +104,30 @@ var playSecretWordTwiceInARow = function (guessedWord) {
 
 //Secret Word X in a Row 
 
-let requiredTries = function() {
-  tries =  (Math.floor(Math.random() * 3)) + 2;
-  return tries
+let requiredTimes = function() {
+  times =  (Math.floor(Math.random() * 3)) + 2;
+  return times
 };
 
 let mode = "get into game"
 // startMsg = `Press submit button to see required guess in a row`
 var playSecretWordXInARow = function (guessedWord) {
   if (mode === "get into game"){
-      let tries =  requiredTries()
-      let reqNumTries = tries
-      console.log(reqNumTries)
+      let times =  requiredTimes()
+      let reqNumTimes = times
+      console.log(reqNumTimes)
       mode = "game mode"
       console.log(`mode is ${mode}`)
       console.log(`stuck at start`)
-      return ` You need to guess the correct word ${reqNumTries} times`
+      return ` You need to guess the correct word ${reqNumTimes} times`
     }
   
   if (mode === "game mode") {
+      mode  = "begin"
       var secretWord = generateSecretWordNoRepeats(); // generateWord(); also ok
       var standardMessage = `You guessed: ${guessedWord}. <br>
                             Secret word: ${secretWord}.`;
-      reqNumTries = tries
-      mode  === "begin"
+      reqNumTimes = times
       console.log(`secretWord is ${secretWord}`)
       console.log(`mode is ${mode}`)
       console.log(`enter game`)
@@ -135,23 +135,23 @@ var playSecretWordXInARow = function (guessedWord) {
           ) {
             // reset to begin mode with the earlier required num of guess
             numCorrectGuessesSoFar = 0
-            mode  === "begin"
+            mode  = "game mode"
             console.log(`mode is ${mode}`)
-            console.log(`wrong guess`, reqNumTries)
+            console.log(`wrong guess. Need correct guess times `, reqNumTimes)
             
             return `${standardMessage}. Try again`
           }
-        else if (secretWord === guessedWord && ((numCorrectGuessesSoFar+1) < reqNumTries)
+        else if (secretWord === guessedWord && ((numCorrectGuessesSoFar+1) < reqNumTimes)
           ) {
             mode = "guess correctly mode"
             console.log(`mode is ${mode}`)
             numCorrectGuessesSoFar = numCorrectGuessesSoFar + 1; 
             console.log(`numCorrectGuessesSoFar : ${numCorrectGuessesSoFar}.` )
-            console.log(`correct guess. Remaining required num of tries:`, reqNumTries)
+            console.log(`correct guess. Remaining required num of correct guess:`, (reqNumTimes-1))
             mode = "game mode"
             return `${standardMessage} <br> 
                 You guessed correctly! <br> 
-                You need ${reqNumTries - numCorrectGuessesSoFar} more correct guesses to win.`
+                You need ${reqNumTimes - numCorrectGuessesSoFar} more correct guesses to win.`
           }
 
         else {
@@ -160,10 +160,10 @@ var playSecretWordXInARow = function (guessedWord) {
        
               mode  = "get into game"
               console.log(`mode is ${mode}`)
-              console.log(`required num of times in a row:`, reqNumTries)
+              console.log(`required num of times in a row:`, reqNumTimes)
               numCorrectGuessesSoFar = 0 // to reset
               return `${standardMessage} <br> 
-              You guessed correctly ${reqNumTries} times in a row. <br> 
+              You guessed correctly ${reqNumTimes} times in a row. <br> 
               You win! Let's reset. Please play again by pressing Submit.`
              }
   }        
