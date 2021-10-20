@@ -1,7 +1,8 @@
 var main = function (input) {
   // var myOutputValue = drawChar(input)
   // var myOutputValue = drawSq(input);
-  var myOutputValue = drawTri(input)
+  // var myOutputValue = drawTri(input)
+  var myOutputValue = borderSquare(input)
   return myOutputValue;
 };
 
@@ -43,26 +44,27 @@ var drawSq = function (input) {
 
 
 // trianagle
-let drawTri = function(input) {
-  let myOutputValue = '';
+var drawTri = function(input) {
+  var myOutputValue = '';
   // initiate a column counter in the inner loop
-  let spotCounter = Number(input);
+  var columnCounter = input;
   // initiate the outer counter for depth
-  let rowCounter = 0;
-  while (rowCounter < spotCounter) {
-    columnCounter = 0
+  var rowCounter = 0;
+  while (rowCounter < columnCounter) {
+    var spotCounter = 0;
     // loop to match row and column
-    while (columnCounter < rowCounter) {
-      myOutputValue +- '🍀'
-      columnCounter += 1 ;
+    while (spotCounter <= rowCounter) {
+      myOutputValue +=  '🍀'
+      spotCounter = spotCounter + 1 ;
     }
 
     // at the end of each level ie outer loop, add a <br> tag to begin a new row
-    myOutputValue =  myOutputValue + '<br';
-    rowCounter = rowCounter +1;
+    myOutputValue +=  '<br>';
+    rowCounter +=1;
   }
   return myOutputValue;
 }
+
 
 // while loop
 // Initialise counter
@@ -79,3 +81,34 @@ while (counter < 10) {
 for (var counter = 0; counter < 10; counter += 1) {
   console.log('hello');
 }
+
+
+var borderSquare = function (input) {
+  var myOutputValue = '';
+  // sideLength represents the length of each side of the square
+  var height = input;
+  var rowCounter = 0;
+  while (rowCounter < height) {
+    var innerCounter = 0;
+    while (innerCounter < height) {
+      // If current iteration represents a border element, draw 🌸 instead.
+      if (
+            rowCounter == 0 || // top row
+            innerCounter == 0  || // left most column
+            rowCounter == height -1 || // last row
+            innerCounter == height - 1  // last column
+        ) {
+        myOutputValue += '🌸';
+      } else {
+        // Add a 🍀 to the current row
+        myOutputValue += '🍀';
+      }
+
+      innerCounter += 1;
+    }
+    // Insert a line break to start a new row
+    myOutputValue += '<br>';
+   rowCounter += 1;
+  }
+  return myOutputValue;
+};
