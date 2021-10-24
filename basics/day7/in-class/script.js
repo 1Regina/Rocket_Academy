@@ -28,7 +28,6 @@ var helloAllWords = function (input) {
   return myOutputValue;
 };
 
-
  
 // Initialise an empty names array
 var names = [];
@@ -51,7 +50,6 @@ var addressBook = function (input) {
   if (!found) {
     names.push(input);
   }
-
   // Return the full array of names
   var myOutputValue = 'All names: ' + names;
   return myOutputValue;
@@ -96,26 +94,50 @@ var madlibCreater = function (chosenWord) {
   );
 };
 
-// // //More comfortable
-// // // Input and Create Mode
+// //More comfortable
+// // Input and Create Mode
 
-// mode = "input"
-// adjectives = []
-// let inputCreate = function (word) {
-//   if (word = "input") {
-//     mode = "input"
-//     adjectives.push(word) 
-//     adjectivesLength = adjectives.length
-//     console.log("you added ", adjectivesLength, "words")
-//     console.log("still in input mode")
-//     if (word = "create") {
-//       mode = "create"
-//       let randomInteger = getRandomIndex(adjectivesLength);
-//       //get chosen word
-//       let chosenWord = adjectives[randomInteger];
-//       myOutputValue = madlibCreater(chosenWord);
-//       return myOutputValue
-//     }
-//     return `adjectives choices are: ${adjectives}` 
-//   }
-// }
+let mode = "input"
+adjectives = []
+let inputCreate = function (word) {
+  if (word == "create") {
+    mode = "create"
+    console.log(`now in `, mode, ` mode.`)
+    let randomInteger = getRandomIndex(adjectives.length);
+    //get chosen word
+    let chosenWord = adjectives[randomInteger];
+    myOutputValue = madlibCreater(chosenWord);
+    return myOutputValue
+    
+  }
+  else if (mode == "input") {    
+    // mode = "input"
+    var found = false
+    var index = 0;
+    while (index < adjectives.length){
+      let currentAdj = adjectives[index]
+      if(currentAdj == word){
+        found = true
+        return `${word} is already existing.`
+      }
+      index = index +1;
+    }
+    if (!found) {
+      adjectives.push(word);
+      
+    }
+    console.log("you have ", adjectives.length, "words")
+    console.log("still in input mode")
+    return `your adjectives array is ${adjectives}`
+  }  
+  else if (word == "") {
+    mode = "create"
+    console.log("auto mode. just submit")
+    let randomInteger = getRandomIndex(adjectives.length);
+    //get chosen word
+    let chosenWord = adjectives[randomInteger];
+    myOutputValue = madlibCreater(chosenWord);
+    return myOutputValue
+  }
+}
+
