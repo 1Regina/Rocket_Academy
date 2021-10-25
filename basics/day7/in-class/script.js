@@ -2,7 +2,9 @@ var main = function(input){
   // myOutputValue = helloAllWords(input)
   // myOutputValue = addressBook(input)
   // myOutputValue = madLib(input)
-  myOutputValue = inputCreate(input)
+  // myOutputValue = inputCreate(input)
+  // myOutputValue = insertMultiple(input)
+  myOutputValue = createPhraseArray (input)
   return myOutputValue
 }
 
@@ -56,7 +58,7 @@ var addressBook = function (input) {
 };
 
 
-//BASE
+//BASE https://basics.rocketacademy.co/in-class-exercises/day-7-arrays-and-loops#input-multiple-words
 // When the Basics Starter Code app loads, the user can input 1 adjective at a time to store in the app. Store the user-inputted adjectives in a global array variable.
 // When the user inputs the word "create" the app completes the Mad Lib with a random word from the user-inputted adjectives array and outputs the completed Mad Lib in the grey box
 
@@ -95,10 +97,10 @@ var madlibCreater = function (chosenWord) {
 };
 
 // //More comfortable
-// // Input and Create Mode
+// // Input and Create Mode https://basics.rocketacademy.co/in-class-exercises/day-7-arrays-and-loops#input-multiple-words
 
 let mode = "input"
-adjectives = []
+let adjectives = []
 let inputCreate = function (word) {
   if (word == "create") {
     mode = "create"
@@ -138,6 +140,40 @@ let inputCreate = function (word) {
     let chosenWord = adjectives[randomInteger];
     myOutputValue = madlibCreater(chosenWord);
     return myOutputValue
+  }
+}
+
+
+// INPUT MULTIPLE WORDS https://basics.rocketacademy.co/in-class-exercises/day-7-arrays-and-loops#input-multiple-words
+// already initialised
+// let mode = "input"
+// let adjectives = []
+
+// 1. parse phrase into array of adjectives
+// 2. create a set of adjectives
+// 3. check that each word in new set is not the mother adjectives array
+// 4. create sentence
+
+phraseAdjs = []
+var found = false
+let createPhraseArray = function(input) {
+  phraseAdjs =  input.split(' ')
+  
+  var index = 0;
+  while (index < phraseAdjs.length){
+    let currentAdj = phraseAdjs[index]
+    if(phraseAdjs.includes(currentAdj) == true){
+      found = true
+      console.log(`index`, index)
+      // console.log(, `unique adj`)
+      index = index +1;
+      return `phrase contains duplicate words.`
+      } else {
+    phraseAdjs.push(currentAdj);
+    index = index +1;
+    console.log(phraseAdjs.length, `unique adj`)
+    return `all unique words`
+    }
   }
 }
 
