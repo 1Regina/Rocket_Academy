@@ -6,7 +6,6 @@ var main = function (input) {
   // var myOutputValue = loopSimple(input)
   // var myOutputValue = loopLoop(input)
   var myOutputValue = multiDice(input)
-  // var myOutputValue = guessDice(input)
   return myOutputValue;
 };
 
@@ -47,42 +46,46 @@ let winTimes = 0
 // Multi-Dice Game
 let multiDice = function(input) {
   let message = ""
+  
   if (mode == "mode 1: define dice attempt"){
-  tries = input;
-  mode = "mode 2: guessing game"
-  console.log(mode)
-  return `You want to throw the dice for ${tries} times. Put in your guess.`
+    tries = input;
+    mode = "mode 2: guessing game"
+    console.log(mode)
+    return `You want to throw the dice for ${tries} times. Put in your guess.`
   }
   console.log("going guess mode:", mode, mode == 'mode 2: guessing game')
+
   if (mode == 'mode 2: guessing game'){
-    console.log("entered")
+    console.log("entered guessing")
     
-    // let diceRolls = []
+    let diceRolls = []
+    let userGuess = input
+    
+    winTimes = 0
     console.log( "i m playing the game. ")
+
     while (multiDiceGamecounter < tries){
 //       // mode = "guessing game"
-          let userGuess = input
-          let diceNum = diceRoll()
-          winTimes = 0
-          // diceRolls = diceRolls.push(diceNum) 
-          console.log(`keep trying`)
-          if (diceNum == userGuess)
-          {
-            winTimes +=1
-            message = "well done" //multiDiceMsg(userGuess, diceNum) + ` <br> You guess correctly and won ${winTimes} times. ` 
-            
-          }
-          message = multiDiceMsg(userGuess, diceNum) + ` <br> You lose this time and had won ${winTimes} times. `
-          multiDiceGamecounter += 1
-          console.log("try again")
+      let diceNum = diceRoll()
+      diceRolls.push(diceNum) 
+      console.log(`keep trying`)
+      if (diceRolls[multiDiceGamecounter] == userGuess){
+        winTimes +=1
+        return multiDiceMsg(userGuess, diceRolls) + ` <br> You made a correct guess. ` 
+      } else {
+        console.log("try again")
+        console.log(`DiceRolls were ${diceRolls}.`)
+        message = multiDiceMsg(userGuess, diceRolls) + ` <br> You lose this game. `
+        
+      }
+      multiDiceGamecounter += 1  
     }
   }  
-  mode == "mode 1: define dice attempt"
   return  message
  }
 
-let multiDiceMsg = function (guess, diceNum) {
-  return `You guess ${guess} and you rolled ${diceNum}.`
+let multiDiceMsg = function (guess, diceRolls) {
+  return `You guess ${guess} and you rolled ${diceRolls}.`
 }
 
 let diceRoll = function () {
@@ -92,15 +95,7 @@ let diceRoll = function () {
   return diceNum
 }
 
-// let guessDice = function(guess){
-//   let diceNum = diceRoll()
-//   console.log(`Guess is `, guess, ` But dice is ` ,diceNum, )
-//   let outputMsg = `Guess Wrongly` + multiDiceMsg(guess, diceNum)
-//   if(guess == diceNum){
-//     outputMsg =  `Spot On Guess` + multiDiceMsg(guess, diceNum)
-//     } 
-//   return outputMsg
-// }
+
 
 // Number of characters
 let drawChar = function(numChar) {
