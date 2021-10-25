@@ -285,9 +285,7 @@ var getRandomIndex = function (max) {
 };
 
 
-
-var main = function (input) {
-
+var playHighCard = function() {
     // Shuffle the deck and save it in a new variable shuffledDeck
   // to communicate that we have shuffled the deck.
   var shuffledDeck = shuffleCards(cardDeck);
@@ -345,3 +343,68 @@ var shuffleCards = function (cardDeck) {
   // Return the shuffled deck
   return cardDeck;
 };
+
+
+// Highest of 2 Cards Highest of 2 Cards https://basics.rocketacademy.co/10-javascript-objects/10.1-javascript-objects#:~:text=High%20Card%20game.-,highest%20of%202%20cards,-Change%20the%20High
+// Change the High Card program so that the player and computer each draw 2 cards instead of 1. The player with the highest of any of the cards wins.
+
+var playDoubleCards = function() {
+  // Shuffle the deck and save it in a new variable shuffledDeck
+// to communicate that we have shuffled the deck.
+var shuffledDeck = shuffleCards(cardDeck);
+
+// Computer and player take turns to draw 2 cards each from the top of the deck
+var computerCard1 = shuffledDeck.pop();
+var playerCard1 = shuffledDeck.pop();
+var computerCard2 = shuffledDeck.pop();
+var playerCard2 = shuffledDeck.pop();
+
+// Construct an output string to communicate which cards were drawn
+var myOutputValue =
+  'Computer had ' +
+  computerCard1.name +
+  ' of ' +
+  computerCard1.suit +
+  ' and ' +
+  computerCard2.name +
+  ' of ' +
+  computerCard2.suit +
+  '. Player had ' +
+  playerCard1.name +
+  ' of ' +
+  playerCard1.suit +
+  ' and ' +
+  playerCard2.name +
+  ' of ' +
+  playerCard2.suit +
+  '. ';
+
+// Compare computer and player cards by rank attribute
+// If computer card rank is greater than player card rank, computer wins
+if (   computerCard1.rank > playerCard1.rank 
+    || computerCard1.rank > playerCard2.rank 
+    || computerCard2.rank > playerCard1.rank 
+    || computerCard2.rank > playerCard2.rank ) {
+  // Add conditional-dependent text to the output string
+  myOutputValue = myOutputValue + 'Computer wins.';
+  // Else if computer card rank is less than player card rank, player wins
+} else if (  computerCard1.rank < playerCard1.rank 
+          || computerCard1.rank < playerCard2.rank 
+          || computerCard2.rank < playerCard1.rank 
+          || computerCard2.rank < playerCard2.rank) {
+  myOutputValue = myOutputValue + 'Player wins!';
+  // Otherwise (i.e. ranks are equal), it's a tie
+} else {
+  myOutputValue = myOutputValue + "It's a tie.";
+}
+
+// Return the fully-constructed output string
+return myOutputValue;
+};
+
+
+var main = function (input) {
+  // myOutputValue = playHighCard()
+  myOutputValue = playDoubleCards()
+  return myOutputValue
+}
