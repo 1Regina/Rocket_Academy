@@ -381,6 +381,7 @@ var myOutputValue =
 
 // Compare computer and player cards by rank attribute
 // If computer card rank is greater than player card rank, computer wins
+
 if (   computerCard1.rank > playerCard1.rank 
     || computerCard1.rank > playerCard2.rank 
     || computerCard2.rank > playerCard1.rank 
