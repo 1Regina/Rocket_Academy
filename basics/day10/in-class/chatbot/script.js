@@ -1,21 +1,10 @@
-// const main = function (input) {
-//   let myOutputValue = 'hello'
-// return myOutputValue
-// }
-
-var answersAndResponses = {
-  yes: `Wow! Me too!`,
-  no: "Oh ok, just normally happy ;)",
-  maybe: "It seems the very thought of coding makes people happy!",
-};
 
 var name = "";
 var age = "";
 var mode = "ask name";
 var myOutputValue = "";
-var answerIndex = "";
+
 var main = function (input) {
-  // var userInput = input;
   console.log(mode);
   if (mode == "ask name") {
     var intro = `Hey I am Robocop. Whats your name?`;
@@ -24,7 +13,7 @@ var main = function (input) {
   }
   if (mode == "give name") {
     name = input;
-    var message = `Hey ${name}, a nice name. Waht is your age`;
+    var message = `Hey ${name} What a cool name. How old are you?`;
     mode = "ask age";
     return message;
   }
@@ -32,13 +21,11 @@ var main = function (input) {
     age = input;
     mode = "ask question";
     if (age <= 20) {
-      message = `Too young `;
-      
-    } else if (20 < age < 60) {
-      message = "middle age ";
-      
-    } else if (age >= 60) {
-      message = `What a wise age `;
+      message = `Cherish your youth, `;
+    } else if (age > 60) {
+      message = `What a wise age, `;
+    } else {
+      message = `You are in your prime mid life, `;
     }
 
     return message + name;
@@ -46,7 +33,6 @@ var main = function (input) {
   if (mode == "ask question") {
     myOutputValue = "chose set A or set B";
     console.log(myOutputValue);
-    var userInput = input;
     if (input == "set A") {
       myOutputValue = `${name} ` + questionAndAnswerSets[0].question;
       mode = "answer question";
@@ -59,6 +45,8 @@ var main = function (input) {
       return myOutputValue;
     }
   } else if (mode == "answer question") {
+    mode = "ask name";
+    let userInput = input;
     myOutputValue = questionAndAnswerSets[answerIndex].answers[userInput];
     return myOutputValue;
   }
@@ -85,3 +73,10 @@ var questionAndAnswerSets = [
     },
   },
 ];
+
+
+var answersAndResponses = {
+  yes: `Wow! Me too!`,
+  no: "Oh ok, just normally happy ;)",
+  maybe: "It seems the very thought of coding makes people happy!",
+};
