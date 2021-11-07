@@ -1,21 +1,21 @@
-var bodyPart = {
+let bodyPart = {
   finger: "magic hand",
   foot: "traveller",
   face: "you are rich",
 };
-var mode = "ask name";
-var myOutputValue = "";
-var main = function (input) {
+let mode = "ask name";
+let myOutputValue = "";
+const main = function (input) {
   // var userInput = input;
   console.log(mode);
   if (mode == "ask name") {
-    var intro = `Whats your name?`;
+    let intro = `Whats your name?`;
     mode = "give name";
     return intro;
   }
   if (mode == "give name") {
     name = input;
-    var message = `Hey ${name}, a nice name. where is your birthmark`;
+    let message = `Hey ${name}, a nice name. where is your birthmark`;
     mode = "birthmark";
     return message;
   }
