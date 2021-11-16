@@ -108,10 +108,8 @@ const yellowBox = (array) => {
     return row;
   }
 };
-
-// yellowBox(arrayWords)
-
 yellowBox(arrayWords);
+
 const withYellow = (numberInput) => {
   for (let i = 0; i < numberInput; i += 1) {
     const greyBox = document.createElement(`div`);
