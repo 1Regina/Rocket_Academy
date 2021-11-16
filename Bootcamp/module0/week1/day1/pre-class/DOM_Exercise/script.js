@@ -74,6 +74,7 @@ const manyWords = (array) => {
 
 // manyWords(words);
 
+// Element Contents From an Array of Arrays
 const arrayWords = [
   ['orange', 'tomato'],
   ['fire engine', 'basketball'],
@@ -98,4 +99,30 @@ const manyArrays = (numberInput) => {
     }
   }
 };
-manyArrays(6);
+// manyArrays(6);
+
+const yellowBox = (array) => {
+  for (let i = 0; i < array.length; i += 1) {
+    const row = document.createElement(`div`);
+    row.classList.add(`row`);
+    return row;
+  }
+};
+
+// yellowBox(arrayWords)
+
+yellowBox(arrayWords);
+const withYellow = (numberInput) => {
+  for (let i = 0; i < numberInput; i += 1) {
+    const greyBox = document.createElement(`div`);
+    greyBox.classList.add(`container`);
+    document.body.appendChild(greyBox);
+    for (let k = 0; k < arrayWords.length; k += 1) {
+      const wordTop = document.createElement(`span`);
+      const yellow = yellowBox(arrayWords);
+      yellow.appendChild(wordTop);
+      greyBox.appendChild(yellow);
+    }
+  }
+};
+withYellow(3);
