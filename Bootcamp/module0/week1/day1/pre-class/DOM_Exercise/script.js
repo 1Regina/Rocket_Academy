@@ -101,26 +101,44 @@ const manyArrays = (numberInput) => {
 };
 // manyArrays(6);
 
-const yellowBox = (array) => {
-  for (let i = 0; i < array.length; i += 1) {
-    const row = document.createElement(`div`);
-    row.classList.add(`row`);
-    return row;
-  }
-};
-yellowBox(arrayWords);
+// Refractor solution 1
+// const yellowBox = (array) => {
+//   for (let i = 0; i < array.length; i += 1) {
+//     const row = document.createElement(`div`);
+//     row.classList.add(`row`);
+//     return row;
+//   }
+// };
+// yellowBox(arrayWords);
 
-const withYellow = (numberInput) => {
+// const withYellow = (numberInput) => {
+//   for (let i = 0; i < numberInput; i += 1) {
+//     const greyBox = document.createElement(`div`);
+//     greyBox.classList.add(`container`);
+//     document.body.appendChild(greyBox);
+//     for (let k = 0; k < arrayWords.length; k += 1) {
+//       const wordTop = document.createElement(`span`);
+//       const yellow = yellowBox(arrayWords);
+//       yellow.appendChild(wordTop);
+//       greyBox.appendChild(yellow);
+//     }
+//   }
+// };
+// withYellow(3);
+
+// Refractor solution 2
+const makeYellow = (numberInput, arrayWords) => {
   for (let i = 0; i < numberInput; i += 1) {
     const greyBox = document.createElement(`div`);
     greyBox.classList.add(`container`);
     document.body.appendChild(greyBox);
     for (let k = 0; k < arrayWords.length; k += 1) {
       const wordTop = document.createElement(`span`);
-      const yellow = yellowBox(arrayWords);
-      yellow.appendChild(wordTop);
-      greyBox.appendChild(yellow);
+      const row = document.createElement(`div`);
+      row.classList.add(`row`);
+      row.appendChild(wordTop);
+      greyBox.appendChild(row);
     }
   }
 };
-withYellow(3);
+makeYellow(2, arrayWords);
