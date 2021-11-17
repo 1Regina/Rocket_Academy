@@ -82,7 +82,6 @@ const arrayWords = [
 
 const manyArrays = (numberInput) => {
   for (let i = 0; i < numberInput; i += 1) {
-    const wordings = createWords(numberInput);
     const greyBox = document.createElement(`div`);
     greyBox.classList.add(`container`);
     document.body.appendChild(greyBox);
@@ -132,13 +131,32 @@ const makeYellow = (numberInput, arrayWords) => {
     const greyBox = document.createElement(`div`);
     greyBox.classList.add(`container`);
     document.body.appendChild(greyBox);
-    for (let k = 0; k < arrayWords.length; k += 1) {
-      const wordTop = document.createElement(`span`);
+    for (let j = 0; j < arrayWords.length; j += 1) {
+      // const wordTop = document.createElement(`span`);
       const row = document.createElement(`div`);
       row.classList.add(`row`);
-      row.appendChild(wordTop);
+      // row.appendChild(wordTop);
       greyBox.appendChild(row);
+      // return row
     }
   }
 };
-makeYellow(2, arrayWords);
+// makeYellow(2, arrayWords);
+
+// prob wtih manyArraysYellow. I must not create row otherwise I cannot read the words. But I also cant get makeYellow to return row otherwise my row count is 
+const manyArraysYellow = (numberInput, arrayWords) => {
+  makeYellow(numberInput, arrayWords);
+  const index = arrayWords.length;
+  for (let i = 0; i < index; i += 1) {
+    const row = document.createElement(`div`);
+    // row.classList.add(`row`);
+    for (let k = 0; k < arrayWords[i].length; k += 1) {
+      const wordTop = document.createElement(`span`);
+      wordTop.classList.add(`word`);
+      wordTop.innerText = arrayWords[i][k];
+      row.appendChild(wordTop);
+    }
+  }
+};
+
+manyArraysYellow(2, arrayWords);
