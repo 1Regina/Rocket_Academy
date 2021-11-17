@@ -163,7 +163,6 @@ const manyArrays = (numberInput) => {
 
 // ADD EVENT LISTENERS
 
-
 // const greyBox = document.createElement(`div`);
 // greyBox.classList.add(`container`);
 // document.body.appendChild(greyBox);
@@ -217,10 +216,10 @@ const manyArraysClickInside = () => {
   for (let i = 0; i < arrayGreet.length; i += 1) {
     const row = document.createElement(`div`);
     row.classList.add(`row`);
-    for (let k = 0; k < arrayGreet[i].length; k += 1) {
+    for (let j = 0; j < arrayGreet[i].length; j += 1) {
       const wordTop = document.createElement(`span`);
       wordTop.classList.add(`word`);
-      wordTop.innerText = arrayGreet[i][k];
+      wordTop.innerText = arrayGreet[i][j];
       row.appendChild(wordTop);
       // greyBox.appendChild(row);
     }
@@ -232,17 +231,40 @@ const manyArraysClickInside = () => {
 };
 // manyArraysClickInside();
 
-
 // CLICK AND INPUT
 // bigGreyBox.classList.add(`input-group`,`mb-3`);
 
-const field= document.createElement(`input`);
+const field = document.createElement(`input`);
 field.setAttribute(`id`, `oneWord`);
-field.setAttribute(`placeholder`, `type in your word`)
-greyBox.appendChild(field)
+field.setAttribute(`placeholder`, `type in your word`);
+greyBox.appendChild(field);
 greyBox.appendChild(eventButton);
-const freshArray = []
+const freshArray = [];
+
 
 const clickInput = () => {
+  let wordField = document.querySelector(`#oneWord`);
+  console.log(`wordField`, wordField);
+  let typedWord = wordField.value;
 
-}
+  freshArray.push(typedWord);
+  console.log(`freshArray`, freshArray);
+
+  const row = document.createElement(`div`);
+  row.classList.add(`row`);
+  const word = document.createElement(`span`);
+  word.classList.add(`word`);
+
+  // const newArray = freshArray.slice(-1)
+  for (let i = 0; i < freshArray.length; i += 1) {
+    word.innerText = freshArray[i];
+    console.log(`word is `, word);
+    console.log(`freshArray`, freshArray);
+    greyBox.appendChild(row);
+    row.appendChild(word);
+    eventButton.addEventListener(`click`, clickInput);
+  }
+};
+clickInput();
+// freshArray.shift();
+// console.log(`freshArray start`, freshArray);
