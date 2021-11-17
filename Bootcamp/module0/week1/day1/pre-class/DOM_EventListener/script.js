@@ -225,46 +225,47 @@ const manyArraysClickInside = () => {
     }
     greyBox.appendChild(row);
 
-    eventButton.addEventListener(`click`, manyArraysClickInside);
+    // eventButton.addEventListener(`click`, manyArraysClickInside); // could be outside
   }
   greyBox.appendChild(eventButton);
 };
-// manyArraysClickInside();
+manyArraysClickInside();
+eventButton.addEventListener(`click`, manyArraysClickInside);
 
 // CLICK AND INPUT
 // bigGreyBox.classList.add(`input-group`,`mb-3`);
 
-const field = document.createElement(`input`);
-field.setAttribute(`id`, `oneWord`);
-field.setAttribute(`placeholder`, `type in your word`);
-greyBox.appendChild(field);
-greyBox.appendChild(eventButton);
-const freshArray = [];
+// const field = document.createElement(`input`);
+// field.setAttribute(`id`, `oneWord`);
+// field.setAttribute(`placeholder`, `type in your word`);
+// greyBox.appendChild(field);
+// greyBox.appendChild(eventButton);
+// const freshArray = [];
 
 
-const clickInput = () => {
-  let wordField = document.querySelector(`#oneWord`);
-  console.log(`wordField`, wordField);
-  let typedWord = wordField.value;
+// const clickInput = () => {
+//   let wordField = document.querySelector(`#oneWord`);
+//   console.log(`wordField`, wordField);
+//   let typedWord = wordField.value;
 
-  freshArray.push(typedWord);
-  console.log(`freshArray`, freshArray);
+//   freshArray.push(typedWord);
+//   console.log(`freshArray`, freshArray);
 
-  const row = document.createElement(`div`);
-  row.classList.add(`row`);
-  const word = document.createElement(`span`);
-  word.classList.add(`word`);
+//   const row = document.createElement(`div`);
+//   row.classList.add(`row`);
+//   const word = document.createElement(`span`);
+//   word.classList.add(`word`);
 
-  // const newArray = freshArray.slice(-1)
-  for (let i = 0; i < freshArray.length; i += 1) {
-    word.innerText = freshArray[i];
-    console.log(`word is `, word);
-    console.log(`freshArray`, freshArray);
-    greyBox.appendChild(row);
-    row.appendChild(word);
-    eventButton.addEventListener(`click`, clickInput);
-  }
-};
-clickInput();
+//   // const newArray = freshArray.slice(-1)
+//   for (let i = 0; i < freshArray.length; i += 1) {
+//     word.innerText = freshArray[i];
+//     console.log(`word is `, word);
+//     console.log(`freshArray`, freshArray);
+//     greyBox.appendChild(row);
+//     row.appendChild(word);
+//     eventButton.addEventListener(`click`, clickInput);
+//   }
+// };
+// clickInput();
 // freshArray.shift();
 // console.log(`freshArray start`, freshArray);
