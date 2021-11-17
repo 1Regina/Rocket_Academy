@@ -161,7 +161,12 @@ const manyArrays = (numberInput) => {
 
 // manyArraysYellow(2, arrayWords);
 
+// ADD EVENT LISTENERS
 
+
+// const greyBox = document.createElement(`div`);
+// greyBox.classList.add(`container`);
+// document.body.appendChild(greyBox);
 const manyArraysEvent = () => {
   // let items = 1;
   // console.log(items);
@@ -183,14 +188,61 @@ const manyArraysEvent = () => {
     }
   }
 };
-
-const eventButton = document.createElement(`button`);
-eventButton.setAttribute(`id`, `event`);
-eventButton.innerText = `click for event`;
-document.body.appendChild(eventButton);
-// CLICK TO CREATE
+// manyArraysEvent()
+// EVENT LISTENING TO manyArraysEvent
+// const eventButton = document.createElement(`button`);
+// eventButton.setAttribute(`id`, `event`);
+// eventButton.innerText = `click for event`;
+// document.body.appendChild(eventButton);
+// // CLICK TO CREATE
 // eventButton.addEventListener(`click`, manyArraysEvent);
 // document.getElementById('event').addEventListener('click', manyArraysEvent);
 
+// CLICK WITH OTHER EVENTS
+// eventButton.addEventListener(`dblclick`, manyArraysEvent);
+// eventButton.addEventListener(`mouseenter`, manyArraysEvent);
+// eventButton.addEventListener(`mouseleave`, manyArraysEvent);
 
-// eventButton.addEventListener(`click`, manyArraysEvent);
+// CLICK TO CREATE WITH NESTED BUTTON
+const arrayGreet = [['hello', 'hi']];
+
+const greyBox = document.createElement(`div`);
+greyBox.classList.add(`container`);
+document.body.appendChild(greyBox);
+const eventButton = document.createElement(`button`);
+eventButton.innerText = `click for event`;
+// greyBox.appendChild(eventButton); // if want button at top
+
+const manyArraysClickInside = () => {
+  for (let i = 0; i < arrayGreet.length; i += 1) {
+    const row = document.createElement(`div`);
+    row.classList.add(`row`);
+    for (let k = 0; k < arrayGreet[i].length; k += 1) {
+      const wordTop = document.createElement(`span`);
+      wordTop.classList.add(`word`);
+      wordTop.innerText = arrayGreet[i][k];
+      row.appendChild(wordTop);
+      // greyBox.appendChild(row);
+    }
+    greyBox.appendChild(row);
+
+    eventButton.addEventListener(`click`, manyArraysClickInside);
+  }
+  greyBox.appendChild(eventButton);
+};
+// manyArraysClickInside();
+
+
+// CLICK AND INPUT
+// bigGreyBox.classList.add(`input-group`,`mb-3`);
+
+const field= document.createElement(`input`);
+field.setAttribute(`id`, `oneWord`);
+field.setAttribute(`placeholder`, `type in your word`)
+greyBox.appendChild(field)
+greyBox.appendChild(eventButton);
+const freshArray = []
+
+const clickInput = () => {
+
+}
