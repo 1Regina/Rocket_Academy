@@ -101,65 +101,65 @@ const manyArrays = (numberInput) => {
 // manyArrays(6);
 
 // Refractor solution 1
-// const yellowBox = (array) => {
-//   for (let i = 0; i < array.length; i += 1) {
-//     const row = document.createElement(`div`);
-//     row.classList.add(`row`);
-//     return row;
-//   }
-// };
+const yellowBox = (array) => {
+  for (let i = 0; i < array.length; i += 1) {
+    const row = document.createElement(`div`);
+    row.classList.add(`row`);
+    return row;
+  }
+};
 // yellowBox(arrayWords);
 
-// const withYellow = (numberInput) => {
-//   for (let i = 0; i < numberInput; i += 1) {
-//     const greyBox = document.createElement(`div`);
-//     greyBox.classList.add(`container`);
-//     document.body.appendChild(greyBox);
-//     for (let k = 0; k < arrayWords.length; k += 1) {
-//       const wordTop = document.createElement(`span`);
-//       const yellow = yellowBox(arrayWords);
-//       yellow.appendChild(wordTop);
-//       greyBox.appendChild(yellow);
-//     }
-//   }
-// };
+const withYellow = (numberInput) => {
+  for (let i = 0; i < numberInput; i += 1) {
+    const greyBox = document.createElement(`div`);
+    greyBox.classList.add(`container`);
+    document.body.appendChild(greyBox);
+    for (let k = 0; k < arrayWords.length; k += 1) {
+      const wordTop = document.createElement(`span`);
+      const yellow = yellowBox(arrayWords);
+      yellow.appendChild(wordTop);
+      greyBox.appendChild(yellow);
+    }
+  }
+};
 // withYellow(3);
 
 // // Refractor solution 2
-// const makeYellow = (numberInput, arrayWords) => {
-//   for (let i = 0; i < numberInput; i += 1) {
-//     const greyBox = document.createElement(`div`);
-//     greyBox.classList.add(`container`);
-//     document.body.appendChild(greyBox);
-//     for (let j = 0; j < arrayWords.length; j += 1) {
-//       // const wordTop = document.createElement(`span`);
-//       const row = document.createElement(`div`);
-//       row.classList.add(`row`);
-//       // row.appendChild(wordTop);
-//       greyBox.appendChild(row);
-//       // return row
-//     }
-//   }
-// };
-// // makeYellow(2, arrayWords);
+const makeYellow = (numberInput, arrayWords) => {
+  for (let i = 0; i < numberInput; i += 1) {
+    const greyBox = document.createElement(`div`);
+    greyBox.classList.add(`container`);
+    document.body.appendChild(greyBox);
+    for (let j = 0; j < arrayWords.length; j += 1) {
+      // const wordTop = document.createElement(`span`);
+      const row = document.createElement(`div`);
+      row.classList.add(`row`);
+      // row.appendChild(wordTop);
+      greyBox.appendChild(row);
+      // return row
+    }
+  }
+};
+// makeYellow(2, arrayWords);
 
-// // prob wtih manyArraysYellow. I must not create row otherwise I cannot read the words. But I also cant get makeYellow to return row otherwise my row count is
-// const manyArraysYellow = (numberInput, arrayWords) => {
-//   makeYellow(numberInput, arrayWords);
-//   const index = arrayWords.length;
-//   for (let i = 0; i < index; i += 1) {
-//     const row = document.createElement(`div`);
-//     // row.classList.add(`row`);
-//     for (let k = 0; k < arrayWords[i].length; k += 1) {
-//       const wordTop = document.createElement(`span`);
-//       wordTop.classList.add(`word`);
-//       wordTop.innerText = arrayWords[i][k];
-//       row.appendChild(wordTop);
-//     }
-//   }
-// };
-
-// manyArraysYellow(2, arrayWords);
+// prob wtih manyArraysYellow. I must not create row otherwise I cannot read the words. But I also cant get makeYellow to return row otherwise my row count is wrong
+const manyArraysYellow = (numberInput, arrayWords) => {
+  makeYellow(numberInput, arrayWords);
+  const index = arrayWords.length;
+  for (let i = 0; i < index; i += 1) {
+    // const row = document.createElement(`div`);
+    // row.classList.add(`row`);
+    for (let k = 0; k < arrayWords[i].length; k += 1) {
+      const wordTop = document.createElement(`span`);
+      wordTop.classList.add(`word`);
+      wordTop.innerText = arrayWords[i][k];
+      // row.appendChild(wordTop);
+    }
+  }
+};
+fruits = ['orange', 'tomato' , 'banana'];
+manyArraysYellow(2, fruits);
 
 // ADD EVENT LISTENERS
 
@@ -229,8 +229,8 @@ const manyArraysClickInside = () => {
   }
   greyBox.appendChild(eventButton);
 };
-manyArraysClickInside();
-eventButton.addEventListener(`click`, manyArraysClickInside);
+// manyArraysClickInside();
+// eventButton.addEventListener(`click`, manyArraysClickInside);
 
 // CLICK AND INPUT
 // bigGreyBox.classList.add(`input-group`,`mb-3`);
