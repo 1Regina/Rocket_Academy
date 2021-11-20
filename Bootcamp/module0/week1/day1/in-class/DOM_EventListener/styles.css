@@ -1,0 +1,17 @@
+.word {
+  background-color: pink;
+  margin: 0 4px;
+  padding: 10px;
+}
+
+.row {
+  background-color: yellow;
+  margin: 15px;
+  padding: 20px;
+}
+
+.container {
+  background-color: grey;
+  margin: 15px;
+  padding: 20px;
+}
