@@ -1,16 +1,6 @@
-const emojiArray = ['😄', '😎', '😦'];
-// const emojiButtonss = (emojiArray) => {
-//   const box = document.createElement(`div`);
-//   document.body.appendChild(box);
-//   for (let i = 0; i < emojiArray.length; i += 1) {
-//     const cartoon = document.createElement('BUTTON');
+const emojiArray = ['😄', '😎', '😦', '😅'];
 
-//     cartoon.innerHTML = emojiArray[i];
-//     cartoon.setAttribute(`id`, `emoji${i}`)
-//     box.appendChild(cartoon);
-//   }
-// };
-// emojiButtonss(emojiArray);
+
 
 const box = document.createElement(`div`);
 document.body.appendChild(box);
@@ -32,9 +22,9 @@ document.body.appendChild(box2);
 const para = document.createElement(`p`);
 box2.appendChild(para);
 
-let emoji0 = emojiArray[0];
-let emoji1 = emojiArray[1];
-let emoji2 = emojiArray[2];
+let emojiA = emojiArray[0];
+let emojiB = emojiArray[1];
+let emojiC = emojiArray[2];
 
 let clicks = 0;
 
@@ -45,7 +35,7 @@ const makeSquareSmileEmoji = (clicks) => {
 
   for (let i = 0; i < clicks; i += 1) {
     for (let j = 0; j < clicks; j += 1) {
-      str += emoji0;
+      str += emojiA;
     }
     str += '<br/>';
   }
@@ -65,7 +55,7 @@ const makeSquareSunglassEmoji = (clicks) => {
 
   for (let i = 0; i < clicks; i += 1) {
     for (let j = 0; j < clicks; j += 1) {
-      str += emoji1;
+      str += emojiB;
     }
     str += '<br/>';
   }
@@ -85,7 +75,7 @@ const makeSquareFrownEmoji = (clicks) => {
 
   for (let i = 0; i < clicks; i += 1) {
     for (let j = 0; j < clicks; j += 1) {
-      str += emoji2;
+      str += emojiC;
     }
     str += '<br/>';
   }
@@ -93,12 +83,59 @@ const makeSquareFrownEmoji = (clicks) => {
   console.log(str);
 };
 
-function onClickFrown() {
+const onClickFrown = () => {
   clicks += 1;
   console.log(`%`, clicks);
   makeSquareFrownEmoji(clicks);
-}
+};
 
 smileButton.addEventListener(`click`, onClickSmile);
 sunglassButton.addEventListener(`click`, onClickSunglass);
 frownButton.addEventListener(`click`, onClickFrown);
+
+// Any Emoji-Displaying Buttons
+let emotional = [];
+const emojiButtonss = (emojiArray) => {
+  const box = document.createElement(`div`);
+  document.body.appendChild(box);
+  for (let i = 0; i < emojiArray.length; i += 1) {
+    const cartoon = document.createElement('button');
+    cartoon.innerHTML = emojiArray[i];
+    box.appendChild(cartoon);
+    cartoon.setAttribute(`id`, `emoji${i}`);
+    emotional.push(cartoon);
+  }
+  return emotional;
+};
+emojiButtonss(emojiArray);
+
+const lastBaseBox = document.createElement(`div`);
+document.body.appendChild(lastBaseBox);
+const span = document.createElement(`span`);
+lastBaseBox.appendChild(span);
+const eventButton = document.createElement(`button`);
+eventButton.innerText = `click to draw`;
+span.appendChild(eventButton);
+
+let emoji = '';
+const drawEmoji = (emoji) => {
+  clicks += 1;
+  console.log(`%`, clicks);
+  let str = '';
+
+  for (let i = 0; i < clicks; i += 1) {
+    for (let j = 0; j < clicks; j += 1) {
+      str += emoji;
+    }
+    str += '<br/>';
+  }
+  para.innerHTML = str;
+  console.log(str);
+};
+eventButton.addEventListener('click', () => drawEmoji('😊'));
+
+emotional[0].addEventListener('click', () => drawEmoji(emojiArray[0]));
+emotional[1].addEventListener('click', () => drawEmoji(emojiArray[1]));
+emotional[2].addEventListener('click', () => drawEmoji(emojiArray[2]));
+emotional[3].addEventListener('click', () => drawEmoji(emojiArray[3]));
+
