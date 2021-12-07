@@ -15,7 +15,7 @@ img{
 .card{
   display:inline-block;
   width: 200px;
-  background-color:rgb(106, 204, 143);
+  background-color:rgb(243, 247, 244);
   padding:10px;
   margin:10px;
   vertical-align: top;
@@ -24,7 +24,7 @@ img{
 .column{
   display:inline-block;
   width:48%;
-  background-color:rgb(65, 105, 150);
+  background-color:rgb(170, 200, 233);
   padding:20px;
   margin:20px;
   vertical-align:top; /* otherwise a shorter box will be stuck to the baseline of the taller box */
