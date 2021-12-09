@@ -1,0 +1,36 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body{
+  background-color:pink;
+   margin:0; /* also to correct for sizing */
+}
+
+img{
+  display:block;
+  margin:0 auto; 
+}
+
+.card{
+  display:inline-block;
+  width: 200px;
+  background-color:rgb(243, 247, 244);
+  padding:10px;
+  margin:10px;
+  vertical-align: top;
+}
+
+.column{
+  display:inline-block;
+  width:48%;
+  background-color:rgb(170, 200, 233);
+  padding:20px;
+  margin:20px;
+  vertical-align:top; /* otherwise a shorter box will be stuck to the baseline of the taller box */
+}
+
+img{
+  float:left;
+  margin:30px;
+}
