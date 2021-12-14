@@ -1,0 +1,19 @@
+body {
+  padding: 50px;
+}
+.container {
+  border: 1px solid blue;
+  padding: 20px 40px 40px;
+  max-width: 100%;
+  min-height: 250px;
+}
+.container__image {
+  border: 10px solid red;
+  width: 250px;
+  height: 160px;
+  margin: 30px 30px 30px 0;
+  float: left;
+}
+.container__text {
+  display: inline;
+}
