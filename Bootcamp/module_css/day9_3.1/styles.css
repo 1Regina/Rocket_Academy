@@ -1,0 +1,53 @@
+body {
+  background-color: pink;
+  margin: 10; /* also to correct for sizing */
+}
+.container {
+  display: flex;
+}
+
+.col {
+  background-color: white;
+  border: 2px solid green;
+}
+
+.fixed-w {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 200px;
+}
+
+.flex1 {
+  /* same as: flex:1; */
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  background-color: white;
+  border: 2px solid green;
+}
+
+.flex2 {
+  flex-grow: 0;
+  flex-shrink: 2;
+  flex-basis: auto;
+}
+
+.take-up {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+
+.vertical-container {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+}
+.centered {
+  width: 300px;
+  background-color: white;
+  border: 2px solid green;
+}
