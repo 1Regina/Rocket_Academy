@@ -20,6 +20,7 @@ body {
 
 .articles-by-language {
   text-align: center;
+  width: 100px;
 }
 
 .link {
@@ -30,7 +31,6 @@ body {
   color: navy;
   justify-content: center;
 }
-
 
 .wiki-container {
   display: flex;
@@ -54,5 +54,4 @@ body {
 .column {
   flex: 50%;
   padding: 5px;
-
 }
