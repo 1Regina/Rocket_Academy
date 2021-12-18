@@ -4,6 +4,7 @@ body {
 }
 .container {
   display: flex;
+  background-color: blue;
 }
 
 .col {
@@ -17,6 +18,7 @@ body {
   flex-basis: 200px;
 }
 
+/* flex-basis: auto means grow to the contents only ie as big as the content when flex-grow=0 But if flex-grow=1, the element will grow to take up empty space */
 .flex1 {
   /* same as: flex:1; */
   flex-grow: 0;
