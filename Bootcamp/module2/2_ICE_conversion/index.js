@@ -67,7 +67,13 @@ const convertKelvin = () => {
   }
   return 'All is well';
 };
-// console.log(convertKelvin());
+console.log(convertKelvin());
+// command to run
+// node index.js Kelvin farenheit 0 459.67 559.67 859.67 759.67
+// node index.js farenheit Kelvin 32 100 10 20 200 1000
+// node index.js farenheit Kelvin 0 -273.15 -3.15 -270
+// node index.js Kelvin celsius 0 273.15 3.15 270
+// node index.js celsius Kelvin 0 -273.15 -3.15 -270
 
 // POST CLASS
 // BASE
