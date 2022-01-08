@@ -46,7 +46,7 @@ if (source === 'celsius' && target === 'Kelvin') {
 // console.log(output0, output1, output2);
 
 // FANCY with loops
-let result
+let result;
 for (i = 4; i < process.argv.length; i++) {
   if (source === 'Kelvin' && target === 'farenheit') {
     result = ((Number(process.argv[i]) - 273.15) * 9) / 5 + 32;
