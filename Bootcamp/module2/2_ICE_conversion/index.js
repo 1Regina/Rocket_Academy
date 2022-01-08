@@ -136,3 +136,6 @@ const convertColor = () => {
   return output;
 };
 console.log(convertColor());
+// try with 
+// node index.js rgbhex 'rgb(255,255,255)'
+// node index.js hexToRgb '#ffffff'
