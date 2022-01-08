@@ -46,27 +46,21 @@ if (source === 'celsius' && target === 'Kelvin') {
 // console.log(output0, output1, output2);
 
 // FANCY with loops
-if (source === 'Kelvin' && target === 'farenheit') {
-  for (i = 4; i < process.argv.length; i++) {
-    let result = ((Number(process.argv[i]) - 273.15) * 9) / 5 + 32;
-    console.log(result);
+let result
+for (i = 4; i < process.argv.length; i++) {
+  if (source === 'Kelvin' && target === 'farenheit') {
+    result = ((Number(process.argv[i]) - 273.15) * 9) / 5 + 32;
   }
-}
-if (source === 'farenheit' && target === 'Kelvin') {
-  for (i = 4; i < process.argv.length; i++) {
-    let result = ((Number(process.argv[i]) - 32) * 5) / 9 + 273.15;
-    console.log(result);
+
+  if (source === 'farenheit' && target === 'Kelvin') {
+    result = ((Number(process.argv[i]) - 32) * 5) / 9 + 273.15;
   }
-}
-if (source === 'Kelvin' && target === 'celsius') {
-  for (i = 4; i < process.argv.length; i++) {
-    let result = Number(process.argv[i]) - 273.15;
-    console.log(result);
+
+  if (source === 'Kelvin' && target === 'celsius') {
+    result = Number(process.argv[i]) - 273.15;
   }
-}
-if (source === 'celsius' && target === 'Kelvin') {
-  for (i = 4; i < process.argv.length; i++) {
-    let result = Number(process.argv[i]) + 273.15;
-    console.log(result);
+  if (source === 'celsius' && target === 'Kelvin') {
+    result = Number(process.argv[i]) + 273.15;
   }
+  console.log(result);
 }
