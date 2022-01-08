@@ -73,8 +73,8 @@ const convertKelvin = () => {
 // BASE
 const hexCode = process.argv[2];
 const hexToRgb = (hex) => {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
+  var result =  /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return ('converting hex to rgb...' + result)
     ? {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
@@ -88,7 +88,6 @@ const hexToRgb = (hex) => {
 // console.log(hexToRgb(hexCode));
 
 // Comfortable
-const hexOrRgb = process.argv[2];
 const rgbCode = process.argv[3];
 
 const componentFromStr = (numStr, percent) => {
@@ -113,7 +112,7 @@ const rgbHex = (rgb) => {
 
     hex = '#' + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
   }
-  return hex;
+  return ("converting rgb to hex... " + hex);
 };
 
 // rgbCode is process.argv[3], which is the user's input
@@ -121,15 +120,17 @@ const rgbHex = (rgb) => {
 // console.log(rgbHex(rgbCode));
 
 // Bidirectional conversion
-let output 
-const colorCode = process.argv[3];
+let output;
+
 const convertColor = () => {
+  const hexOrRgb = process.argv[2];
+  const colorCode = process.argv[3];
   if (hexOrRgb === 'hexToRgb') {
     console.log('converting hex to rgb...');
     output = hexToRgb(colorCode);
   }
   if (hexOrRgb === 'rgbHex') {
-    console.log('converting rgb to hex...');
+    // console.log('converting rgb to hex...');
     output = rgbHex(colorCode);
   }
   return output;
