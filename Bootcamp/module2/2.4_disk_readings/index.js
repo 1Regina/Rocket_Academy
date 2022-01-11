@@ -20,10 +20,19 @@ console.log('about to call readFile');
 
 // 2nd param 'utf8' specifies the file encoding.
 // Read more about UTF8 here: https://en.wikipedia.org/wiki/UTF-8
-readFile('mystuff.txt', 'utf8', handleFileRead);
+readFile('mystuff.txt', 'utf8', handleFileRead); // readFile('mystuff.txt', 'utf8'  will define the contents for handleFileRead
 
 console.log('done calling readFile');
 
+// same as line 23
+readFile('mystuff.txt', 'utf8', (content, error) => {
+  console.log('running inside of handleFileRead');
+  if (error) {
+    console.log('read error', error);
+    return;
+  }
+  console.log('content', content);
+});
 
 // newlines case
 const handleFileReadWithNewLines = (error, content) => {
