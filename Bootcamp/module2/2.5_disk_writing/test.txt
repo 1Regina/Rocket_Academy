@@ -1,0 +1,10 @@
+Printing 10 numbers:Random number: 0: 0.5648596918869087
+Random number: 1: 0.7030897647212364
+Random number: 2: 0.4149977310340691
+Random number: 3: 0.842242724432585
+Random number: 4: 0.3027259040961605
+Random number: 5: 0.702365775207417
+Random number: 6: 0.16538057704623133
+Random number: 7: 0.42765020806547804
+Random number: 8: 0.41925027058418296
+Random number: 9: 0.8484378899933986
