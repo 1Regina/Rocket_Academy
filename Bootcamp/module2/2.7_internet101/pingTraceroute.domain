@@ -1,0 +1,122 @@
+Try `ping` and `traceroute` on the following domains. Time n place
+===========================================================================
+1. ntu.edu.sg [Packets: Sent = 3, Received = 0, Lost = 3 (100% loss),]
+www.ntu.edu.sg
+$ ping www.ntu.edu.sg
+
+Pinging part-0031.t-0009.t-msedge.net [13.107.213.59] with 32 bytes of data:
+Reply from 13.107.213.59: bytes=32 time=10ms TTL=120
+Reply from 13.107.213.59: bytes=32 time=5ms TTL=120
+Reply from 13.107.213.59: bytes=32 time=14ms TTL=120
+Reply from 13.107.213.59: bytes=32 time=8ms TTL=120
+
+Ping statistics for 13.107.213.59:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 5ms, Maximum = 14ms, Average = 9ms
+==============================================================
+
+$ ping genting.com
+
+Pinging genting.com [202.9.102.27] with 32 bytes of data:
+Reply from 202.9.102.27: bytes=32 time=10ms TTL=53
+Reply from 202.9.102.27: bytes=32 time=10ms TTL=53
+Reply from 202.9.102.27: bytes=32 time=12ms TTL=53
+Reply from 202.9.102.27: bytes=32 time=11ms TTL=53
+
+Ping statistics for 202.9.102.27:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 10ms, Maximum = 12ms, Average = 10ms
+
+===============================================================
+
+$ ping tigerbeer.com.sg
+
+Pinging tigerbeer.com.sg [103.11.189.110] with 32 bytes of data:
+Reply from 103.11.189.110: bytes=32 time=13ms TTL=53
+Reply from 103.11.189.110: bytes=32 time=36ms TTL=53
+Reply from 103.11.189.110: bytes=32 time=18ms TTL=53
+Reply from 103.11.189.110: bytes=32 time=13ms TTL=53
+
+Ping statistics for 103.11.189.110:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 13ms, Maximum = 36ms, Average = 20ms
+===============================================================
+
+$ ping stanford.edu
+
+Pinging stanford.edu [171.67.215.200] with 32 bytes of data:
+Reply from 171.67.215.200: bytes=32 time=179ms TTL=245
+Reply from 171.67.215.200: bytes=32 time=212ms TTL=245
+Reply from 171.67.215.200: bytes=32 time=178ms TTL=245
+Reply from 171.67.215.200: bytes=32 time=182ms TTL=245
+
+Ping statistics for 171.67.215.200:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 178ms, Maximum = 212ms, Average = 187ms
+
+==============================================================    
+
+$ ping nus.edu.sg
+
+Pinging nus.edu.sg [45.60.33.225] with 32 bytes of data:
+Reply from 45.60.33.225: bytes=32 time=246ms TTL=52
+Reply from 45.60.33.225: bytes=32 time=246ms TTL=52
+Reply from 45.60.33.225: bytes=32 time=245ms TTL=52
+Reply from 45.60.33.225: bytes=32 time=257ms TTL=52
+
+Ping statistics for 45.60.33.225:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 245ms, Maximum = 257ms, Average = 248ms
+
+=============================================================    
+
+$ ping in-n-out.com
+
+Pinging in-n-out.com [199.83.133.218] with 32 bytes of data:
+Reply from 199.83.133.218: bytes=32 time=200ms TTL=58
+Reply from 199.83.133.218: bytes=32 time=171ms TTL=58
+Reply from 199.83.133.218: bytes=32 time=257ms TTL=58
+Reply from 199.83.133.218: bytes=32 time=514ms TTL=58
+
+Ping statistics for 199.83.133.218:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 171ms, Maximum = 514ms, Average = 285ms
+
+===============================================================
+
+musee-orsay.fr
+$ ping musee-orsay.fr
+
+Pinging musee-orsay.fr [193.41.223.133] with 32 bytes of data:
+Reply from 193.41.223.133: bytes=32 time=252ms TTL=51
+Reply from 193.41.223.133: bytes=32 time=892ms TTL=51
+Reply from 193.41.223.133: bytes=32 time=364ms TTL=51
+Reply from 193.41.223.133: bytes=32 time=285ms TTL=51
+
+Ping statistics for 193.41.223.133:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 252ms, Maximum = 892ms, Average = 448ms
+
+==============================================================
+
+rwandatel.rw
+
+$ ping rwandatel.rw
+
+Pinging rwandatel.rw [196.12.157.116] with 32 bytes of data:
+Reply from 41.223.225.5: TTL expired in transit.
+Reply from 41.223.225.5: TTL expired in transit.
+Reply from 41.223.225.5: TTL expired in transit.
+Reply from 41.223.225.5: TTL expired in transit.
+
+Ping statistics for 196.12.157.116:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+
+==============================================================    
