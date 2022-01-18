@@ -1,0 +1,140 @@
+body {
+  /* background-color: grey; */
+  /* rgb(223, 233, 233); */
+  background-image: url('https://i.pinimg.com/736x/03/5b/fe/035bfea4ef4f622370eb8329e0a2740c--wallpaper-pictures-hd-wallpaper.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+h1 {
+  text-align: center;
+  color: goldenrod;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.left {
+  display: flex;
+  justify-content: left;
+}
+
+.earnings {
+  display: flex;
+  justify-content: center;
+  /* background-color: white; */
+  color: white;
+  font-size: 16px;
+}
+.flex-container {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* .row {
+  width: auto;
+  border: 1px solid blue;
+} */
+.flex-item {
+  /* background-color: #77e9bf; */
+  padding: 5px;
+  width: auto;
+  height: auto;
+  margin: 10px;
+  line-height: 20px;
+  color: goldenrod;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  justify-content: center;
+}
+
+.betbutton {
+  background-color: goldenrod;
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.buttonBlock {
+  display: flex;
+  width: auto;
+  border: none;
+  background-color: goldenrod;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: justify;
+  justify-content: space-around;
+}
+
+.instructions {
+  display: flex;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  margin-right: 10px;
+  width: 400px;
+  height: auto;
+  margin: 0px 5px 220px 5px;
+
+}
+
+.cover {
+  margin: 10px;
+  height: 110px;
+  width: 90px;
+  border-radius: 8px;
+}
+
+.card {
+  margin: 10px;
+  padding: 10px;
+  background-color: whitesmoke;
+  height: 90px;
+  width: 70px;
+  text-align: center;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.suit {
+  margin: 5px;
+  font-size: 20px;
+}
+
+.name {
+  margin: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
+
+.card-container {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

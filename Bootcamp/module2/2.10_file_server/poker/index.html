@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Poker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <h1 id="header">
+      <img style="width: 65px; height: 65px" src="stormtrooper.png" />
+      Welcome to Poker
+      <img style="width: 65px; height: 65px" src="stormtrooper.png" />
+      <!-- <img style="width: 50px; height: 60px"
+          src="https://static.wikia.nocookie.net/disneyemojiblitz/images/9/9f/EmojiBlitzStormtrooper1.png/revision/latest/top-crop/width/360/height/450?cb=20201231152518" />  -->
+    </h1>
+    <audio id="myAudio">
+      <!-- <source src="horse.ogg" type="audio/ogg" /> -->
+      <source src="Cantina_Song.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <h4 style="color: azure; margin-left: 20px">Play Music</h4>
+    <img
+      style="width: 35px; height: 35px; margin-left: 20px"
+      onclick="playAudio()"
+      src="play.png"
+    />
+
+    <img
+      style="width: 35px; height: 35px"
+      onclick="pauseAudio()"
+      src="pause.png"
+    />
+    <div class="flex-container">
+      <div class="row">
+        <div class="flex-item">
+          <img class="center" src=
+          "https://cdn.quotesgram.com/img/89/30/2041532204-may-the-force-be-with-you.gif"
+          <!-- "https://c.tenor.com/2yUIEP2RM8kAAAAM/peanuts-snoopy.gif" -->
+        </div>
+        <section class="flex-item">Credits</section>
+        <section class="flex-item" id="wallet">10</section>
+      </div>
+      <div class="flex-item">
+        <table class="earnings" id="earningsTable">
+          <tr style="background-color: goldenrod; color: whitesmoke">
+            <th>Select Bet</th>
+            <th>
+              <button class="betbutton" id="betStandard">
+                <b>Standard</b>
+              </button>
+            </th>
+            <th>
+              <button class="betbutton" id="betPower"><b>Power Up</b></button>
+            </th>
+            <th>
+              <button class="betbutton" id="betDouble"><b>Double Up</b></button>
+            </th>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i> Royal Flush</i></td>
+            <td>250</td>
+            <td>375</td>
+            <td>500</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i>Straight Flush</i></td>
+            <td>150</td>
+            <td>225</td>
+            <td>300</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i>Four of a Kind</i></td>
+            <td>100</td>
+            <td>150</td>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i>Full House</i></td>
+            <td>80</td>
+            <td>120</td>
+            <td>160</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i>Flush</i></td>
+            <td>60</td>
+            <td>90</td>
+            <td>120</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i>Straight</i></td>
+            <td>45</td>
+            <td>68</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i>Three of a Kind</i></td>
+            <td>32</td>
+            <td>48</td>
+            <td>64</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i>Two Pair</i></td>
+            <td>25</td>
+            <td>38</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i>One Pair</i></td>
+            <td>10</td>
+            <td>15</td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <td style="text-align: left"><i>Lose</i></td>
+            <td>-5</td>
+            <td>-10</td>
+            <td>-20</td>
+          </tr>
+        </table>
+        <div id="choose" class="buttonBlock"></div>
+      </div>
+      <div
+        id="instructions-container"
+        class="instructions"
+        style="color: white;"
+      >
+        <ol>
+          <b><u>INSTRUCTIONS</u></b>
+          <p id="instruction"></p>
+
+          <!-- <li>
+            <p>
+              Click on the bet ("Standard" or "Power Up" or "Double") you want to play.
+            </p>
+       </li> 
+          <li>
+            <p>Click on "Start".</p>
+          </li>
+          <li>
+            <p>
+              Click on the cards to hold. Click card on hold again to change
+              your mind.
+            </p>
+          </li>
+          <li>
+            <p>Click "Swap" to see the new hand.</p>
+          </li>
+          <li>
+            <p>Click "Submit" to see your new credit balance.</p>
+          </li>
+          <li>
+            <p>Click "Replay" to clear the cards then "Start" again</p>
+          </li>  -->
+        </ol>
+      </div>
+    </div>
+
+    <div id="cardsTable" class="center"></div>
+    <!-- Import program logic -->
+    <!-- <script type="module" src="script.js"></script> -->
+    <!-- <script src="scriptOld.js"></script> -->
+    <!-- <script src="scriptNew.js"></script> -->
+    <script src="script.js"></script>
+  </body>
+</html>
