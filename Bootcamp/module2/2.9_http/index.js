@@ -5,8 +5,7 @@ const handleIncomingRequest = (request, response) => {
   // 1st agrument is request. can be get or leave it as request as default is get
   console.log('Received request!');
 
-  // into the create server. Not here. See 2.10 index.js
-  // set respond header for exercise requirement. Basically to intro a new "Attribute" like poker
+  // set respond header for exercise requirement. Basically to intro a new "Attribute" like poker's card status for swap
   response.setHeader('Rocketacademy', true);
 
   // response.end tells the server to send the completed response and mark
@@ -17,29 +16,28 @@ const handleIncomingRequest = (request, response) => {
 
 // createServer creates the server object. It accepts a request listener function.
 // The server calls the function every time it receives a request.
-// The listen method tells server to start listening for requests on given port.
+// The listen method tells server to start listening for requests on given port. 
 createServer(handleIncomingRequest).listen(3004);
 
-// const handleResponse = (response) => {
-//   // Compile response data in a data variable.
-//   // The response may contain multiple "chunks" of data.
-//   let data = '';
+const handleResponse = (response) => {
+  // Compile response data in a data variable.
+  // The response may contain multiple "chunks" of data.
+  let data = '';
 
-//   // Add chunk of data to data var when each "chunk" is received.
-//   response.on('data', (chunk) => {
-//     data += chunk;
-//   });
+  // Add chunk of data to data var when each "chunk" is received.
+  response.on('data', (chunk) => {
+    data += chunk;
+  });
 
-//   // We have received the whole response. Print the full response data.
-//   response.on('end', () => {
-//     console.log('Response Data: ', data);
-//   });
-
-  
-// };
+  // We have received the whole response. Print the full response data.
+  response.on('end', () => {
+    console.log('Response Data: ', data);
+  });
+};
 
 // Send an HTTP GET request, handle response with handleResponse callback.
 // Handle errors by logging the error message.
+// otherwise output in termainal will b the html of the site
 // get('http://info.cern.ch/', handleResponse).on('error', (err) => {
 //   // try with http://localhost:3004 ; http://info.cern.ch/ ;
 //   console.error('Error: ' + err.message);
