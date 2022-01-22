@@ -1,4 +1,5 @@
-import { writeFile , readFile} from 'fs';
+import { writeFile, readFile} from 'fs';
+// readfile is now extracted to the bottom
 
 // WRITE
 /**
@@ -17,7 +18,7 @@ export function write(filename, jsonContentObj) {
     }
   });
 }
-
+// import { readFile } from 'fs';
 // READ
 /**
  * Read and log the contents of the target JSON file
@@ -57,6 +58,7 @@ export function add(filename, key, value) {
     }
 
     // Parse the JSON string from the file into a JS Object.
+    console.log(`jsonContentStr`, jsonContentStr);
     const jsonContentObj = JSON.parse(jsonContentStr);
 
     // Add the new key and value to the content object.
