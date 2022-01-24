@@ -1,4 +1,4 @@
-import { writeFile, readFile} from 'fs';
+import { writeFile, readFile } from 'fs';
 // readfile is now extracted to the bottom
 
 // WRITE
@@ -25,20 +25,35 @@ export function write(filename, jsonContentObj) {
  * @param {string} filename - The name of the target JSON file
  * @returns undefined
  */
-export function read(filename) {
-  const handleFileRead = (readErr, jsonContentStr) => {
+// The client application provides the handleFileRead callback.
+// This increases customisability of the jsonFileStorage module.
+// export function read(filename, handleFileRead) {
+//   readFile(filename, 'utf-8', handleFileRead);
+// }
+
+/**
+ * Read target file, convert contents to Object, call client callback
+ * @param {string} filename - JSON DB file name
+ * @param {function} handleJsonRead - Callback for successful file read
+ *                                    Takes 1 param, JSON content as JS Object
+ */
+export function read(filename, handleJsonRead) {
+
+  const handleFileRead = (readErr, jsonContentStr) => {  
+    // Catch read error if any
     if (readErr) {
-      console.error('Reading error', readErr);
-      return;
+      console.error('Read error', readErr);
     }
-    // We only log the value of jsonContentStr. We could also parse it
-    // into a JS Object to access specific keys and values.
-    console.log(jsonContentStr);
+
+    // Parse JSON content str into JS Object
+    const jsonContentObj = JSON.parse(jsonContentStr);
+
+    // Call custom logic that our app passed into this module
+    handleJsonRead(jsonContentObj);
   };
 
   readFile(filename, 'utf-8', handleFileRead);
 }
-
 // ADD
 // The following code builds on the imports, write and read functions above.
 // We omit the above code here for brevity.
