@@ -22,18 +22,22 @@ if (process.argv[2] === 'add') {
   });
 }
 if (process.argv[2] === 'edit') {
+  // recall edit(filename, readCallback, writeCallback) that edit has 3 inputs
   edit(
+    // first input of edit is filename
     'data.json',
+    // 2nd input = my first callback/function argument "readCallback" in edit
     (err, jsonContentObj) => {
       // If no error, edit the content
       if (!err) {
         jsonContentObj['people'][0].name = 'Terminator';
       }
     },
+    // 3rd input = my 2nd callback/function argument "writeCallback" in edit
     (err) => {
-      // If no error, edit the content
+      // If no error, just concern
       if (!err) {
-       console.log("lihllhihibhaidy")
+        console.log('lihllhihibhaidy');
       }
     }
   );
