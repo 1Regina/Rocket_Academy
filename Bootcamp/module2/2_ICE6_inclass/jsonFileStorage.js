@@ -11,6 +11,7 @@ import { readFile, writeFile } from 'fs';
 export function write(filename, jsonContentObj, callback) {
   // Convert content object to string before writing
   const jsonContentStr = JSON.stringify(jsonContentObj);
+  console.log(`jsonContentStr`, jsonContentStr)
 
   // Write content to DB
   writeFile(filename, jsonContentStr, (writeErr) => {
@@ -60,6 +61,8 @@ export function read(filename, callback) {
  *                              Callback takes read error as 1st param and JS Object as 2nd param.
  * @returns undefined
  */
+
+// can change existing content
 export function edit(filename, readCallback, writeCallback) {
   // Read contents of target file and perform callback on JSON contents
   read(filename, (readErr, jsonContentObj) => {
@@ -88,6 +91,8 @@ export function edit(filename, readCallback, writeCallback) {
  *                              Callback takes read or write error as 1st param and written string as 2nd param.
  * @returns undefined
  */
+
+// add is for addition new stuff but not changing
 export function add(filename, key, input, callback) {
   edit(
     filename,
