@@ -1,0 +1,38 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.singleQuote": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.minimap.enabled": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.migration.2_x": "off",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll": true
+  },
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.profiles.windows": {
+    "Git Bash": {
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "icon": "terminal-bash"
+    },
+    "bash (migrated)": {
+      "path": "bash",
+      "args": []
+    }
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "editor.largeFileOptimizations": false,
+  "emmet.includeLanguages": {
+    "ejs": "html"
+  },
+  "html.format.unformatted": "wbr,%",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "workbench.iconTheme": "material-icon-theme",
+  "files.autoSave": "afterDelay",
+  "diffEditor.ignoreTrimWhitespace": false
+}
