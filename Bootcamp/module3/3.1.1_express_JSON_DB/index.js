@@ -7,7 +7,7 @@ const port = 3004
 
 const handleIncomingRequestFileRead = (request, response) => {
   console.log('request came in');
-  read('dataCity.json', (jsonContentObj) => {
+  read('datacity.json', (err, jsonContentObj) => {
     console.log(`where is my object`,jsonContentObj);
     response.send(jsonContentObj);
   });
@@ -36,6 +36,14 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
 
+//PARAMS
+//www.cardealer.co/:brand/:id
+//www.cardealer.co/:toyota/5
+//QUERY
+//www.cardealer.co?toyota=blue
+//www.cardealer.co?toyota=blue&id=5
+
+// www.rocketacademy.co?city=singapore&postCode=300456
 
 // // A Dice 
 // const handleIncomingRequestADice = (request, response) => {
