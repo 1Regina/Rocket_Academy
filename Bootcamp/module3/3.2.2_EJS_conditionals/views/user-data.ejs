@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <!-- Only show this message if there are over 100 users. --> 
+    <% if (users.length > 100) { %>
+      <h1>Wow, you have a lot of users!</h1>
+    <% } %>
+    <!-- Render all user names --> 
+    <ul>
+      <% users.forEach((user) => { %>
+        <li><%= user.name %></li>
+      <% }); %>
+    </ul>
+  </body>
+</html>
