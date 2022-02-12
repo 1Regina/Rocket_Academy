@@ -2,13 +2,13 @@
 2. cd my-first-npm-project
 3. npm init -y
 4. npm install express
-5. npm install ejs
+5. node
 6. go into package.json and add 
     "module": "true",
     "type": "module",
 7. go to index.js and add this at the start of file
     import express from 'express';
-    import { read } from './jsonFileStorage.js';
+    import { read } from './jsonFileStorage.js'; or import read from './jsonFileStorage.js';
 
     const app = express()
     const port = 3004
