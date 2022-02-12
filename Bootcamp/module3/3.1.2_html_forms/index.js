@@ -19,10 +19,5 @@ app.get('/hello', (request, response) => {
   response.render('greeting', data);
 });
 
-const handleIncomingRequest = (req, res) => {
-  console.log(req.params);
-  res.render('yay');
-};
 
-app.get('/hello2', handleIncomingRequest);
 app.listen(port)
