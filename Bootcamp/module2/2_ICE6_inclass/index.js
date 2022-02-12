@@ -117,7 +117,9 @@ if (command === 'tally') {
 
       // assign the tally object as "frequencies"
       const frequencies = getTally(jsonContentObj[key]);
+      console.log(`frequencies`, frequencies)
       jsonContentObj.frequencies = { ...frequencies };
+      console.log(`jsonContentObj.frequencies`, frequencies)
       console.log(`You rolled ${latestRoll}`);
     },
 
@@ -129,6 +131,7 @@ if (command === 'tally') {
       }
 
       const occurences = Object.values(JSON.parse(data).frequencies);
+      console.log(`occurences`, occurences)
       const max = Math.max(...occurences);
       
       let freqObj = JSON.parse(data).frequencies
