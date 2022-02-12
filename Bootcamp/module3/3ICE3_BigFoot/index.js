@@ -34,4 +34,22 @@ app.get('/bigfoot', (request, response) => {
   response.render('sighting');
 });
 
+
+// for practice with curl $ curl -d "YEAR=1989&SEASON=spring" -X POST http://localhost:3004/sighting
+app.post('/sighting', (request, response) => {
+
+  // Add new recipe data in request.body to sightings array in data.json.
+  console.log('before added sighting')
+  add('data.json', 'sightings', request.body, (err) => {
+    console.log('added sighting')
+    if (err) {
+      response.status(500).send('DB write error.');
+      return;
+    }
+    // Acknowledge recipe saved.
+    return response.send('Saved bigfoot sighting!');
+  });
+  // response.send('d;kdfg!');
+});
+
 app.listen(port)
