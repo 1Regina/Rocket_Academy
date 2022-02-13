@@ -22,13 +22,16 @@
 For EJS, do these also
 1. npm install ejs
 2. Set up the following file structure
-    └── my-app
-        ├── index.js
-        └── public
-            └── styles.css
-        └── views
-            └── fruit.ejs
+    ```
+        └── my-app
+            ├── index.js
+            └── public
+                └── styles.css
+            └── views
+                └── fruit.ejs
+    ```
 3. in index.js, add these:
+    ```
     import express from 'express';
     import {add} from './jsonFileStorage.js';
 
@@ -51,6 +54,7 @@ For EJS, do these also
     });
 
     app.listen(3004);
+    ```
 4. in fruit.ejs 
     ```
     <html>
