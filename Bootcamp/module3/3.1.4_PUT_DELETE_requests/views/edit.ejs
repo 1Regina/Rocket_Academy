@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <form action="/recipe/<%= recipe.index %>?_method=PUT" method="POST">
+      <label for="label">recipe label:</label><br />
+      <input type="text" id="label" name="label" /><br />
+      <label for="ingredients">ingredients:</label><br />
+      <input type="text" id="ingredients" name="ingredients" /><br />
+      <input type="submit" value="Submit" />
+    </form>
+    <form action="/recipe/<%= recipe.index %>/?_method=DELETE" method="POST">
+      <input type="submit" value="Delete" />
+    </form>
+  </body>
+</html>

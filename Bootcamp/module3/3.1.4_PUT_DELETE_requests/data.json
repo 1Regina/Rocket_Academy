@@ -1,0 +1,11 @@
+{
+  "recipes": [
+    { "label": "banana shake", "ingredients": "bananas" },
+    { "label": "fruit salad", "ingredients": "fruits" },
+    { "label": "beef hor fun", "ingredients": "beef" },
+    { "dishlabel": "ginseng soup", "ingredients": "ginseng" },
+    { "dishlabel": "dim sum", "ingredients": "egg and pork" },
+    { "label": "nasi lemak", "ingredients": "coconut milk" },
+    { "dishlabel": "seafood soup", "ingredients": "seafood" }
+  ]
+}
