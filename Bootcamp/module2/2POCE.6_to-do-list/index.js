@@ -39,16 +39,38 @@ const handleIncomingRequestName = (request, response) => {
 
 // COMFORTABLE
 const completeChores = (error, jsonContent) => {
-  const {items} = jsonContent
-   if (process.argv[2] === "show") {
+  const chores =  jsonContent.items
+    if (process.argv[2] === "show") {
       console.log(`To-Do:`);
-    for (let i = 0; i < items.length; i += 1 ){
-      console.log(` ${i+1}`+`. `+ `${items[i]}`);
+    for (let i = 0; i < chores.length; i += 1 ){
+      console.log(` ${i+1}`+`. `+ `${chores[i]}`);
     }
     console.log(`\nDone:`)
-
   }
+  if (process.argv[2] === "complete") {
+    let removeIndex= process.argv[3] - 1
+    console.log(` I have marked item ${process.argv[3]}, "${chores[removeIndex]}" as complete.` )
 
+    // adding the removed item to the jsonContent.done. HELP NEEDED
+    add(`data.json`, `done`,chores[removeIndex],whenJsonIsRead)
+    
+    chores.splice(removeIndex,1)
+    // assign jsonContent.item to the new updated chores
+    jsonContent.items = chores
+    console.log(`remaining chores`, chores)
+    //DUNNO HOW TO USE THE EDIT function. HELP NEEDED
+
+    // output the details of the udpated data.json content
+    console.log(`To-Do:`);
+    for (let i = 0; i < chores.length; i += 1 ){
+      console.log(` ${i+1}`+`. `+ `${chores[i]}`);
+    }
+    console.log(`\nDone:`)
+    const doneItems = jsonContent.done
+    for (let i = 0; i < doneItems.length; i += 1 ){
+      console.log(` ${i+1}`+`. `+ `${doneItems[i]}`);
+    }
+  }
 }
 
 app.get('/', handleIncomingRequestName );
