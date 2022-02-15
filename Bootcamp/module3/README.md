@@ -3,8 +3,10 @@
 3. npm init -y
 4. npm install express or npm i
 6. go into package.json and add 
+    ```
     "module": "true",
-    "type": "module",
+    "type": "module"
+    ```
 7. go to index.js and add this at the start of file
     import express from 'express';
     import { read } from './jsonFileStorage.js'; or import read from './jsonFileStorage.js';
