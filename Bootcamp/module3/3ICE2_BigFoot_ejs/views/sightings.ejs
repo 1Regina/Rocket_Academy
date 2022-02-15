@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <!-- AFTER HTML loads in browser, browser will request for CSS. -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Sightings</h1>
+    <div>
+      <% for(let i=0; i < index; i +=1) { %>
+      <ul>
+        <% const url = `/sightings/${i}` %> <% const text = `Sighting ${i}` %>
+        <a href="<%=url %>"><%=text %></a>
+      </ul>
+      <%}%>
+    </div>
+  </body>
+</html>
