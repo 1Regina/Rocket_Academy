@@ -17,7 +17,7 @@ const whenJsonIsRead = (error, jsonContent) => {
   if (process.argv[2] === "show") {
     for (let i = 0; i < items.length; i += 1 ){
       console.log(`- ${items[i]}`);
-      // chores += items[i]
+      chores += items[i]
     }
   }
   if (process.argv[2] === "add"){
@@ -29,11 +29,28 @@ const whenJsonIsRead = (error, jsonContent) => {
 
 
 const handleIncomingRequestName = (request, response) => {
-    read ('data.json', whenJsonIsRead);
-    
+  // BASE
+    // read ('data.json', whenJsonIsRead);
+  // COMFORTABLE  
+    read ('data.json', completeChores); 
     response.send("wow", )
 
 };
 
+// COMFORTABLE
+const completeChores = (error, jsonContent) => {
+  const {items} = jsonContent
+   if (process.argv[2] === "show") {
+      console.log(`To-Do:`);
+    for (let i = 0; i < items.length; i += 1 ){
+      console.log(` ${i+1}`+`. `+ `${items[i]}`);
+    }
+    console.log(`\nDone:`)
+
+  }
+
+}
+
 app.get('/', handleIncomingRequestName );
+
 app.listen(port)
