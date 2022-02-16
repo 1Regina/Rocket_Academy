@@ -95,15 +95,22 @@ app.get('/comfortable_show', async (req, res) =>{
   console.log(`jsonContentObject`, jsonContentObj)
   console.log(`jsonContentObject type`,typeof jsonContentObj)
   const {items} = jsonContentObj
-  let all = ""
+  let allitems = ""
   for (let i = 0; i < items.length; i += 1 ){
-        all += (`${i+1}. ${items[i]}<br>`); 
+        allitems += (`${i+1}. ${items[i]}<br>`); 
         }
-  let allContents = `To-Do: <br>` + all + `<br><br> Done:`
+  let alldone = ""   
+  // to handle cases with done items   
+  if ('done' in jsonContentObj) {    
+    console.log(`afdsfdsfds`)
+    const {done} = jsonContentObj
+    for (let i = 0; i < done.length; i += 1 ){
+        alldone += (`${i+1}. ${done[i]}<br>`); 
+        } console.log(alldone)
+    }
+  let allContents = `To-Do: <br>` + allitems + `<br><br> Done: <br> `+ alldone
+  
   res.send(allContents)
-  // alternative with helper function
-  // let itemsList = createItems(items)
-  // res.send(itemsList)
 });
 
 let taskNumber = process.argv[3]
@@ -136,4 +143,5 @@ app.get('/complete', async (req, res) =>{
 
 
 app.listen(port)
+//IMPORTANT. Start data.json with below object
 // {"items":["wash the car", "cook dinner", "buy bananas", "buy flowers"]}
