@@ -57,6 +57,14 @@
     { "YEAR": "1989", "SEASON": "spring" },
     {},
     {},
-    {}
+    {},
+    { "YEAR": "1111", "SEASON": "hot-age" },
+    { "YEAR": "1010", "SEASON": "silly" },
+    {},
+    {},
+    { "YEAR": "1010", "SEASON": "eerie" },
+    { "YEAR": "1010", "SEASON": "happy" },
+    { "YEAR": "0001", "SEASON": "CNY" },
+    { "New": "yes", "Try": "first" }
   ]
 }
