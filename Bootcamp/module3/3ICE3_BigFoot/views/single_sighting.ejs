@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sighting Single</title>
+  </head>
+  <body>
+    <%const text= "Index Page" %>
+    <a href="<%="/"%>"><%=text %></a>
+    <div>   
+        <%for (const [key, value] of Object.entries(details)) {%>
+        <ul><%=key%>
+            <%=value%>
+        </ul>
+        <%}%>
+    </div>
+    <div>
+      <%="Just the year " + details.YEAR%>
+      <%="Just the year " %><%=details.YEAR%>
+    </div>
+  </body>
+</html>
