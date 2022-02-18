@@ -8,22 +8,19 @@
     "type": "module"
     ```
 7. go to index.js and add this at the start of file
+    ```
     import express from 'express';
     import { read } from './jsonFileStorage.js'; or import read from './jsonFileStorage.js';
 
     const app = express()
     const port = 3004
-8. at the terminal to run the index.js, instead of the old node index.js, do the following below. Nodemon refresh changes so this eliminates the need to restart server all the time there is changes
-    nodemon index.js -e js 
-9.  Once we transition to SQL DBS, feel free to use nodemon without the -e argument.
-10. or simply
-    nodemon index.js
+    ```
+8. at the terminal to run the index.js, instead of the old `node index.js`, do `nodemon index.js -e js ` . **Nodemon** refresh changes so this eliminates the need to restart server all the time there is changes. Once we transition to SQL DBS, feel free to use nodemon without the -e argument.
+9.  or simply `nodemon index.js`
 
-
-
-For EJS, do these also
-1. npm install ejs
-2. Set up the following file structure
+## For EJS, do these also
+10. npm install ejs
+11. Set up the following file structure
     ```
         └── my-app
             ├── index.js
@@ -32,7 +29,7 @@ For EJS, do these also
             └── views
                 └── fruit.ejs
     ```
-3. in index.js, add these:
+12. in index.js, add these:
     ```
     import express from 'express';
     import {add} from './jsonFileStorage.js';
@@ -51,13 +48,13 @@ For EJS, do these also
     // Save new recipe data sent via POST request from our form
     app.get('/fruit', (request, response) => {.......
     .........
-        // Return HTML to client, merging "index" template with supplied data.
+    // Return HTML to client, merging "index" template with supplied data.
     response.render('fruit', data);
     });
 
     app.listen(3004);
     ```
-4. in fruit.ejs 
+13. in fruit.ejs 
     ```
     <html>
     <head>
