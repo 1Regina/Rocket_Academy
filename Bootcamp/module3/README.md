@@ -66,3 +66,47 @@
     </body>
     </html>
     ```
+14. To bind POST requests, add in index.js
+    ```
+    app.use(express.urlencoded({ extended: false }));
+    ```    
+15. To enable PUT and DELETE method
+    1.  cd in the app folder and `npm install method-override`
+    2.  add in index.js
+        ```
+        import methodOverride from 'method-override';
+
+        // Override POST requests with query param ?_method=PUT to be PUT requests
+        app.use(methodOverride('_method'));
+        ```
+    3. Add the designated query parameter to the end of the form action URL so that Express can detect this as a PUT request. The form should still have method "POST". Read more in [here](https://bootcamp.rocketacademy.co/3-backend-applications/3.1-express-js/3.1.4-put-delete-requests).
+    4. Changes to form url
+       1. Example 1
+            ```
+            /recipe/1?_method=PUT
+            ```
+       2. Example 2.. Remember to encase the ENTIRE record in form tag     
+            ```
+            <form action="/sighting/<%=oneSighting.index%>/edit?_method=PUT" method="POST">
+            ..all the other logic.. 
+            </form>
+            ```
+    5. Delete uses splice to remove the data:
+        ```
+            app.delete('/recipe/:index', (request, response) => {
+                // Remove element from DB at given index
+                const { index } = request.params;
+                read('data.json', (err, data) => {
+                    data['recipes'].splice(index, 1);
+                    write('data.json', data, (err) => {
+                    response.send('Done!');
+                    });
+                });
+                });
+        ```         
+    6.  The delete form may only contain a single button that triggers a DELETE request on the data with the specified index. Note it uses the Method Override parameter like we did with PUT requests above. If the full record viewing is not neceesary and delete button is only at a spot in the summary listing page, then the form action could be just over the button like below. See [summary listing example with delete button](C:\Users\regina\Desktop\Learning\Rocket_Academy\Rocket_Academy_Projects\bootcamp\project10_major_UFO_sightings\views\listing.ejs)
+        ```
+            <form action="/recipe/<%= index %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete" />
+            </form>
+        ```   
