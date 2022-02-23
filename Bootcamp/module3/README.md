@@ -105,8 +105,15 @@
                 });
         ```         
     6.  The delete form may only contain a single button that triggers a DELETE request on the data with the specified index. Note it uses the Method Override parameter like we did with PUT requests above. If the full record viewing is not neceesary and delete button is only at a spot in the summary listing page, then the form action could be just over the button like below. See [summary listing example with delete button](C:\Users\regina\Desktop\Learning\Rocket_Academy\Rocket_Academy_Projects\bootcamp\project10_major_UFO_sightings\views\listing.ejs)
-        ```
+        1.  Example 1
+            ```
             <form action="/recipe/<%= index %>?_method=DELETE" method="POST">
             <input type="submit" value="Delete" />
             </form>
-        ```   
+            ```   
+        2. Example 2
+            ```
+            <form action="/sighting/<%=i%>/delete?_method=DELETE" method="POST">
+                <input type="submit" value="Delete" <%=id= delete_id %>/>   
+                </form>   
+            ```    
