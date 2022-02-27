@@ -1,0 +1,13 @@
+body {
+  background-color: rgb(179, 206, 214);
+}
+
+.square {
+  padding: 10px;
+  margin: 10px;
+  background-color: white;
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  vertical-align: top;
+  }
