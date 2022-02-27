@@ -1,0 +1,8 @@
+# File that sometimes appears on MacOS
+.DS_Store
+
+# Dependencies directories
+**node_modules/
+
+# igonore files like .gitignore and .prettierignore
+# .*
