@@ -1,0 +1,5 @@
+water 
+-- a Life-giving source if in right amount and clean
+-- anything polluted can cause death
+-- anything more can cause drowning
+-- anything sad can cause tears
