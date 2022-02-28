@@ -117,3 +117,6 @@
                 <input type="submit" value="Delete" <%=id= delete_id %>/>   
                 </form>   
             ```    
+## For Postgresql
+1. `npm install pg` to update package.json
+2. See sample for index.js [here](https://bootcamp.rocketacademy.co/3-backend-applications/3.4-sql-applications/3.4.2-postgresql-node-app)      
