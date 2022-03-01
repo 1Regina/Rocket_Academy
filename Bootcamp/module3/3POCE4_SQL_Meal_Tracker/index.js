@@ -60,10 +60,10 @@ if (command === 'log') {
   sqlQuery = 'INSERT INTO meal_tracker ( type, description, amount_of_alcohol, was_hungry_before_eating) VALUES ($1, $2, Number($3), $4)';
   client.query(sqlQuery, inputData, whenQueryDone);
 }
-if (command === 'report') {
-  sqlQuery = 'SELECT * FROM meal_tracker';
-  client.query(sqlQuery, whenQueryDone);
-}
+// if (command === 'report') {
+//   sqlQuery = 'SELECT * FROM meal_tracker';
+//   client.query(sqlQuery, whenQueryDone);
+// }
 
 // COMFORTABLE
 const editDetails = process.argv.slice(3,6);
@@ -85,6 +85,30 @@ const whenEditQueryDone = (error, result) => {
 }
 
 if (command === 'edit') {
-  sqlQuery = 'UPDATE meal_tracker SET $2 = $3 WHERE id = $1';
-  client.query(sqlQuery, editDetails, whenEditQueryDone);
+  console.log(editDetails)
+  const sqlQuery = `UPDATE meal_tracker SET ${editDetails[1]} = '${editDetails[2]}' WHERE id = ${editDetails[0]}`;
+  // const sqlQuery = `UPDATE meal_tracker SET ${process.argv[4]} = '${process.argv[5]}' WHERE id=${process.argv[3]}`;
+  client.query(sqlQuery, whenEditQueryDone);
 }  
+
+// COMFORTABLE REPORT by attribute
+
+// function filterByValue(array, string) {
+//     return array.filter(o =>
+//         Object.keys(o).some(k => o[k].toLowerCase().includes(string.toLowerCase())));
+// }
+
+// let attributeWord = process.argv[3];
+// const whenReportQueryAttribute = (error, result) => {
+//   // this error is anything that goes wrong with the query
+//   if (error) {
+//     console.log(`error`, error);
+//   } else {
+//   // console.log(`result.rows output`, result.rows)
+//   let filteredRecords =  filterByValue(result.rows, attributeWord)
+//   }
+//   console.log (`filtered Records`, filteredRecords)
+//       // close the connection
+//     client.end();
+// }
+// client.query(`SELECT * FROM cats`, whenReportQueryAttribute)
