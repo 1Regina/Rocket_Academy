@@ -22,13 +22,27 @@ const whenQueryDone = (error, result) => {
       console.log('error', error);
     } else {
       // rows key has the data
-      console.log(result.rows);
+      // BASIE
+      // console.log(`report results`, result.rows);
+      /////@@@@@@@/////
+      // COMFORTABLE -Sample Report Output
+      let reportResults = result.rows;
+      let ifHungry = "";
+      for (i=0; i< reportResults.length; i+=1){
+        if(reportResults.was_hungry_before_eating === true){
+        ifHungry = "feeling_hungry"
+      } else {
+        ifHungry = "feeling stuffed"
+      }
+        console.log(`${reportResults[i].id} - ${reportResults[i].type} - ${reportResults[i].description} - ${reportResults[i].amount_of_alcohol} - ${ifHungry}`)
+      }
       console.log(`input Data`, inputData)
     }
     // close the connection
     client.end();
 };
 
+// BASE
 const command = process.argv[2];
 const inputData = process.argv.slice(3,7);
 // let inputData = []
@@ -51,4 +65,26 @@ if (command === 'report') {
   client.query(sqlQuery, whenQueryDone);
 }
 
-// client.query(sqlQuery, inputData, whenQueryDone);
+// COMFORTABLE
+const editDetails = process.argv.slice(3,6);
+// let editID = process.argv[3];
+// let editColumn = process.argv[4];
+// let editValue = process.argv [5];
+
+
+const whenEditQueryDone = (error, result) => {
+  // this error is anything that goes wrong with the query
+  if (error) {
+    console.log(`error`, error);
+  } else {
+    console.log(`results`, result.rows);
+    console.log(`editDetails`, editDetails);
+  }
+    // close the connection
+    client.end();
+}
+
+if (command === 'edit') {
+  sqlQuery = 'UPDATE meal_tracker SET $2 = $3 WHERE id = $1';
+  client.query(sqlQuery, editDetails, whenEditQueryDone);
+}  
