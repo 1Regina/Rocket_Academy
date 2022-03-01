@@ -3,9 +3,9 @@ const { Client } = pg;
 
 // set the way we will connect to the server
 const pgConnectionConfigs = {
-  user: '<MY_UNIX_USERNAME>',
+  user: 'regina',
   host: 'localhost',
-  database: '<MY_UNIX_USERNAME>',
+  database: 'regina',
   port: 5432, // Postgres server always runs on this port
 };
 
