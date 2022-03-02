@@ -164,10 +164,10 @@ const whenReportQueryAttribute = (error, result) => {
 
 }
 
-if (command === "report") {
-  const sqlQuery = `SELECT * FROM meal_tracker`;
-  client.query(sqlQuery, whenReportQueryAttribute);
-}
+// if (command === "report") {
+//   const sqlQuery = `SELECT * FROM meal_tracker`;
+//   client.query(sqlQuery, whenReportQueryAttribute);
+// }
 
 
 // ============ MORE COMFORTABLE ADD Created_At Column
@@ -201,4 +201,34 @@ if (command === "insertDate") {
   client.query(insertDatesText, whenInsertQueryDone);
 }
 
-// ============ MORE COMFORTABLE REPORTING DRINKS
+// ============ MORE COMFORTABLE REPORTING STATISTICS
+const reportAlcohol = process.argv.slice(2,4);
+
+const whenReportingAlcohol = (error, result) => {
+  let counterAlcoholicMeals = 0;
+  let qtyAlchohol = 0;
+  let counterAllMeals = 0;
+  // this errors is anything that goes wrong with the query 
+  if (error){
+    console.log('error', error);
+  } else {
+    for (i = 0; i < result.rows.length; i += 1) {
+        if (result.rows[i].amount_of_alcohol > 0) {
+          counterAlcoholicMeals +=1  
+        } 
+        counterAllMeals += 1
+        qtyAlchohol += result.rows[i].amount_of_alcohol
+    }
+    console.log(`Alcohol Consumption Rate By Meals`, `${(counterAlcoholicMeals/counterAllMeals).toFixed(2)}`)
+    console.log(`Average Alcohol Consumption per Meal`, `${(qtyAlchohol/counterAllMeals).toFixed(2)} glasses`)
+  }
+  // close the connection
+  client.end();
+}
+console.log(`reportAlcohol`, reportAlcohol)
+// if (reportAlcohol ===  ['report','drink'])
+if (command === "report" && process.argv[3] === "drink"){
+  console.log(`query comes in`)
+  const reportAlcoholQuery = "SELECT amount_of_alcohol FROM meal_tracker";
+  client.query(reportAlcoholQuery, whenReportingAlcohol)
+}
