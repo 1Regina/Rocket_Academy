@@ -278,3 +278,33 @@ if (command === "report" && process.argv[3] === "week-so-far"){
   const mealThisWeekQuery = "SELECT * FROM meal_tracker";
   client.query(mealThisWeekQuery, whenReportingCurrentWeek)
 }
+
+// ============ MORE COMFORTABLE REPORTING past 7 days excluding today meals
+const whenReportingpast7days = (error, result) => {
+   
+    let pastWeekMeals = []
+    // this error is anything that goes wrong with the query
+    if (error) {
+      console.log('error', error);
+    } else {
+      for (i = 0; i < result.rows.length; i += 1) {
+        if ((Math.abs(((result.rows[i].created_at.getTime()  - (new Date().getTime()))/ oneDay )) < 7 )
+          && 
+          (Math.abs(((result.rows[i].created_at.getTime()  - (new Date().getTime()))/ oneDay )) > 1 )) {
+        pastWeekMeals.push(result.rows[i])
+        }  
+      }
+    }
+      // reporting message
+      console.log(`Meals eaten past 7 days excluding today are: `)
+      for (j = 0; j < pastWeekMeals.length; j +=1) {
+        console.log(`${j+1}. ${pastWeekMeals[j].description} for ${pastWeekMeals[j].type} on ${pastWeekMeals[j].created_at} with ${pastWeekMeals[j].amount_of_alcohol} glasses of alcohol \n`)
+      }  
+    // close the connection
+    client.end();
+}       
+
+if (command === "report" && process.argv[3] === "past-week"){
+  const mealpast7DaysQuery = "SELECT * FROM meal_tracker";
+  client.query(mealpast7DaysQuery, whenReportingpast7days)
+}
