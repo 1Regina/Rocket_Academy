@@ -144,3 +144,33 @@ if (command === "report") {
   const sqlQuery = `SELECT * FROM meal_tracker`;
   client.query(sqlQuery, whenReportQueryAttribute);
 }
+
+// MORE COMFORTABLE ADD Created_At Column
+if (command === "add created_at column") {
+  const addColumnQuery = "ALTER TABLE meal_tracker ADD COLUMN IF NOT EXISTS created_at DATE"
+  client.query(addColumnQuery)
+}
+
+const whenInsertQueryDone = (error, result) => {
+  // this error is anything that goes wrong with the query
+  if (error) {
+    console.log(`error`, error);
+  } else {
+    console.log(`results`, result.rows);
+  }
+    // close the connection
+    client.end();
+}
+
+if (command === "insertDate") { 
+  // insert the current time into it
+  const now = new Date().toLocaleString("en-US", {timeZone: "America/New_York"})
+  // SPECIFY the dates
+  const now = new Date('2022-02-28T12:00:00Z').toLocaleString("en-US", {timeZone: "America/New_York"})
+
+  // now.toLocaleString('fi-FI', { timeZone: 'Europe/Helsinki' });
+  console.log(`process.agrv[3]`, typeof process.argv[3], process.argv[3])
+  // USE edit to populate the table
+  const insertDatesText = `UPDATE meal_tracker SET created_at = '${now}' WHERE id = ${process.argv[3]}`;
+  client.query(insertDatesText, whenInsertQueryDone);
+}
