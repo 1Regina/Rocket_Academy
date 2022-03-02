@@ -57,6 +57,7 @@ const inputData = process.argv.slice(3,7);
 let sqlQuery = '';
 
 if (command === 'log') {
+  console.log(`inputData array`, inputData)
   sqlQuery = 'INSERT INTO meal_tracker ( type, description, amount_of_alcohol, was_hungry_before_eating) VALUES ($1, $2, Number($3), $4)';
   client.query(sqlQuery, inputData, whenQueryDone);
 }
@@ -92,23 +93,54 @@ if (command === 'edit') {
 }  
 
 // COMFORTABLE REPORT by attribute
+function filterByValue(array, string) {
+    return array.filter(o =>
+        Object.keys(o).some(k => String(o[k]).toLowerCase().includes(String(string).toLowerCase())));
+}
 
-// function filterByValue(array, string) {
-//     return array.filter(o =>
-//         Object.keys(o).some(k => o[k].toLowerCase().includes(string.toLowerCase())));
-// }
+let attributeWord = "";
+if (process.argv[3] === "hungry") {
+  attributeWord = true
+} else if (process.argv[3] === "not-hungry"){
+  attributeWord = false
+} else {
+  attributeWord = process.argv[3]
+}
 
-// let attributeWord = process.argv[3];
-// const whenReportQueryAttribute = (error, result) => {
-//   // this error is anything that goes wrong with the query
-//   if (error) {
-//     console.log(`error`, error);
-//   } else {
-//   // console.log(`result.rows output`, result.rows)
-//   let filteredRecords =  filterByValue(result.rows, attributeWord)
-//   }
-//   console.log (`filtered Records`, filteredRecords)
-//       // close the connection
-//     client.end();
-// }
-// client.query(`SELECT * FROM cats`, whenReportQueryAttribute)
+// make boolean in was_hungry_before_eating to a string
+const formatHungryMeals = (resultArray) => {
+  let ifHungry = "";
+  for (i=0; i< resultArray.length; i+=1){
+    if(resultArray[i].was_hungry_before_eating === true) {
+      ifHungry = "feeling hungry"
+    } else {
+      ifHungry = "feeling not hungry"
+    }
+    console.log(`${resultArray[i].id} - ${resultArray[i].type} - ${resultArray[i]. description} - ${resultArray[i].amount_of_alcohol} - ${ifHungry}`)
+  }
+}
+
+const whenReportQueryAttribute = (error, result) => {
+  let filteredRecords; 
+  // this error is anything that goes wrong with the query
+  if (error) {
+    console.log(`error`, error);
+  } else {
+  // console.log(`result.rows output`, result.rows)
+  filteredRecords =  filterByValue(result.rows, attributeWord);
+  }
+  // Method 1 output table contents as is
+  console.log (`filtered Records`, filteredRecords)
+
+  // Method 2 outputing via helper function replace boolean
+  formatHungryMeals(filteredRecords);
+
+  // close the connection
+  client.end();
+
+}
+
+if (command === "report") {
+  const sqlQuery = `SELECT * FROM meal_tracker`;
+  client.query(sqlQuery, whenReportQueryAttribute);
+}
