@@ -58,7 +58,7 @@ let sqlQuery = '';
 
 if (command === 'log') {
   console.log(`inputData array`, inputData)
-  sqlQuery = 'INSERT INTO meal_tracker ( type, description, amount_of_alcohol, was_hungry_before_eating) VALUES ($1, $2, Number($3), $4)';
+  sqlQuery = 'INSERT INTO meal_tracker ( type, description, amount_of_alcohol, was_hungry_before_eating) VALUES ($1, $2, $3, $4)';
   client.query(sqlQuery, inputData, whenQueryDone);
 }
 // if (command === 'report') {
