@@ -225,10 +225,56 @@ const whenReportingAlcohol = (error, result) => {
   // close the connection
   client.end();
 }
-console.log(`reportAlcohol`, reportAlcohol)
-// if (reportAlcohol ===  ['report','drink'])
+
+// if (reportAlcohol ===  ['report','drink']) // doesnt work somehow
 if (command === "report" && process.argv[3] === "drink"){
   console.log(`query comes in`)
   const reportAlcoholQuery = "SELECT amount_of_alcohol FROM meal_tracker";
   client.query(reportAlcoholQuery, whenReportingAlcohol)
+}
+
+// ============ MORE COMFORTABLE REPORTING This week's meals
+const oneDay = 1000 * 60 * 60 * 24;
+const getDays = (start, last) => {
+    //initialize dates with Date object
+    const date1 = new Date(start);
+    const date2 = new Date(last);
+
+    // calculation for converting a day into milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    // calculation for the time difference between start and last
+    const diffTime = date2.getTime() - date1.getTime();
+
+    // calculation for the days between start and last
+    const diffDays = Math.round(diffTime / oneDay);
+    // return number of days
+    return diffDays;
+}
+
+const whenReportingCurrentWeek = (error, result) => {
+    const today = new Date().toLocaleString("en-US", {timeZone: "America/New_York"})
+    let currentWeekMeals = []
+    // this error is anything that goes wrong with the query
+    if (error) {
+      console.log('error', error);
+    } else {
+      for (i = 0; i < result.rows.length; i += 1) {
+        if (Math.abs(((result.rows[i].created_at.getTime()  - (new Date().getTime()))/ oneDay )) < 7 ) {
+        currentWeekMeals.push(result.rows[i])
+        }  
+      }
+    }
+      // reporting message
+      console.log(`Meals eaten this week are: `)
+      for (j = 0; j < currentWeekMeals.length; j +=1) {
+        console.log(`${j+1}. ${currentWeekMeals[j].description} for ${currentWeekMeals[j].type} on ${currentWeekMeals[j].created_at} with ${currentWeekMeals[j].amount_of_alcohol} glasses of alcohol \n`)
+      }  
+    // close the connection
+    client.end();
+}       
+
+if (command === "report" && process.argv[3] === "week-so-far"){
+  const mealThisWeekQuery = "SELECT * FROM meal_tracker";
+  client.query(mealThisWeekQuery, whenReportingCurrentWeek)
 }
