@@ -164,10 +164,13 @@ const whenReportQueryAttribute = (error, result) => {
 
 }
 
-// if (command === "report") {
-//   const sqlQuery = `SELECT * FROM meal_tracker`;
-//   client.query(sqlQuery, whenReportQueryAttribute);
-// }
+if (command === "report" && (
+   (!process.argv[3].includes("week") && !process.argv[3].includes("drink"))
+   )
+   ) {
+  const sqlQuery = `SELECT * FROM meal_tracker`;
+  client.query(sqlQuery, whenReportQueryAttribute);
+}
 
 
 // ============ MORE COMFORTABLE ADD Created_At Column
