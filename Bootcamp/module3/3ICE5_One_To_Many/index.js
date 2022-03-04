@@ -1,11 +1,11 @@
-const pg = require ('pg');
+import pg from 'pg';
 const {Client} = pg; 
 
 // set the way we will connect to the server
 const pgConnectionConfigs = {
   user: 'regina',
   host: 'localhost',
-  database: 'cat_owners', // where meal_tracker table resides
+  database: 'cat_owners', // where cats and owners table resides
   port: 5432,
 }
 
@@ -69,7 +69,7 @@ const whenListAll = (error, result) => {
     }
   }
 
-
+// ======== Get List of Cats and Respective Owners
 
 if (command === "cats"){
 
@@ -84,22 +84,23 @@ if (command === "cats"){
        return;
      }
      // if no error, results of the output is in array
-     console.log(`catsQueryResults aaa`, catsQueryResult.rows)
+     const cats = catsQueryResult.rows
+     console.log(`catsQueryResults aaa`,cats)
 
     // return early if no results
-    if (catsQueryResult.rows.length <= 0) {
+    if (cats.length <= 0) {
       console.log('no results!');
       client.end();
       return;
     }
-    
-    console.log(`the size of catsQueryResult is`, `${catsQueryResult.rows.length}`)
-    for (i = 0; i< catsQueryResult.rows.length; i+=1) {
-      console.log(`owner id`, `${i}`, `${catsQueryResult.rows[i].owner_id}`)
+    console.log(`all the catssss`, cats)
+    console.log(`the size of catsQueryResult is`, `${cats.length}`)
+    for (let i = 0; i< cats.length; i+=1) {
+      // console.log(`owner id bbbbb`, `${i}`, `${cats[i].owner_id}`)
       // MAGIC NOT HAPPENING: use the result of the 1st query in the 2nd
-      let ownerQuery = `SELECT name FROM owners WHERE id=${catsQueryResult.rows[i].owner_id}`;
-      console.log(`magical` ,`${i}`)
-      console.log(`owner query `, ownerQuery)
+      let ownerQuery = `SELECT name FROM owners WHERE id=${cats[i].owner_id};`;
+      // console.log(`magical` ,`${i}`)
+      // console.log(`owner query `, ownerQuery)
       client.query(ownerQuery, (ownerQueryError, ownerQueryResult) => {
         //this error is anything that goes wrong with the query
         if (ownerQueryError) {
@@ -107,14 +108,20 @@ if (command === "cats"){
           client.end();
           return;
         }
-        // output the desired format
-        console.log(`Cats: \n '${i+1}'. '${catsQueryResult.rows[i]}' : Owner: '${ownerQueryResult}' `)
-        // let ownerCat = ownerQueryResult
-        // return ownerCat
+      // console.log(`Entire ownerqueryResult`, ownerQueryResult.rows)
+      let {name} = ownerQueryResult.rows[0]
+     
+      console.log(`the name of cats`, `${cats[i].name}`)
+      // console.log(`AAAAA name`, name)
+      // console.log(`ownerqueryresultscxc`, ownerQueryResult.rows[0].name)
+      // output the desired format
+
+      console.log(`Cats everywhere: \n '${i+1}'. '${cats[i].name}' : Owner: '${name}' `)
+    
       })    
     }  
 
-      client.end();
+      // client.end();
   } 
   ) 
 }
