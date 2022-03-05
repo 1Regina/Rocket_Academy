@@ -1,0 +1,1 @@
+For innerjoin on 3ICE6: One To Many> go to inner-join branch and see file <innerJoin.js>
