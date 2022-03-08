@@ -1,21 +1,4 @@
-// import express from "express"; // to serve server
-// import methodOverride from 'method-override'; // to override POST requests with query param ?_method=PUT 
 import pg from 'pg'; //import { pool } from "./constant.js";
-// import jsSHA from 'jssha'; // for hashing password
-// import cookieParser from "cookie-parser"; // for response.cookie and response.clearCookie("loggedIn");
-// import bodyParser from 'body-parser'; //cookie
-
-
-// export const app = express();
-// // Set the view engine to ejs
-// app.set("view engine", "ejs");
-// // Override POST requests with query param ?_method=PUT to be PUT requests
-// app.use(methodOverride('_method'));
-// // Configure Express to parse request body data into request.body
-// app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-// app.use(bodyParser.json());
-
 
 const {Pool} = pg;
 // set the way we will connect to the server
@@ -67,7 +50,7 @@ if (command === "insertexercises") {
     console.log(`user just enter`, results.rows[0])
   })
 }
-
+// == BASE Output Exercises
 if (command === "exercises") {
   let displayAllQuery = `SELECT * FROM exercises`
   pool.query(displayAllQuery, (displayError, displayResults) => {
@@ -80,7 +63,7 @@ if (command === "exercises") {
 }
 
 const [appName, scriptName, cmdName, workoutName, workoutDate, ...workoutExercises] = process.argv;
-
+// == BASE Create Workouts (With Existing Exercises)
 if (cmdName === "add-workout"){
   let workout_id 
   let insertWorkoutQuery = `INSERT INTO workouts (name, date) VALUES ('${workoutName}', '${workoutDate}') RETURNING * ;`
@@ -103,5 +86,18 @@ if (cmdName === "add-workout"){
   })
 }
 
+// BASE == Get Workouts with Specific Exercise with Exercise ID
+if (cmdName === "get-workouts-by-exercise") {
+  const exer_ID = process.argv[3]
+  let findWorkOutQuery = `SELECT workouts.name, date, exercise_id, workout_id FROM workouts INNER JOIN exercise_workouts ON workouts.id = exercise_workouts.workout_id WHERE exercise_id = ${exer_ID} ;`
+  pool.query(findWorkOutQuery, (error, results) => {
+    if (error) {
+      whenQueryDone(error, results)
+    } 
 
+    console.log(`Workout for exercise id ${exer_ID} is `)
+    let workouts =  results.rows       
+    workouts.forEach(working => console.log(`\t- ${working.name}`))
+  })
+}
 
