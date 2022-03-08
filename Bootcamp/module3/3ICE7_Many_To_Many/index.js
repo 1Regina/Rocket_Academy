@@ -145,3 +145,30 @@ if (cmdName === "c-get-workouts-by-exercise") {
  
 };  
 
+if (cmdName === "c-add-workout"){
+    let insertWorkoutQuery = `INSERT INTO workouts (name, date) VALUES ('${workoutName}', '${workoutDate}') RETURNING * ;`
+    pool.query(insertWorkoutQuery, (error, results) => {
+      if (error) {
+        whenQueryDone(error, results);
+      }
+      workout_id = results.rows[0].id
+      // affect the exercise_workout table
+      for (let i=0; i< workoutExercises.length; i+=1) {
+        console.log(`${workoutExercises[i]}`)
+        let findQuery = `SELECT * FROM exercises WHERE name = '${workoutExercises[i]}';`
+        pool.query(findQuery,(findError, findResults) => {
+          if (findError) {
+            whenQueryDone(findError, findResults)
+          } 
+          console.log(`results`, findResults.rows[0])
+          let exercising_id =  findResults.rows[0].id
+          let insertEx_WOutQuery = `INSERT INTO exercise_workouts (exercise_id, workout_id) VALUES (${exercising_id}, ${workout_id})`
+          pool.query(insertEx_WOutQuery,(errorW, resultsW) => {
+            if (errorW) {
+              whenQueryDone(errorW, resultsW);
+            }             
+          })
+        })  
+      } 
+    })
+};
