@@ -21,7 +21,7 @@ const whenQueryDone = (error, result) => {
     return;
   }
 
-  if (queryResult.rows.length <= 0) {
+  if (result.rows.length <= 0) {
     handleEmptyResult;
     return;
   }
