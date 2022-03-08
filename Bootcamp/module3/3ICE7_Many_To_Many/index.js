@@ -63,41 +63,85 @@ if (command === "exercises") {
 }
 
 const [appName, scriptName, cmdName, workoutName, workoutDate, ...workoutExercises] = process.argv;
-// == BASE Create Workouts (With Existing Exercises)
-if (cmdName === "add-workout"){
-  let workout_id 
-  let insertWorkoutQuery = `INSERT INTO workouts (name, date) VALUES ('${workoutName}', '${workoutDate}') RETURNING * ;`
-  pool.query(insertWorkoutQuery, (error, results) => {
-    if (error){
-     whenQueryDone(error, results);
-    }
-      workout_id = results.rows[0].id
-      // affect the exercise_workout table
-      for (let i=0; i< workoutExercises.length; i+=1) {
 
-        let insertEx_WOutQuery = `INSERT INTO exercise_workouts (exercise_id, workout_id) VALUES (${workoutExercises[i]}, ${workout_id})`
-        pool.query(insertEx_WOutQuery,(errorW, resultsW) => {
-          if (errorW){
-          whenQueryDone(errorW, resultsW);
-          } 
+// == BASE Create Workouts (With Existing Exercises)
+let workout_id 
+const insertWorkingOut = () => {
+  let insertWorkoutQuery = `INSERT INTO workouts (name, date) VALUES ('${workoutName}', '${workoutDate}') RETURNING * ;`
+    pool.query(insertWorkoutQuery, (error, results) => {
+      if (error){
+      whenQueryDone(error, results);
+      }
+        workout_id = results.rows[0].id
+        // affect the exercise_workout table
+        for (let i=0; i< workoutExercises.length; i+=1) {
+
+          let insertEx_WOutQuery = `INSERT INTO exercise_workouts (exercise_id, workout_id) VALUES (${workoutExercises[i]}, ${workout_id})`
+          pool.query(insertEx_WOutQuery,(errorW, resultsW) => {
+            if (errorW){
+            whenQueryDone(errorW, resultsW);
+            } 
+            
+          })
+        } return 
+    })
+}    
+
+if (cmdName === "add-workout"){
+  // let workout_id 
+  // let insertWorkoutQuery = `INSERT INTO workouts (name, date) VALUES ('${workoutName}', '${workoutDate}') RETURNING * ;`
+  // pool.query(insertWorkoutQuery, (error, results) => {
+  //   if (error){
+  //    whenQueryDone(error, results);
+  //   }
+  //     workout_id = results.rows[0].id
+  //     // affect the exercise_workout table
+  //     for (let i=0; i< workoutExercises.length; i+=1) {
+
+  //       let insertEx_WOutQuery = `INSERT INTO exercise_workouts (exercise_id, workout_id) VALUES (${workoutExercises[i]}, ${workout_id})`
+  //       pool.query(insertEx_WOutQuery,(errorW, resultsW) => {
+  //         if (errorW){
+  //         whenQueryDone(errorW, resultsW);
+  //         } 
           
-        })
-      } return 
-  })
+  //       })
+  //     } return 
+  // })
+  insertWorkingOut();
 }
 
+
 // BASE == Get Workouts with Specific Exercise with Exercise ID
-if (cmdName === "get-workouts-by-exercise") {
-  const exer_ID = process.argv[3]
+const exercise_ID = process.argv[3];   
+const findWorkoutByEx_ID = (exer_ID) => {   
   let findWorkOutQuery = `SELECT workouts.name, date, exercise_id, workout_id FROM workouts INNER JOIN exercise_workouts ON workouts.id = exercise_workouts.workout_id WHERE exercise_id = ${exer_ID} ;`
   pool.query(findWorkOutQuery, (error, results) => {
     if (error) {
       whenQueryDone(error, results)
     } 
 
-    console.log(`Workout for exercise id ${exer_ID} is `)
+    // console.log(`Workout for exercise id ${exer_ID} is `)
+    console.log(`Workout for the exercise is `)
     let workouts =  results.rows       
     workouts.forEach(working => console.log(`\t- ${working.name}`))
   })
-}
+};
+
+if (cmdName === "get-workouts-by-exercise") {
+  findWorkoutByEx_ID (exercise_ID)
+};  
+
+// COMFORTABLE == Get Workouts with Specific Exercise with Exercise Name
+const exercise_name = process.argv[3];
+if (cmdName === "c-get-workouts-by-exercise") {
+  let findEx_IDQuery = `SELECT * FROM exercises WHERE name = '${exercise_name}'`
+  pool.query(findEx_IDQuery, (err, results) => {
+    if (err) {
+      console.log(`error`, err)
+    } 
+    let exer_ID = results.rows[0].id
+    findWorkoutByEx_ID (exer_ID)
+  })
+ 
+};  
 
