@@ -79,7 +79,7 @@ if (command === "exercises") {
   })
 }
 
-const [appName, scriptName, cmdName, workoutName, workoutDate, exerciseID ] = process.argv;
+const [appName, scriptName, cmdName, workoutName, workoutDate, ...workoutExercises] = process.argv;
 
 if (cmdName === "add-workout"){
   let workout_id 
@@ -88,15 +88,18 @@ if (cmdName === "add-workout"){
     if (error){
      whenQueryDone(error, results);
     }
-     workout_id = results.rows[0].id
-    // affect the exercise_workout table
-    let insertEx_WOutQuery = `INSERT INTO exercise_workouts (exercise_id, workout_id) VALUES (${workout_id}, ${exerciseID})`
-    pool.query(insertEx_WOutQuery,(errorW, resultsW) => {
-      if (errorW){
-      whenQueryDone(errorW, resultsW);
-      }
-  
-    })
+      workout_id = results.rows[0].id
+      // affect the exercise_workout table
+      for (let i=0; i< workoutExercises.length; i+=1) {
+
+        let insertEx_WOutQuery = `INSERT INTO exercise_workouts (exercise_id, workout_id) VALUES (${workoutExercises[i]}, ${workout_id})`
+        pool.query(insertEx_WOutQuery,(errorW, resultsW) => {
+          if (errorW){
+          whenQueryDone(errorW, resultsW);
+          } 
+          
+        })
+      } return 
   })
 }
 
