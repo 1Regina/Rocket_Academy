@@ -15,5 +15,8 @@ CREATE TABLE IF NOT EXISTS exercise_workouts (
   workout_id INTEGER
 );
 
--- ALTER TABLE users 
---   ADD COLUMN IF NOT EXISTS hashed_password text ;
+CREATE TABLE IF NOT EXISTS muscles (
+  id SERIAL PRIMARY KEY,
+  muscle text,
+  exercise_id INTEGER
+);
