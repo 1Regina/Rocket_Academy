@@ -112,8 +112,7 @@ const findWorkoutByEx_ID = (exer_ID) => {
                           WHERE exercise_id = ${exer_ID} ;`
   pool.query(findWorkOutQuery, (error, results) => {
     whenQueryDone(error, results)
-    
-    // console.log(`Workout for exercise id ${exer_ID} is `)
+
     console.log(`Workout for the exercise is `)
     let workouts =  results.rows       
     workouts.forEach(working => console.log(`\t- ${working.name}`))
@@ -213,8 +212,8 @@ if (command === "get-workout-by-muscle") {
     matchedWorkouts.forEach(work => {
       workouts.push(work.name)
     })
+      // Handle same workouts across different dates
       let uniqueWorkout =  [ ... new Set(workouts)]
-      // console.log(`unique`, uniqueWorkout)
       for (let i=0; i< uniqueWorkout.length; i+=1){
         console.log(`${i+1}. ${uniqueWorkout[i]}`)
       }
