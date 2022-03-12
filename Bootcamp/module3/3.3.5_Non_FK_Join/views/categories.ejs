@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>checkbox</title>
-</head>
-<body>
-
-    <form action="/recipe/<%= data.recipieId %>/categories/add" method="POST">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>checkbox</title>
+  </head>
+  <body>
+    <form action="/recipe/<%= data.recipeId %>/categories" method="POST">
       <% data.categories.forEach((category) => { %>
       <label><%= category.name %></label>
-      <input type="checkbox" name="category_ids" value="<%= category.name %>" <%= category.name %> />
+      <input type="checkbox" name="category_ids" value="<%= category.id %>" />
       <% }); %>
       <input type="text" name="label" placeholder="recipe label" />
       <input type="submit" value="Submit" />
     </form>
-  
-</body>
+  </body>
 </html>

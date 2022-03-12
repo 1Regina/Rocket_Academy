@@ -66,7 +66,6 @@ app.get('/recipe/:id/categories/add', (request, response) => {
     };
   
     data.recipeId = index
-
     // console.log({data})
     response.render('categories', {data});
 
@@ -74,18 +73,16 @@ app.get('/recipe/:id/categories/add', (request, response) => {
 });
 
 
-app.post('/recipe/:id/categories/add', (request, response) => {
-  console.log(`bbbb`, request.params)
-    let index = request.params.id
-  const recipeValues = [request.body.label];
-  
-  console.log(`recipeVALUES`, recipeValues)
+app.post('/recipe/:id/categories', (request, response) => {
 
-  // use "RETURNING *" to retrieve the newly-created row
+  const { category_ids, label } = request.body
+
+  // const recipeValues = [request.body.label];
+  // console.log(`recipeVALUES`, recipeValues)
   const recipeInsertQuery = `INSERT INTO recipes (label) VALUES ($1) RETURNING *`;
 
   // execute query to insert new recipe
-  pool.query(recipeInsertQuery, recipeValues, (recipeError, recipeResult) => {
+  pool.query(recipeInsertQuery, [label], (recipeError, recipeResult) => {
     if (recipeError) {
       response.status(501).send('error!');
       return;
@@ -93,14 +90,12 @@ app.post('/recipe/:id/categories/add', (request, response) => {
 
     // retrieving this data is possible because of the "RETURNING *" in our query
     const recipeId = recipeResult.rows[0].id;
-
     const categoryInsertQuery =
       'INSERT INTO recipe_categories (recipe_id, category_id) VALUES ($1, $2)';
 
     let queryDoneCounter = 0;
-
     // for each category we have in the request, make an insert query
-    request.body.category_ids.forEach((categoryId, index) => {
+    category_ids.forEach((categoryId, index) => {
       // construct the set of values we are inserting
       const categoryValues = [recipeId, categoryId];
 
@@ -109,11 +104,11 @@ app.post('/recipe/:id/categories/add', (request, response) => {
         categoryValues,
         (categoryError, categoryResult) => {
           // query is done
+          console.log(categoryError, categoryResult)
           console.log(categoryResult.rows);
 
           queryDoneCounter += 1;
-          
-          // all queries are done
+                    // all queries are done
           if (queryDoneCounter === request.body.category_ids.length) {
             response.send('done!');
           }
