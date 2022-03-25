@@ -231,3 +231,60 @@
     });
 ```
 2. check out [authentication](https://github.com/1Regina/Rocket_Academy/blob/master/Bootcamp/module3/3.5.5_Middleware/akira.js) in middleware 
+
+## Date
+1. Gold standard in SQL is TIMESTAMPTZ
+    ```
+
+    CREATE TABLE sightings (
+        id            SERIAL PRIMARY KEY,
+        description   TEXT,
+        date          DATE,
+        created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+
+    ```
+
+2. prining all sighting dates
+    ```
+    app.get('/sightings', (request, response) => {
+    const query = 'SELECT * from sightings';
+
+        pool.query(query).then((result) => {
+            // print out all the dates in the database
+            const allSightingDates = result.rows.map((sighting) => {
+            console.log(sighting.date);
+
+            // change this Date object into a string value
+            return sighting.date.toString();
+            });
+
+            response.send(allSightingDates);
+        });
+    });
+    ```
+3. npm install moment
+4. import moment from 'moment' inside file index.js
+5. processing with dates e.g to return ['11 days ago', '117 years ago'];
+    ```
+    // ...
+
+    // print out all the dates in the database
+    const allSightingDates = result.rows.map((sighting) => {
+    console.log(sighting.date);
+
+    // change this Date object into a string value
+    // .from returns a "ago" string
+    return moment(sighting.date).from();
+    });
+
+    // ...
+    ```
+6. See the moment docs on how to output dates with moment. Note that moment will also work with the TIMESTAMPTZ data type from the created_at column and any date with timezone data inside it.  
+7. Under "Current Options for Storing Time Data" . 3 options
+    1. use the datetime-local input type. Chrome supports datetime-local and the field value can be inserted directly into a Postgres TIMESTAMPTZ field.
+       ```
+       <input type="date-local" name="date"/>
+       ``` 
+    2. date input type and create a separate input field for time data. Store time data in Postgres using a separate column.  Example [here](https://stackoverflow.com/questions/538739/best-way-to-store-time-hhmm-in-a-database). 
+    3. Avoid time input altogether in your application, and only support date input.
