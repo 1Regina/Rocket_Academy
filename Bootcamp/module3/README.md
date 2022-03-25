@@ -208,3 +208,6 @@
         });
     ```
 6. clear cookie when [logout](https://github.com/1Regina/Rocket_Academy/tree/master/Bootcamp/module3#:~:text=remove%20cookie%20when%20logout%20with%20response.clearcookie(%22loggedin%22)%3B).   
+
+## For Promises n .then
+1. npm install axios
