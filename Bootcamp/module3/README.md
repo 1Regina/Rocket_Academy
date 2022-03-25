@@ -213,7 +213,7 @@
 1. npm install axios
 
 ## Middleware
-1. Note that only 1 next is ever called in middleware . In Express, it's possible for 2 nexts to be called, but this will invoke the successive middleware twice, possibly causing an error when the code tries to end the request-response cycle for the 2nd time for a given request.
+1. Note that only 1 next is ever called in middleware . In Express, it's possible for 2 nexts to be called, but this will invoke the successive middleware twice, possibly causing an error when the code tries to end the request-response cycle for the 2nd time for a given request. 
 ```
     const checkAuth = (request, response, next) => {
     // logic that calls next() or not
@@ -230,3 +230,4 @@
     // ...
     });
 ```
+2. check out [authentication](https://github.com/1Regina/Rocket_Academy/blob/master/Bootcamp/module3/3.5.5_Middleware/akira.js) in middleware 
