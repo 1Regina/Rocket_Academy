@@ -211,3 +211,22 @@
 
 ## For Promises n .then
 1. npm install axios
+
+## Middleware
+1. Note that only 1 next is ever called in middleware . In Express, it's possible for 2 nexts to be called, but this will invoke the successive middleware twice, possibly causing an error when the code tries to end the request-response cycle for the 2nd time for a given request.
+```
+    const checkAuth = (request, response, next) => {
+    // logic that calls next() or not
+    // ...
+    };
+
+    // ...
+
+    app.get('/recipes', checkAuth, (request, response) => {
+    if (request.isUserLoggedIn === false) {
+        response.status(403).send('sorry');
+        return;
+    }
+    // ...
+    });
+```
