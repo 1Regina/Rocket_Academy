@@ -209,6 +209,51 @@
     ```
 6. clear cookie when [logout](https://github.com/1Regina/Rocket_Academy/tree/master/Bootcamp/module3#:~:text=remove%20cookie%20when%20logout%20with%20response.clearcookie(%22loggedin%22)%3B).   
 
+## ADD SALT VIA ENV
+1. npm install path
+2. npm install dotenv
+3. put import in index.js
+    ```
+    import path from "path";
+    import dotenv from "dotenv";
+
+    ``` 
+4. Create some .env file at the same level e.g some_salt.env and put the declarations with the string variables in them
+    ```
+    MY_ENV_VAR = "testing"
+    SALT = "anyhow try"
+    ```
+5. Add this to index.js
+    ```
+    const envFilePath = "some_salt.env";
+    dotenv.config({ path: path.normalize(envFilePath) });
+    const theEnvVar = process.env.MY_ENV_VAR;
+
+    console.log(theEnvVar);
+
+    // initialize salt as a global constant
+    const SALT = process.env.SALT;
+    ```   
+6. use the salt to hash password 
+    ```
+    // 3. Refactor Hash Logic into Helper Function
+    const getHash = (input) => {
+    // create new SHA object
+    const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
+
+    // create an unhashed cookie string based on user ID and salt
+    const unhashedString = `${input}-${SALT}`;
+
+    // generate a hashed cookie string using SHA object
+    shaObj.update(unhashedString);
+
+    return shaObj.getHash('HEX');
+    };
+
+    console.log(`this is the hashed with salt`,getHash (`lala`))
+
+    ```
+
 ## For Promises n .then
 1. npm install axios
 
@@ -288,3 +333,5 @@
        ``` 
     2. date input type and create a separate input field for time data. Store time data in Postgres using a separate column.  Example [here](https://stackoverflow.com/questions/538739/best-way-to-store-time-hhmm-in-a-database). 
     3. Avoid time input altogether in your application, and only support date input.
+
+    
