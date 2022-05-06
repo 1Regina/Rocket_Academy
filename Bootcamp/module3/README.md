@@ -373,7 +373,7 @@ This file tells the sequelize cli how to connect to the database
     ```
     npx sequelize db:create
     ```
-### 3. Create Tables (Migrations)    
+### 3. Create Tables (Migrations = versions of tables)    
 1. Create a new migration for schema. Sequelize expects table names to be plural, and model names to be singular, and automatically queries for table names that are pluralised forms of our model names in our apps.
     ```
     npx sequelize migration:generate --name create-items-table
@@ -383,3 +383,57 @@ This file tells the sequelize cli how to connect to the database
     ```
     npx sequelize db:migrate
     ```
+4. This will 
+    1. create the intended table with its intended schema and a meta table "SequelizeMeta" which tells which table had been run and in what order.   
+    2. run those migration files which havent run as it look for those that are not yet run.
+    3. create a table call items with all its columns as specified in the migration file
+5. `npx sequelize db:migrate: undo` to undo a migration
+
+### 4. Models -- interaction with database (the form template)
+1. the model corresponding to the items table must be called "item" in the sequelize definition for Sequelize to work.
+2. mkdir models 
+3. touch item.mjs to initialise the model from the migration. It looks similar to the migration table except for first few lines
+4. short cut to create a migration and a model
+    ```
+    npx sequelize-cli model:generate --name Item --attributes name:string
+    ```
+5. Migration has higher authority than models in the odd event that their types dont match    
+6. Create Model Index File to Make Models Accessible in App
+We will initialise and export all the models we define in a single module. This makes it easy to access models from different modules within our application. In the following code, model classes are exported in a db object where keys are model names and values are model classes. 
+
+
+##QUESTION!
+1. Sample Model Index File (models/index.mjs) is it to allow us to a shot do many models or no -- the actions still need to be done via separate files "create.mjs" and "where.mjs"
+
+### 5. Use Sequelize in App Logic
+1. Use an app file to do what action you want done to the db -- create e.g create.mjs. Test with `node create.mjs milk`
+    ```
+    // import the object we created with everything in it from index.mjs
+    import db from './models/index.mjs';
+
+    // a model is an ES6 class. An instance of the class represents one object from that model (which maps to one row of the table in the database).
+    //  Although a model is a class, you should not create instances by using the new operator directly. Sequelize provides the create method for this
+    // https://sequelize.org/master/manual/model-instances.html
+
+    db.Item.create({
+    name: process.argv[2],
+    })
+    .then((item) => {
+        console.log('success!');
+        console.log(item);
+    })
+    .catch((error) => console.log(error));
+    ```
+2. Can find/retrieve also with . where.mjs. Test with `node where.mjs milk`
+    ```
+    import db from './models/index.mjs';
+
+    db.<MODEL_NAME_UPPER_CAMEL_CASE_SINGULAR>.findAll({
+    where: {
+        <MODEL_COLUMN_NAME>: ['milk']
+    }
+    })
+    .then((items) => console.log(items[0]))
+    .catch((error) => console.log(error));
+
+    ```    
