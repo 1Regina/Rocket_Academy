@@ -254,7 +254,7 @@
 
     ```
 
-## For Promises n .then
+## For API, use AXIOS
 1. npm install axios
 
 ## Middleware
@@ -334,4 +334,52 @@
     2. date input type and create a separate input field for time data. Store time data in Postgres using a separate column.  Example [here](https://stackoverflow.com/questions/538739/best-way-to-store-time-hhmm-in-a-database). 
     3. Avoid time input altogether in your application, and only support date input.
 
-    
+## File uploads  
+1. https://bootcamp.rocketacademy.co/3-backend-applications/3.4-sql-applications/3.4.11-file-uploads
+
+## eslint
+1. npm install eslint --save-dev
+2. npm init @eslint/config
+
+
+## Sequelize
+### 1. Setup Package and Folders
+1. npm init -y
+2. Sequelize requests that we install pg manually because Sequelize also supports other SQL database types such as MySQL and SQLite, and does not install any SQL DB connectors such as pg by default to keep the Sequelize library lean.
+    ```    
+    npm install pg sequelize
+    ```
+3. Install sequelize-cli NPM package to generate relevant Sequelize files such as migrations and models from the command line. sequelize-cli also allows us to run Sequelize migration files that will update our DB schema 
+    ```
+    npm install --save-dev sequelize-cli
+    ```
+4. Create the empty folders config, migrations, models, and seeders. These will store Sequelize files that we will need to create for our application. We will explore what each of these folders. We can also create these folders with the `npx sequelize init` command if npm is not global.
+    ```
+    mkdir config migrations models seeders
+    ```
+### 2. Configure Database
+1. Set up for path and environment variables
+    ```
+    import path from "path";
+    import dotenv from "dotenv";
+    ```
+2. Sample Config File (config/config.js)
+module.exports is the instruction that tells Node.js which bits of code (functions, objects, strings, etc.) to “export” from a given file so other files are allowed to access the exported code.
+    1. Here i have a .env for the variables
+    2. a config.json in config folder
+
+This file tells the sequelize cli how to connect to the database
+3. Create Database Based on Config
+    ```
+    npx sequelize db:create
+    ```
+### 3. Create Tables (Migrations)    
+1. Create a new migration for schema. Sequelize expects table names to be plural, and model names to be singular, and automatically queries for table names that are pluralised forms of our model names in our apps.
+    ```
+    npx sequelize migration:generate --name create-items-table
+    ```
+2. Populate the schema in the generated migration file    including the `up` vs `down`
+3. Writing the migration file specifies the DB schema changes. To execute all unexecuted migration files, run sequelize-cli's db:migrate command
+    ```
+    npx sequelize db:migrate
+    ```
