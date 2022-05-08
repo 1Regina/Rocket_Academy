@@ -380,6 +380,7 @@ module.exports is the instruction that tells Node.js which bits of code (functio
     2. [a config.js in config folder](https://github.com/1Regina/Rocket_Academy/blob/master/Bootcamp/module4/4.1_Sequelize/config/config.js)
 
 This file tells the sequelize cli how to connect to the database
+
 3. Create Database Based on Config
     ```
     npx sequelize db:create
@@ -437,12 +438,52 @@ This file tells the sequelize cli how to connect to the database
     1. create the intended table with its intended schema and a meta table "SequelizeMeta" which tells which table had been run and in what order.   
     2. run those migration files which havent run as it look for those that are not yet run.
     3. create a table call items with all its columns as specified in the migration file
-5. `npx sequelize db:migrate: undo` to undo a migration
+5. `npx sequelize db:migrate:undo` to undo a migration
 
 ### 4. Models -- interaction with database (the form template)
 1. the model corresponding to the items table must be called "item" in the sequelize definition for Sequelize to work.
 2. mkdir models 
-3. touch item.mjs to initialise the model from the migration. It looks similar to the migration table except for first few lines
+3. touch models/item.mjs (note the singular now) to initialise the model from the migration. It looks similar to the migration table except for first few lines. Sample models/item.mjs
+    ```
+        //  a model represents a table in sequelize, The model tells Sequelize several things about the entity it represents, such as the name of the table in the database and which columns it has (and their data types).
+        // To define mappings between a model and a table, use the define method
+        //  After being defined, we can access our model with sequelize.models.Item, i.e,
+        //  Item === sequelize.models.Item
+        ​
+        // this function is exported and used in line 37 of index.mjs, 
+        // db.Item = initItemModel(sequelize, Sequelize.DataTypes);
+        // it takes 2 parameters, the instance of Sequelize (sequelize) that we created in index.mjs and Sequelize.Datatypes(https://sequelize.org/v5/manual/data-types.html), which allow us to specify what type of data we want 
+
+
+    export default function initItemModel(sequelize, DataTypes) {
+        return sequelize.define(
+            'item',
+            {
+            id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+            },
+            name: {
+                type: DataTypes.STRING,
+            },
+            createdAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            },
+            updatedAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            },
+            },
+            {
+            // The underscored option makes Sequelize reference snake_case names in the DB.
+            underscored: true,
+            }
+        );
+    }
+    ```
 4. short cut to create a migration and a model template
     ```
     npx sequelize-cli model:generate --name Item --attributes name:string
@@ -456,7 +497,7 @@ We will initialise and export all the models we define in a single module. This 
 1. Sample Model Index File (models/index.mjs) is it to allow us to a shot do many models or no -- the actions still need to be done via separate files "create.mjs" and "where.mjs"
 
 ### 5. Use Sequelize in App Logic
-1. Use an app file to do what action you want done to the db -- create e.g create.mjs. Test with `node create.mjs milk`
+1. Use an app file (create.mjs) to do what action you want done to the db -- create e.g create.mjs. Test with `node create.mjs milk`
     ```
     // import the object we created with everything in it from index.mjs
     import db from './models/index.mjs';
@@ -474,7 +515,7 @@ We will initialise and export all the models we define in a single module. This 
     })
     .catch((error) => console.log(error));
     ```
-2. Can find/retrieve also with . where.mjs. Test with `node where.mjs milk`
+2. Can find/retrieve also with where.mjs. Test with `node where.mjs milk`
     ```
     import db from './models/index.mjs';
 
