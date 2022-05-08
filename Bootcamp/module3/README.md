@@ -340,6 +340,17 @@
 ## eslint
 1. npm install eslint --save-dev
 2. npm init @eslint/config
+    * How would you like to use ESLint? = Find n fix problems n enforce style
+    * What type of modules does your project use? = JavaScript modules (import/export)
+    * Which framework does your project use? = None of these
+    * Does your project use TypeScript? = No 
+    * Where does your code run? = Node
+    * How would you like to define a style for your project? = choose from a popular style
+    * Which style guide do you want to follow? = Airbnb: https://github.com/airbnb/javascript
+    * What format do you want your config file to be in? = JavaScript
+     eslint-config-airbnb-base@latest eslint@^7.32.0 || ^8.2.0 eslint-plugin-import@^2.25.2
+    * Would you like to install them now with npm? Yes
+
 
 
 ## Sequelize
@@ -358,15 +369,15 @@
     mkdir config migrations models seeders
     ```
 ### 2. Configure Database
-1. Set up for path and environment variables
+1. Set up for path and environment variables in config.js (and .sequelizerc)
     ```
-    import path from "path";
+    -- import path from "path"; (maybe not)
     import dotenv from "dotenv";
     ```
 2. Sample Config File (config/config.js)
 module.exports is the instruction that tells Node.js which bits of code (functions, objects, strings, etc.) to “export” from a given file so other files are allowed to access the exported code.
-    1. Here i have a .env for the variables
-    2. a config.json in config folder
+    1. Here i have a [.env](https://github.com/1Regina/Rocket_Academy/blob/master/Bootcamp/module4/4.1_Sequelize/.env) for the variables 
+    2. [a config.js in config folder](https://github.com/1Regina/Rocket_Academy/blob/master/Bootcamp/module4/4.1_Sequelize/config/config.js)
 
 This file tells the sequelize cli how to connect to the database
 3. Create Database Based on Config
@@ -378,7 +389,46 @@ This file tells the sequelize cli how to connect to the database
     ```
     npx sequelize migration:generate --name create-items-table
     ```
-2. Populate the schema in the generated migration file including the `up` vs `down`
+2. `queryInterface` is a param provided by Sequelize to manipulate DB schema. Populate the schema in the generated migration file including the `up` vs `down`.
+    ```
+    // running "npx sequelize migration:generate --name create-items-table" creates this file
+    // something like this should appear in the terminal after running this command
+    ​
+    // Sequelize CLI [Node: 15.14.0, CLI: 6.3.0, ORM: 6.12.0-alpha.1]
+    ​
+    // migrations folder at "/home/michellemok/RA/ftbc5/sequelize/migrations" already exists.
+    // New migration was created at /home/michellemok/RA/ftbc5/sequelize/migrations/20211203063853-create-items-table.js .
+
+    module.exports = {
+        up: async (queryInterface, Sequelize) => {
+            await queryInterface.createTable('items', {
+            id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: Sequelize.INTEGER,
+            },
+            name: {
+                type: Sequelize.STRING,
+            },
+            // created_at and updated_at are required
+            created_at: {
+                allowNull: false,
+                type: Sequelize.DATE,
+            },
+            updated_at: {
+                allowNull: false,
+                type: Sequelize.DATE,
+            },
+            });
+        },
+
+        down: async (queryInterface, Sequelize) => {
+            await queryInterface.dropTable('items');
+        },
+    };
+    ```
+
 3. Writing the migration file specifies the DB schema changes. To execute all unexecuted migration files, run sequelize-cli's db:migrate command
     ```
     npx sequelize db:migrate
@@ -437,3 +487,4 @@ We will initialise and export all the models we define in a single module. This 
     .catch((error) => console.log(error));
 
     ```    
+### Impt: Use camelCase    
