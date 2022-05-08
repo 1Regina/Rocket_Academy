@@ -1,10 +1,13 @@
-import { Sequelize } from 'sequelize';
+import sequelizePackage from 'sequelize';
 import allConfig from '../../config/config.js';
 
+import initTripModel from './trip.mjs';
 import initAttractionModel from './attraction.mjs';
-import initCategoryModel from './category.mjs';
 
+const { Sequelize } = sequelizePackage;
 const env = process.env.NODE_ENV || 'development';
+
+// in this case, "env" will be development, as we have in our config.js file
 // this is the same as saying :
 // const config = allConfig['development']
 const config = allConfig[env];
@@ -12,7 +15,6 @@ const db = {};
 
 // initiate a new instance of Sequelize
 // note similarity to pool.query
-
 const sequelize = new Sequelize(
   // database settings from config.js
   config.database,
@@ -21,19 +23,21 @@ const sequelize = new Sequelize(
   config,
 );
 
-// here we are putting initItemModel from item.mjs into the object "db" (line 14)
+// put initTripModel from trip.mjs into the object "db" (line 14)
+// put initAttractionModel from attraction.mjs into the object "db" (line 14)
+db.Trip = initTripModel(sequelize, Sequelize.DataTypes);
 db.Attraction = initAttractionModel(sequelize, Sequelize.DataTypes);
-db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
 
 // A    belongsTo     B
-db.Attraction.belongsTo(db.Category);
+db.Attraction.belongsTo(db.Trip);
 // A      hasMany      B
-db.Category.hasMany(db.Item);
+db.Trip.hasMany(db.Attraction);
 
-// here we are putting the instance we created in line 28 into the object "db"
+// here we are putting the instance we created in line 28 and line 29 into the object "db"
 db.sequelize = sequelize;
 // db = {
-//     Item: initItemModel(sequelize, Sequelize.DataTypes),
+//     Trip: initTripModel(sequelize, Sequelize.DataTypes),
+//     Attraction: initAttractionModel(sequelize, Sequelize.DataTypes),
 //    sequelize: sequelize
 // }
 

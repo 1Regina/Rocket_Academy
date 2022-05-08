@@ -1,6 +1,6 @@
-export default function initItemModel(sequelize, DataTypes) {
+export default function initAttractionModel(sequelize, DataTypes) {
   return sequelize.define(
-    'item',
+    'attraction',
     {
       id: {
         allowNull: false,
@@ -9,36 +9,28 @@ export default function initItemModel(sequelize, DataTypes) {
         type: DataTypes.INTEGER,
       },
       name: {
+        allowNull: false,
         type: DataTypes.STRING,
       },
-      tripId: {
+      trip_id: {
+        allowNull: false,
         type: DataTypes.INTEGER,
-        // This links the categoryId column to the id column in the categories table
+        // This links the trip_id column to the id column in the trips table
         references: {
           model: 'trips',
           key: 'id',
         },
       },
-      categoryId: {
-        type: DataTypes.INTEGER,
-        // This links the categoryId column to the id column in the categories table
-        references: {
-          model: 'categories',
-          key: 'id',
-        },
-      },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
+    // The underscored option makes Sequelize reference snake_case names in the DB.
+    // underscored: true,
     },
-    {
-      // The underscored option makes Sequelize reference snake_case names in the DB.
-      // underscored: true,
-    }
   );
 }

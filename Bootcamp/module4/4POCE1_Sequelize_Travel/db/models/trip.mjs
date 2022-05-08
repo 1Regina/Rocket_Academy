@@ -1,7 +1,6 @@
-/* eslint-disable comma-dangle */
-export default function initCategoryModel(sequelize, DataTypes) {
+export default function initTripModel(sequelize, DataTypes) {
   return sequelize.define(
-    'category',
+    'trip',
     {
       id: {
         allowNull: false,
@@ -10,20 +9,20 @@ export default function initCategoryModel(sequelize, DataTypes) {
         type: DataTypes.INTEGER,
       },
       name: {
+        allowNull: false,
         type: DataTypes.STRING,
       },
-      createdAt: {
+      // created_at and updated_at are required
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
+    // The underscored option makes Sequelize reference snake_case names in the DB.
+    // underscored: true,
     },
-    {
-      // The underscored option makes Sequelize reference snake_case names in the DB.
-      // underscored: true,
-    }
   );
 }
