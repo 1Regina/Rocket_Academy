@@ -353,7 +353,7 @@
     ```
     npm install --save-dev sequelize-cli
     ```
-4. Create the empty folders config, migrations, models, and seeders. These will store Sequelize files that we will need to create for our application. We will explore what each of these folders. We can also create these folders with the `npx sequelize init` command if npm is not global.
+4. Create the empty folders config, migrations, models, and seeders. These will store Sequelize files that we will need to create for our application. We will explore what each of these folders. We can also create these folders with the `npx sequelize init` command if npm is not global. But the config file will become config.json which is incorrect. Better to do mkdir.
     ```
     mkdir config migrations models seeders
     ```
@@ -378,7 +378,7 @@ This file tells the sequelize cli how to connect to the database
     ```
     npx sequelize migration:generate --name create-items-table
     ```
-2. Populate the schema in the generated migration file    including the `up` vs `down`
+2. Populate the schema in the generated migration file including the `up` vs `down`
 3. Writing the migration file specifies the DB schema changes. To execute all unexecuted migration files, run sequelize-cli's db:migrate command
     ```
     npx sequelize db:migrate
@@ -393,7 +393,7 @@ This file tells the sequelize cli how to connect to the database
 1. the model corresponding to the items table must be called "item" in the sequelize definition for Sequelize to work.
 2. mkdir models 
 3. touch item.mjs to initialise the model from the migration. It looks similar to the migration table except for first few lines
-4. short cut to create a migration and a model
+4. short cut to create a migration and a model template
     ```
     npx sequelize-cli model:generate --name Item --attributes name:string
     ```
