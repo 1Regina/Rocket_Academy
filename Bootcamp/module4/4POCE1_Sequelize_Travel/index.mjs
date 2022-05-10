@@ -1,89 +1,31 @@
-import db from './db/models/index.model.js';
+// import the object we created with everything in it from index.mjs
+// eslint-disable-next-line import/extensions
+import db from './db/models/index.model.mjs';
 
-const action = process.argv[2];
+// eslint-disable-next-line max-len
+// a model is an ES6 class. An instance of the class represents one object from that model (which maps to one row of the table in the database).
+// eslint-disable-next-line max-len
+//  Although a model is a class, you should not create instances by using the new operator directly. Sequelize provides the create method for this
+// https://sequelize.org/master/manual/model-instances.html
 
-const addCategory = (category) => {
-  db.Category.create({
-    name: category,
-  })
-    .then((item) => {
-      console.log('success!');
-      console.log(item);
-      console.log(item.id);
-      return item;
-    })
-    .catch((error) => console.log(error));
+const createTrip = async () => {
+  try {
+    const newTrip = await db.Trip.create({
+      name: process.argv[3],
+      created_at: Date.now(),
+      updated_at: Date.now(),
+    });
+
+    await console.log('success!');
+    await console.log(newTrip);
+    await console.log(newTrip.name);
+    // to just get the dataValues
+    await console.log(newTrip.get({ plain: true }));
+    return;
+    // newTrip.update({ name: 'CNY' });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const createAttractionWithCategory = async (
-  tripName,
-  attractionName,
-  categoryName
-) => {
-  // create new trip
-  const trip = await db.Trip.create({
-    name: tripName,
-  });
-  const tripId = trip.id;
-
-  // create new category
-  const category = await db.Category.findOne({
-    where: {
-      name: categoryName,
-    },
-  });
-  const categoryId = category.id;
-
-  // create new attraction
-  const attaction = await db.Attraction.create({
-    name: attractionName,
-    tripId,
-    categoryId,
-  });
-
-  console.log('attraction created!');
-  return attaction;
-};
-
-const categoryTrip = async (tripName, categoryName) => {
-  const trip = await db.Trip.findOne({
-    where: {
-      name: tripName,
-    },
-  });
-
-  const category = await db.Category.findOne({
-    where: {
-      name: categoryName,
-    },
-  });
-
-  const attactions = await db.Attraction.findAll({
-    where: {
-      tripId: trip.id,
-      categoryId: category.id,
-    },
-  });
-
-  return attactions;
-};
-
-switch (action) {
-  case 'add-category':
-    const category = process.argv[3];
-    addCategory(category);
-    break;
-  case 1:
-    const trip = process.argv[3];
-    const attraction = process.argv[4];
-    const category = process.argv[5];
-    createAttractionWithCategory(trip, attraction, category);
-    break;
-  case 'category-trip':
-    const trip = process.argv[3];
-    const category = process.argv[4];
-    categoryTrip(trip, category);
-    break;
-  default:
-    console.log('no matching action found');
-}
+createTrip();

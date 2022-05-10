@@ -13,16 +13,18 @@ export default function initTripModel(sequelize, DataTypes) {
         type: DataTypes.STRING,
       },
       // created_at and updated_at are required
-      created_at: {
+      createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-    // The underscored option makes Sequelize reference snake_case names in the DB.
-    // underscored: true,
+    },
+    {
+      // The underscored option makes Sequelize reference snake_case names in the DB.
+      underscored: true,
     },
   );
 }

@@ -22,6 +22,7 @@ module.exports = {
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
+        // underscored: true,
       },
     });
     await queryInterface.createTable('attractions', {
@@ -52,6 +53,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+    // underscored: true,
     });
   },
 
