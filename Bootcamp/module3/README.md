@@ -529,3 +529,74 @@ We will initialise and export all the models we define in a single module. This 
 
     ```    
 ### Impt: Use camelCase    
+
+### 6. Seed Data for DB
+1. Use migration table to seed data
+   ```
+   npx sequelize seed:generate --name seed-data
+   ```
+2. Sample Seed Data Migration file
+   ```
+   module.exports = {
+    up: async (queryInterface) => {
+        const categoriesList = [
+            {
+                name: 'fish',
+                created_at: new Date(),
+                updated_at: new Date(),
+            },
+            {
+                name: 'fruit',
+                created_at: new Date(),
+                updated_at: new Date(),
+            },
+            {
+                name: 'meat',
+                created_at: new Date(),
+                updated_at: new Date(),
+            },
+        ];
+
+        // Insert categories before items because items reference categories
+        let categories = await queryInterface.bulkInsert(
+        'categories',
+        categoriesList,
+        { returning: true }
+        );
+
+        const items = [];
+        for (let i = 0; i < categories.length; i++) {
+            const category = categories[i];
+
+            items.push({
+                name: 'some item',
+                category_id: category.id,
+                created_at: new Date(),
+                updated_at: new Date(),
+            });
+
+            items.push({
+                name: 'other item',
+                category_id: category.id,
+                created_at: new Date(),
+                updated_at: new Date(),
+            });
+
+            items.push({
+                name: 'iitemmm',
+                category_id: category.id,
+                created_at: new Date(),
+                updated_at: new Date(),
+            });
+        }
+
+        queryInterface.bulkInsert('items', items);
+    },
+
+        down: async (queryInterface) => {
+            // Delete item before category records because items reference categories
+            await queryInterface.bulkDelete('items', null, {});
+            await queryInterface.bulkDelete('categories', null, {});
+        },
+    };
+   ``` 
