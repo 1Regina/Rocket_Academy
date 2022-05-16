@@ -87,12 +87,57 @@ const findTripItinery = async (tripName) => {
   }
 };
 
+// comfortable
+const addCategory = async (category) => {
+  try {
+    await db.Category.create({
+      name: category,
+      created_at: Date.now(),
+      updated_at: Date.now(),
+    });
+    await console.log('success!');
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const createAttractionWithCategory = async (trip, attraction, category) => {
+  try {
+    // create new trip
+    const newTrip = await db.Trip.create({
+      name: trip,
+      created_at: Date.now(),
+      updated_at: Date.now(),
+    });
+    const tripId = newTrip.id;
+    // find the category
+    const newCategory = await db.Category.findOne({
+      where: {
+        name: category,
+      },
+    });
+    const catId = newCategory.id;
+    // create attraction
+    const newAttraction = await db.Attraction.create({
+      name: attraction,
+      trip_id: tripId,
+      category_id: catId,
+      created_at: Date.now(),
+      updated_at: Date.now(),
+    });
+    await console.log(newAttraction.get({ plain: true }));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 switch (action) {
   case 'create':
     const nameTrip = process.argv[3];
     createTrip(nameTrip);
     break;
-  case 'add-attrac':
+  case 'add-attrac': // base
     const aTrip = process.argv[3];
     const nameAttraction = process.argv[4];
     createTripAttaction(aTrip, nameAttraction);
@@ -100,6 +145,18 @@ switch (action) {
   case 'trip':
     const tripName = process.argv[3];
     findTripItinery(tripName);
+    break;
+
+    // comfortable
+  case 'add-category':
+    const newCategory = process.argv[3];
+    addCategory(newCategory);
+    break;
+  case 'add-attrac-comfortable':
+    const trip = process.argv[3];
+    const attraction = process.argv[4];
+    const category = process.argv[5];
+    createAttractionWithCategory(trip, attraction, category);
     break;
   default:
     console.log('no matching action found');

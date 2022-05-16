@@ -24,6 +24,7 @@ const sequelize = new Sequelize(
   config,
 );
 
+// For Base
 // put initTripModel from trip.mjs into the object "db" (line 14)
 // put initAttractionModel from attraction.mjs into the object "db" (line 14)
 db.Trip = initTripModel(sequelize, Sequelize.DataTypes);
@@ -34,6 +35,8 @@ db.Attraction.belongsTo(db.Trip);
 // A      hasMany      B
 db.Trip.hasMany(db.Attraction);
 
+// For Comfortable
+// db.Attraction = initAttractionModel(sequelize, Sequelize.DataTypes);
 db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
 // A    belongsTo     B
 db.Attraction.belongsTo(db.Category);

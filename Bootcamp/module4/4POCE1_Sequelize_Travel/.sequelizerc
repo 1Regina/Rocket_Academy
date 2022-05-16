@@ -1,0 +1,9 @@
+// not required if things r working. This overrides the paths esp when you want things in a db folder
+// const path = require('path');
+
+// module.exports = {
+//   config: path.resolve('config', 'sequelize.config.cjs'),
+//   'models-path': path.resolve('db', 'models'),
+//   'seeders-path': path.resolve('db', 'seeders'),
+//   'migrations-path': path.resolve('db', 'migrations'),
+// };

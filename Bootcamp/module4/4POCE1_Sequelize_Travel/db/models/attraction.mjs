@@ -21,11 +21,20 @@ export default function initAttractionModel(sequelize, DataTypes) {
           key: 'id',
         },
       },
-      created_at: {
+      category_id: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        // This links the trip_id column to the id column in the trips table
+        references: {
+          model: 'categories',
+          key: 'id',
+        },
+      },
+      createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: DataTypes.DATE,
       },
