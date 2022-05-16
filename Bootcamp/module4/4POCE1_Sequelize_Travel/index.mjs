@@ -127,6 +127,35 @@ const createAttractionWithCategory = async (trip, attraction, category) => {
       updated_at: Date.now(),
     });
     await console.log(newAttraction.get({ plain: true }));
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getAllAttractions = async (trip, category) => {
+  try {
+    const tripInfo = await db.Trip.findOne({
+      where: {
+        name: trip,
+      },
+    });
+    // const tripID = tripInfo.id;
+
+    const categoryInfo = await db.Category.findOne({
+      where: {
+        name: category,
+      },
+    });
+    // const catID = categoryInfo.id;
+    const attractions = await db.Attraction.findAll({
+      where: {
+        trip_id: tripInfo.id,
+        category_id: categoryInfo.id,
+      },
+    });
+    // await console.log(attractions.map((el) => el.get({ plain: true })));
+    await console.log(JSON.stringify(attractions));
   } catch (error) {
     console.log(error);
   }
@@ -157,6 +186,11 @@ switch (action) {
     const attraction = process.argv[4];
     const category = process.argv[5];
     createAttractionWithCategory(trip, attraction, category);
+    break;
+  case 'category-trip':
+    const tripCat = process.argv[3];
+    const catTrip = process.argv[4];
+    getAllAttractions(tripCat, catTrip);
     break;
   default:
     console.log('no matching action found');
