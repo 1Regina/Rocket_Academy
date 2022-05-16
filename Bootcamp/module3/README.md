@@ -491,7 +491,10 @@ This file tells the sequelize cli how to connect to the database
 5. Migration has higher authority than models in the odd event that their types dont match    
 6. Create Model Index File to Make Models Accessible in App
 We will initialise and export all the models we define in a single module. This makes it easy to access models from different modules within our application. In the following code, model classes are exported in a db object where keys are model names and values are model classes. 
-
+6. To define association of tables
+    1. define the [how they belong](https://github.com/1Regina/Rocket_Academy/blob/321478bb181f32aa8c559ff397488f3b9cb15624/Bootcamp/module4/4POCE1_Sequelize_Travel/db/models/index.model.mjs#L34) 
+    2. define the [is it one to many or many to many](https://github.com/1Regina/Rocket_Academy/blob/321478bb181f32aa8c559ff397488f3b9cb15624/Bootcamp/module4/4POCE1_Sequelize_Travel/db/models/index.model.mjs#L36)
+    3. Specify the column and how it functions as a [foreign key](https://github.com/1Regina/Rocket_Academy/blob/321478bb181f32aa8c559ff397488f3b9cb15624/Bootcamp/module4/4POCE1_Sequelize_Travel/db/models/attraction.mjs#L28) 
 
 ##QUESTION!
 1. Sample Model Index File (models/index.mjs) is it to allow us to a shot do many models or no -- the actions still need to be done via separate files "create.mjs" and "where.mjs"
@@ -600,3 +603,7 @@ We will initialise and export all the models we define in a single module. This 
         },
     };
    ``` 
+4. Execute the seed data
+   ``` 
+   npx sequelize db:seed:all
+   ```
