@@ -3,6 +3,7 @@ import allConfig from '../../config/config.js';
 
 import initTripModel from './trip.mjs';
 import initAttractionModel from './attraction.mjs';
+import initCategoryModel from './category.mjs';
 
 const { Sequelize } = sequelizePackage;
 const env = process.env.NODE_ENV || 'development';
@@ -32,6 +33,12 @@ db.Attraction = initAttractionModel(sequelize, Sequelize.DataTypes);
 db.Attraction.belongsTo(db.Trip);
 // A      hasMany      B
 db.Trip.hasMany(db.Attraction);
+
+db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
+// A    belongsTo     B
+db.Attraction.belongsTo(db.Category);
+// A      hasMany      B
+db.Category.hasMany(db.Attraction);
 
 // here we are putting the instance we created in line 28 and line 29 into the object "db"
 db.sequelize = sequelize;
