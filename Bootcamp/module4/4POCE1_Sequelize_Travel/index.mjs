@@ -161,6 +161,58 @@ const getAllAttractions = async (trip, category) => {
   }
 };
 
+// Comfortable - Get Trips for All Trips that Belong to Specific Category
+const getTrip = async (tripId) => {
+  const tripName = await db.Trip.findAll({
+    where: {
+      id: tripId,
+    },
+  });
+  for (let i = 0; i < tripName.length; i += 1) {
+    console.log(tripName[i].name);
+  }
+};
+
+const someTrips = async (attraction) => {
+  const allAttractions = await db.Attraction.findAll({
+    where: {
+      name: attraction,
+    },
+  });
+  for (let i = 0; i < allAttractions.length; i += 1) {
+    console.log(allAttractions[i].trip_id);
+    getTrip(allAttractions[i].trip_id);
+  }
+
+  // console.log(allTrips.trip_id);
+  return (allAttractions);
+};
+
+// Comfortable -- Get Attractions for All Trips that Belong to Specific Category
+const getAllTrips = async (category) => {
+  try {
+    const aCats = await db.Category.findOne({
+      where: {
+        name: category,
+      },
+    });
+
+    const allAttractions = await db.Attraction.findAll({
+      where: {
+        category_id: aCats.id,
+      },
+    });
+    for (let i = 0; i < allAttractions.length; i += 1) {
+      console.log(allAttractions[i].name);
+
+      // const attractionName = allAttractions[i].name;
+      // someTrips(attractionName); // misunderstood question requirement
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 switch (action) {
   case 'create':
     const nameTrip = process.argv[3];
@@ -191,6 +243,10 @@ switch (action) {
     const tripCat = process.argv[3];
     const catTrip = process.argv[4];
     getAllAttractions(tripCat, catTrip);
+    break;
+  case 'category-attractions':
+    const aCat = process.argv[3];
+    getAllTrips(aCat);
     break;
   default:
     console.log('no matching action found');
