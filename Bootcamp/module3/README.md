@@ -495,10 +495,7 @@ We will initialise and export all the models we define in a single module. This 
     1. define the [how they belong](https://github.com/1Regina/Rocket_Academy/blob/321478bb181f32aa8c559ff397488f3b9cb15624/Bootcamp/module4/4POCE1_Sequelize_Travel/db/models/index.model.mjs#L34) 
     2. define the [is it one to many or many to many](https://github.com/1Regina/Rocket_Academy/blob/321478bb181f32aa8c559ff397488f3b9cb15624/Bootcamp/module4/4POCE1_Sequelize_Travel/db/models/index.model.mjs#L36)
     3. Specify the column and how it functions as a [foreign key](https://github.com/1Regina/Rocket_Academy/blob/321478bb181f32aa8c559ff397488f3b9cb15624/Bootcamp/module4/4POCE1_Sequelize_Travel/db/models/attraction.mjs#L28) 
-
-##QUESTION!
-1. Sample Model Index File (models/index.mjs) is it to allow us to a shot do many models or no -- the actions still need to be done via separate files "create.mjs" and "where.mjs"
-
+    
 ### 5. Use Sequelize in App Logic
 1. Use an app file (create.mjs) to do what action you want done to the db -- create e.g create.mjs. Test with `node create.mjs milk`
     ```
@@ -531,7 +528,7 @@ We will initialise and export all the models we define in a single module. This 
     .catch((error) => console.log(error));
 
     ```    
-### Impt: Use camelCase    
+### Impt: Use camelCase    ?
 
 ### 6. Seed Data for DB
 1. Use migration table to seed data
@@ -607,3 +604,7 @@ We will initialise and export all the models we define in a single module. This 
    ``` 
    npx sequelize db:seed:all
    ```
+5. Sequelize [Cheatsheet](https://bootcamp.rocketacademy.co/4-backend-structure/4.1-orm-sequelize/4.1.9-sequelize-setup-cheatsheet)
+6. Tips:
+    1. Note how we do not need to create a model for the join table! If the table only contains foreign keys, Sequelize does not require us to create a model file for the table. (If the table has non-foreign keys, you would need to create a model).
+    2. Command [CRUD](https://bootcamp.rocketacademy.co/4-backend-structure/4.1-orm-sequelize)
