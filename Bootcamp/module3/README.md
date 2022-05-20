@@ -429,6 +429,22 @@ This file tells the sequelize cli how to connect to the database
         },
     };
     ```
+    Alternative under `down`, if there are many promises to fulfil and order is not important, do Promise.all
+    ```
+    ....
+    down: async (queryInterface) => {
+        // Drop tables with foreign key references first
+        await Promise.all([
+        queryInterface.dropTable('category_items'),
+        queryInterface.dropTable('cart_items'),
+        ]);
+        await Promise.all([
+        queryInterface.dropTable('items'),
+        queryInterface.dropTable('categories'),
+        queryInterface.dropTable('carts'),
+        ]);
+    },
+    ```
 
 3. Writing the migration file specifies the DB schema changes. To execute all unexecuted migration files, run sequelize-cli's db:migrate command
     ```
@@ -495,7 +511,56 @@ We will initialise and export all the models we define in a single module. This 
     1. define the [how they belong](https://github.com/1Regina/Rocket_Academy/blob/321478bb181f32aa8c559ff397488f3b9cb15624/Bootcamp/module4/4POCE1_Sequelize_Travel/db/models/index.model.mjs#L34) 
     2. define the [is it one to many or many to many](https://github.com/1Regina/Rocket_Academy/blob/321478bb181f32aa8c559ff397488f3b9cb15624/Bootcamp/module4/4POCE1_Sequelize_Travel/db/models/index.model.mjs#L36)
     3. Specify the column and how it functions as a [foreign key](https://github.com/1Regina/Rocket_Academy/blob/321478bb181f32aa8c559ff397488f3b9cb15624/Bootcamp/module4/4POCE1_Sequelize_Travel/db/models/attraction.mjs#L28) 
-    
+    4. For many-to-many models/index.mjs , note the joining of table via { through: db.CartItem } e.g db.Item.belongsToMany(db.Cart, { through: db.CartItem });
+    ```
+        import sequelizePackage from 'sequelize';
+        import allConfig from '../config/config.js';
+
+        import initItemModel from './item.mjs';
+        import initCategoryModel from './category.mjs';
+        import initCartModel from './cart.mjs';
+        import initCartItemModel from './cartItem.mjs';
+
+        const { Sequelize } = sequelizePackage;
+        const env = process.env.NODE_ENV || 'development';
+        const config = allConfig[env];
+        const db = {};
+
+        const sequelize = new Sequelize(
+        config.database,
+        config.username,
+        config.password,
+        config
+        );
+
+        db.Item = initItemModel(sequelize, Sequelize.DataTypes);
+        db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
+        db.Cart = initCartModel(sequelize, Sequelize.DataTypes);
+        db.CartItem = initCartItemModel(sequelize, Sequelize.DataTypes);
+
+        // in order for the many-to-many to work we must mention the join table here.
+        db.Item.belongsToMany(db.Category, { through: 'category_items' });
+        db.Category.belongsToMany(db.Item, { through: 'category_items' });
+
+        // Connect Item and Cart models.
+        // Note: It's possible to use a Sequelize model class (i.e. CartItem)
+        // to connect the models Item and Cart instead of the table name (i.e. cart_items).
+        // Using variable is more robust than string because it's easier to detect typos.
+        db.Item.belongsToMany(db.Cart, { through: db.CartItem });
+        db.Cart.belongsToMany(db.Item, { through: db.CartItem });
+
+        // Define 1-M associations between CartItems table and associated tables
+        // to access CartItem attributes from Item and Cart instances
+        db.Item.hasMany(db.CartItem);
+        db.CartItem.belongsTo(db.Item);
+        db.Cart.hasMany(db.CartItem);
+        db.CartItem.belongsTo(db.Cart);
+
+        db.sequelize = sequelize;
+        db.Sequelize = Sequelize;
+
+        export default db;
+    ```
 ### 5. Use Sequelize in App Logic
 1. Use an app file (create.mjs) to do what action you want done to the db -- create e.g create.mjs. Test with `node create.mjs milk`
     ```
@@ -607,4 +672,148 @@ We will initialise and export all the models we define in a single module. This 
 5. Sequelize [Cheatsheet](https://bootcamp.rocketacademy.co/4-backend-structure/4.1-orm-sequelize/4.1.9-sequelize-setup-cheatsheet)
 6. Tips:
     1. Note how we do not need to create a model for the join table! If the table only contains foreign keys, Sequelize does not require us to create a model file for the table. (If the table has non-foreign keys, you would need to create a model).
-    2. Command [CRUD](https://bootcamp.rocketacademy.co/4-backend-structure/4.1-orm-sequelize)
+    2. Command [CRUD](https://bootcamp.rocketacademy.co/4-backend-structure/4.1-orm-sequelize) 
+
+### 7. Validation 
+1. DataBase Validation - violateDBConstraint.mjs to prevent DB constraint violation e.g of the `allowNull: false` . Note that we must import the `DatabaseError` class from Sequelize
+    ```
+    import sequelizePackage from 'sequelize';
+    import db from './models/index.mjs';
+
+    const { DatabaseError } = sequelizePackage;
+
+    const violateDbConstraint = async () => {
+        try {
+            const category = await db.Category.findOne({
+            where: {
+                name: [process.argv[2]],
+            },
+            });
+            const associatedItem = await db.Item.create({
+            name: process.argv[3],
+            categoryId: category.id,
+            });
+            console.log(associatedItem);
+        } catch (error) {
+            if (error instanceof DatabaseError) {
+            console.error('This is a database error!');
+            console.error(error);
+            } else {
+            console.error(error);
+            }
+        }
+    };
+
+    violateDbConstraint();
+    ```
+2. Model Validation -   Constraints are called "validations" in the model context. violateModelValidation.mjs script that performs special logic for validation errors on name of item with `allowNull:false` by importing the `ValidationError` class from Sequelize.
+    ```
+    import sequelizePackage from 'sequelize';
+    import db from './models/index.mjs';
+
+    const { ValidationError } = sequelizePackage;
+
+    const violateModelValidation = async () => {
+        try {
+            const category = await db.Category.findOne({
+            where: {
+                name: [process.argv[2]],
+            },
+            });
+            const associatedItem = await db.Item.create({
+            name: process.argv[3],
+            categoryId: category.id,
+            });
+            console.log(associatedItem);
+        } catch (error) {
+            if (error instanceof ValidationError) {
+            console.error('This is a validation error!');
+            console.error(error);
+            } else {
+            console.error(error);
+            }
+        }
+    };
+
+    violateModelValidation();
+    ```
+3. Other validations -- models/items.mjs to validate length of name etc which will output error object with "validatorKey: 'len'," and "validatorName: 'len',"
+    ```
+    export default function itemModel(sequelize, DataTypes) {
+        return sequelize.define(
+          'item',
+          {
+            id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+            },
+            name: {
+                // The following custom validations are new.
+                validate: {
+                    // isAlpha allows only alphanumeric characters.
+                    isAlpha: true,
+                    // This only allows strings of length 3 to 23.
+                    len: [3, 23],
+                },
+                type: DataTypes.STRING,
+            },
+            categoryId: {
+                type: DataTypes.INTEGER,
+                references: {
+                    model: 'categories',
+                    key: 'id',
+                },
+            },
+            createdAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            },
+            updatedAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            },
+        },
+        {
+            // The underscored option makes Sequelize reference snake_case names in the DB.
+            underscored: true,
+        }
+      );
+    }
+    ```
+4. Combining Constraints and Validations
+    ```
+    import sequelizePackage from 'sequelize';
+    import db from './models/index.mjs';
+
+    const { ValidationError, DatabaseError } = sequelizePackage;
+
+    db.Category.findOne({
+        where: {
+            name: [process.argv[2]],
+        },
+    })
+    .then((category) => {
+        return db.Item.create({
+            name: process.argv[3],
+            categoryId: category.id,
+        });
+    })
+    .then((item) => {
+        console.log(item);
+    })
+    .catch((error) => {
+        if (error instanceof ValidationError) {
+        console.error('This is a validation error!');
+        console.error(error);
+        console.error('The following is the first error message:');
+        console.error(error.errors[0].message);
+      } else if (error instanceof DatabaseError) {
+        console.error('This is a database error!');
+        console.error(error);
+      } else {
+        console.error(error);
+      }
+    });
+    ```
