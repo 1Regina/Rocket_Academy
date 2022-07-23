@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 
 const secretWord = ["b", "a", "n", "a", "n", "a"];
+const wrongSign = ["(", "凸 ", "ಠ", "益", " ಠ", ")", "凸"];
 
 function App() {
   //   // the array begins with only _
@@ -14,9 +15,9 @@ function App() {
     "_",
   ]);
 
-  // let guessPosition = 0
   const [guessPosition, setGuessPosition] = useState(0);
   const [error, setError] = useState("");
+  const [errorCount, setErrorCount] = useState(0);
 
   const handleChange = (event) => {
     const userInput = event?.target?.value?.slice(-1);
@@ -32,12 +33,23 @@ function App() {
         ];
       });
       setGuessPosition(nextPosition);
-      setError("");
+      // setError("");
       if (nextPosition === secretWord.length) {
         setError(`Win already`);
       }
     } else {
-      setError(`${userInput} is not correct`);
+      setErrorCount(errorCount + 1);
+
+      const msg = <>
+          {userInput} is not correct.<br/>
+          {wrongSign.slice(0, errorCount)}<br/>
+          {errorCount + 1} wrong tries
+        </>;
+      setError(msg);
+
+      if (errorCount === wrongSign.length) {
+        setError(`Game Over`);
+      }
     }
   };
 
@@ -53,6 +65,9 @@ function App() {
       <br />
       <br />
       <h4>{error}</h4>
+      <br />
+      <br />
+
     </div>
   );
 }
