@@ -64,4 +64,16 @@ const makeDeck = () => {
   return newDeck;
 };
 
-export {getRandomIndex, shuffleCards, makeDeck}
+
+const compareCards = (arrayCards) => {
+  let msg
+  if (arrayCards[0].rank > arrayCards[1].rank) {
+    msg = `First player has higher card`
+  } else if ( arrayCards[0].rank < arrayCards[1].rank ) {
+    msg = `Second player has higher card`
+  } else {
+    msg = `It is a draw`
+  }
+  return msg
+}
+export {getRandomIndex, shuffleCards, makeDeck, compareCards}

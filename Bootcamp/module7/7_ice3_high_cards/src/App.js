@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import { useState, useEffect } from "react";
-import { getRandomIndex, shuffleCards, makeDeck } from "./cards_prep";
+import { getRandomIndex, shuffleCards, makeDeck, compareCards } from "./cards_helper";
 import "./App.css";
 
 // function App() {
@@ -35,6 +35,12 @@ export default function App() {
   // Set the default player hand as empty
   const [playerHand, setPlayerHand] = useState([]);
 
+  // // set player 1 state
+  // const [player1, setPlayer1] = useState('true');
+
+  // // set player 2 state
+  // const [player2, setPlayer2] = useState('false');
+
   // Deal 2 cards into the player's hand and update the deck
   const dealCards = () => {
     const hand = [cardDeck.pop(), cardDeck.pop()];
@@ -47,13 +53,15 @@ export default function App() {
   // empty, it does not require a special condition.
   const handElems = playerHand.map(({ name, suit }) => (
     <div>
-      {name}
-      {suit}
+      <span>
+        {name} {suit}
+      </span>
     </div>
   ));
-
+  
+  
   return (
-    <div>
+    <div className="App">
       <div>
         <h3>Cards:</h3>
         {handElems}
@@ -61,6 +69,10 @@ export default function App() {
       <p>
         <button onClick={dealCards}>Deal</button>
       </p>
+    <div>
+      <h3>Results:</h3>
+      <h4>{compareCards(playerHand)}</h4>
+    </div>
     </div>
   );
 }
