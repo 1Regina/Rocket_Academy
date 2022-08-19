@@ -1,14 +1,49 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Button,
+  Progress,
+  Container,
+  Form,
+  ListGroup,
+  ListGroupItem,
+  Input,
+  Label,
+} from "reactstrap";
 import "./App.css";
 
+const ProgressLoad = () => {
+  return <Progress className="my-3" color="warning" striped value={80} />;
+};
+
 const LinkList = ({ news }) => {
- 
+  // return news.slice(10).map((n, i) => (
+  //   <p key={i}>
+  //     <a href={n.url}>{n.title}</a>
+  //   </p>
+  // ));
+
   return news.slice(10).map((n, i) => (
     <p key={i}>
-      <a href={n.url}>{n.title}</a>
+      <ListGroupItem className="input-group-addon">
+        <a href={n.url}>{n.title}</a>
+        <Input
+          className="d-flex justify-content-end"
+          name="readAlready"
+          type="checkbox"
+          // onChange={handleCheckboxChange}
+        />
+      </ListGroupItem>
     </p>
   ));
 };
+
+//   const handleCheckboxChange = (newRead) => {
+//   setRead((readArr) => {
+//     console.log([...readArr, newRead])
+//     return [...readArr, newRead];
+//   });
+// };
 
 const App = () => {
   // state
@@ -18,6 +53,9 @@ const App = () => {
     "http://hn.algolia.com/api/v1/search?query=react"
   );
   const [loading, setLoading] = useState(false);
+  const [check, setCheck] = useState(false);
+  const [read, setRead] = useState([]);
+
   // fetch news
   const fetchNews = () => {
     // set loading true
@@ -47,33 +85,23 @@ const App = () => {
     setUrl(`http://hn.algolia.com/api/v1/search?query=${searchQuery}`);
   };
 
-  const showLoading = () => (loading ? <h2> Loading...</h2> : "");
+  const showLoading = () => (loading ? <ProgressLoad /> : "");
 
   const searchForm = () => (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={searchQuery} onChange={handleChange} />
-      <button>Search</button>
+    <form onSubmit={handleSubmit} className="submit-form">
+      <div>
+        <input type="text" value={searchQuery} onChange={handleChange} />
+      </div>
+      <Button color="primary">Search</Button>
     </form>
   );
 
-  // const showNews = () => {
-  //   return  news.map((n, i) => (
-  //       <p key={i}>{n.title}</p>
-  //     ))
-  // }
-  //alternative since only 1 statement, return can be dropped n wo curly braces
-  // const showNews = () =>
-  //   news.slice(10).map((n, i) => (
-  //     <p key={i}>
-  //       <a href={n.url}>{n.title}</a>
-  //     </p>
-  //   ));
-
   // url will change only when button is click
   return (
-    <div className="App">
-      <h2>News</h2>
-      {showLoading() /* FORMERLY {loading ?<h2> Loading...</h2> : ""} */}
+    <div className="submit">
+      <h2 className="App">Read Later</h2>
+      {showLoading()}
+
       {
         searchForm() /* <form onSubmit={handleSubmit}>
         <input type="text" value={searchQuery} onChange={handleChange} />
@@ -82,16 +110,24 @@ const App = () => {
       }
       <br></br>
       <br></br>
+
+      {/* <div className="link-list"> */}
       <div className="articles-wrapper">
-        <LinkList news = {news}
-      //     prop={
-      //       showNews() /* {news.map((n, i) => (
-      //   <p key={i}>{n.title}</p>
-      // ))} */
-      //     }
-        />
+        <ListGroup>
+          <LinkList
+            className="oneLink"
+            news={news}
+
+            //     prop={
+            //       showNews() /* {news.map((n, i) => (
+            //   <p key={i}>{n.title}</p>
+            // ))} */
+            //     }
+          />
+        </ListGroup>
       </div>
     </div>
+    // </div>
   );
 };
 

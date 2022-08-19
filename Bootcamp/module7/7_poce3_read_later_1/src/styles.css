@@ -1,0 +1,42 @@
+body {
+  background-color: pink;
+}
+
+.header {
+  text-align: center;
+  padding: 50px;
+}
+
+.app-div {
+  height: 100%;
+  width: 100%;
+}
+
+.submit {
+  height: 100%;
+  width: 100%;
+}
+.submit-form {
+  padding: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.link-list {
+  background-color: white;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+}
+
+.list-element {
+  display: flex;
+  justify-content: space-around;
+}
+
+.read-links {
+  background-color: white;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+}

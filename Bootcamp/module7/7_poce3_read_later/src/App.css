@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: center
 }
 
 .App-logo {
@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -39,10 +40,43 @@
 
 .articles-wrapper {
   /* flex: 0 30% 0; */
-
+  /* text-align: center; */
   display: flex;
- /* justify-content: center; */
+  justify-content: space-around;
   align-items: flex-start;
   flex-direction: column;
-  margin-left: 20em;
+  margin-left: 10em;
+}
+
+.oneLink {
+  padding-bottom: 30px;
+}
+
+.submit {
+  height: 100%;
+  width: 100%;
+}
+.submit-form {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.link-list {
+  background-color: white;
+  padding: 2px;
+  margin: 2px;
+  text-align: center;
+}
+
+.list-element {
+  display: flex;
+  justify-content: space-around;
+}
+
+.read-links {
+  background-color: white;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
 }
